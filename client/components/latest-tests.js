@@ -1,0 +1,36 @@
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+
+export default function LatestTests() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("http://127.0.0.1:8080/PredictionTests/");
+      const data = await response.json();
+      setData(data);
+    }
+    fetchData();
+  }, []);
+
+  const latestFive = data.slice(0,5);
+
+  return (
+    <div className="latestTests">
+      <h3>新着テスト</h3>
+      <ul>
+        {latestFive && 
+          latestFive.map(test =>{
+            return (
+            <li className="latestTest" key={test._id}>
+              <Link href={`/PredictionTests/${test._id}`}>{`問${test.test_ID}：${test.title}`}</Link>
+              <p><small>{`出題者：${test.publisher.nickname}`}</small></p>
+            </li>
+            )
+          })
+        }
+      </ul>
+      <Link className="allTests" href={`/PredictionTests`}>すべてのテストを見る</Link>
+    </div>
+  );
+}

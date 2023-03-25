@@ -1,0 +1,183 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: auto;
+  font-family: "Kiwi Maru", serif;
+  background-color: #f5e4de;
+  background: url("/background.svg") fixed 100px;
+}
+
+div#__next {
+  max-width: 400px;
+  margin: auto;
+  border: 1.5rem #311b15 solid;
+  box-sizing: content-box;
+  background-color: rgb(253, 250, 220);
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+li {
+  list-style: none;
+}
+
+header {
+  height: 18rem;
+  color: white;
+  padding: 2rem;
+  background: url("/header.svg") center center no-repeat #754F44;
+  background-size: cover;
+  font-family: "Kaisei Opti", serif;
+}
+
+.banner-title {
+  text-align: right;
+}
+
+nav {
+  padding: 1.2rem;
+  background-color: rgb(255, 248, 239);
+  border-bottom: #754F44 3px dashed;
+}
+nav a {
+  color: #754F44;
+  font-weight: 800;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+nav ul li {
+  text-align: center;
+  flex-basis: 50%;
+  flex-grow: 1;
+  background-color: rgb(255, 248, 239);
+  padding: 1rem;
+  font-size: 18px;
+}
+nav ul li:nth-child(odd) {
+  border-right: 2px #754F44 solid;
+}
+nav ul li:nth-child(n+3) {
+  border-top: 2px #754F44 solid;
+}
+
+.loginNav {
+  border-top: 2px #754F44 solid;
+}
+
+#goToAbout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 1rem auto;
+  height: 8rem;
+  padding: 2rem;
+  font-size: 22px;
+  background: url("/goToAbout.svg") no-repeat center;
+  background-color: rgb(255, 248, 239);
+}
+#goToAbout a {
+  font-size: 20px;
+  line-height: 10rem;
+  color: #4b281f;
+  font-weight: 900;
+}
+
+.latestTests, .latestNewses {
+  color: #3d3b16;
+  padding: 1rem;
+  background-color: #d9e0c4;
+}
+.latestTests a, .latestNewses a {
+  color: #2e2c0d;
+}
+.latestTests li, .latestNewses li {
+  margin: 1rem;
+}
+.latestTests h3, .latestNewses h3 {
+  font-size: 25px;
+  bottom: 0;
+}
+.latestTests h3::before, .latestNewses h3::before {
+  content: "";
+  display: inline-block;
+  width: 0.5rem;
+  height: 20px;
+  background-color: #5E654A;
+  margin-right: 10px;
+  line-height: 25px;
+  bottom: 0;
+}
+.latestTests ul, .latestNewses ul {
+  margin: 2rem 0;
+}
+
+.latestTests {
+  border-top: #754F44 3px dashed;
+}
+.latestTests li:nth-child(n+1) {
+  border-bottom: 2px #5E654A dashed;
+}
+.latestTests::after {
+  content: "";
+  display: block;
+  height: 1rem;
+  background: url("/separatingLine/b_ornament_146_0S.png") no-repeat center center;
+  margin-top: 2rem;
+}
+.latestTests p {
+  position: relative;
+  left: 12rem;
+}
+
+a.allTests {
+  display: block;
+  text-align: center;
+  width: 200px;
+  margin: 0.5rem auto;
+  background-color: #5E654A;
+  padding: 0.5rem;
+  border-radius: 10px;
+  color: white;
+}
+
+.latestNews {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.latestNews a {
+  border-bottom: 2px #5E654A dashed;
+}
+.latestNews .postDate {
+  background-color: #fefff9;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+  margin-right: 1rem;
+  width: 9rem;
+  text-align: center;
+}
+
+footer {
+  background-color: #754F44;
+  padding: 0.5rem;
+}
+footer p, footer a, footer span {
+  color: white;
+  margin: 1rem;
+}
+footer a {
+  text-decoration: underline;
+}/*# sourceMappingURL=globals.css.map */

@@ -1,0 +1,24 @@
+// *{
+  
+//   box-sizing: border-box;
+// }
+
+.genreNav{
+  display: flex;
+  flex-direction: column;
+  a{
+    background-color: #999;
+    &:hover{
+      background-color: blue;
+      transition: .5s;
+    }
+
+  }
+}
+
+.accordion{
+  cursor: pointer;
+
+}
+
+

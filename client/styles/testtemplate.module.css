@@ -1,0 +1,15 @@
+.genreNav {
+  display: flex;
+  flex-direction: column;
+}
+.genreNav a {
+  background-color: #999;
+}
+.genreNav a:hover {
+  background-color: blue;
+  transition: 0.5s;
+}
+
+.accordion {
+  cursor: pointer;
+}/*# sourceMappingURL=testtemplate.module.css.map */
