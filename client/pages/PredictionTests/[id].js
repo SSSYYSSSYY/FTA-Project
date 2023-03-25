@@ -57,64 +57,73 @@ export default function Test({data}){
       setCurrentUser(AuthService.getCurrentUser());
       setIsCurrentUserExist(true);
     }else{
-      console.log("當前使用者："+currentUser.user._id.toString())
-      console.log("出題者："+data.publisher._id.toString())
-      if(currentUser.user._id.toString() == data.publisher._id.toString()){
-        console.log("是自己出的題目")
-        if(data.isWaitingForAnswering){
-          console.log("可以對答案了")
-          setCanCheck(true);
-          console.log(canCheck)
-        }
-        for(let choice in data.choices){
-          if(!data.choices[choice].answerer.length){
-            //まだ誰も回答していなければ編集できる
-            setCanEdit(true);
-          }else{
-            setCanEdit(false);
-            break;
+      if(!currentUser){
+        return (
+          <Layout>
+            <h3>ログインしてください。</h3>
+          </Layout>
+        )
+      }else{
+        console.log("當前使用者："+currentUser.user._id.toString())
+        console.log("出題者："+data.publisher._id.toString())
+        if(currentUser.user._id.toString() == data.publisher._id.toString()){
+          console.log("是自己出的題目")
+          if(data.isWaitingForAnswering){
+            console.log("可以對答案了")
+            setCanCheck(true);
+            console.log(canCheck)
+          }
+          for(let choice in data.choices){
+            if(!data.choices[choice].answerer.length){
+              //まだ誰も回答していなければ編集できる
+              setCanEdit(true);
+            }else{
+              setCanEdit(false);
+              break;
+            }
+          }
+          // console.log(currentUser.user.isPenalized)
+          if(!currentUser.user.isPenalized && !data.isAnswered){
+            setCanDelete(true);
           }
         }
-        // console.log(currentUser.user.isPenalized)
-        if(!currentUser.user.isPenalized && !data.isAnswered){
-          setCanDelete(true);
-        }
-      }
-      // console.log(data.choices)
-      for(const choice in data.choices){
-        data.choices[choice].answerer.map(user=>{
-          if(user._id.toString() == currentUser.user._id.toString()){
-            console.log("使用者有選過"+choice,user.usePoint)
-            document.querySelector(`div#${choice}`).classList.add("selected");
-            document.querySelector(`div#${choice}`).insertAdjacentHTML("beforeend",`<p><small>ポイント：${user.usePoint}</small></p>`)
-            document.querySelector(`div#${choice}`).style.color = "#888";
-            //樣式等之後用CSS改
-            if(user.isFlag){
-              document.querySelector(`div#${choice}`).classList.add("flag");
-              document.querySelector(`div#${choice}`).style.color = "gold";
+        // console.log(data.choices)
+        for(const choice in data.choices){
+          data.choices[choice].answerer.map(user=>{
+            if(user._id.toString() == currentUser.user._id.toString()){
+              console.log("使用者有選過"+choice,user.usePoint)
+              document.querySelector(`div#${choice}`).classList.add("selected");
+              document.querySelector(`div#${choice}`).insertAdjacentHTML("beforeend",`<p><small>ポイント：${user.usePoint}</small></p>`)
+              document.querySelector(`div#${choice}`).style.color = "#888";
               //樣式等之後用CSS改
+              if(user.isFlag){
+                document.querySelector(`div#${choice}`).classList.add("flag");
+                document.querySelector(`div#${choice}`).style.color = "gold";
+                //樣式等之後用CSS改
+              }
+              predictedArr.push({
+                choice,
+                usePoint:user.usePoint
+              })
+              if(user.isFlag){
+                flag = choice;
+              }
             }
-            predictedArr.push({
-              choice,
-              usePoint:user.usePoint
-            })
-            if(user.isFlag){
-              flag = choice;
-            }
-          }
-
-        })
+  
+          })
+        }
+        console.log(predictedArr.findIndex(item => item.choice.includes('two')))
+        if(predictedArr.length>=4){
+          setMsg("予知回数が上限に達しています。");
+          setCanPredict(false);
+        }
+        if(currentUser.user._id.toString() == data.publisher._id.toString()){
+          //出題者本人は予知できない
+          setCanPredict(false);
+        }
       }
-      console.log(predictedArr.findIndex(item => item.choice.includes('two')))
-      if(predictedArr.length>=4){
-        setMsg("予知回数が上限に達しています。");
-        setCanPredict(false);
       }
-      if(currentUser.user._id.toString() == data.publisher._id.toString()){
-        //出題者本人は予知できない
-        setCanPredict(false);
-      }
-    }
+      
     let choices = document.querySelectorAll(`div.choices`);
   
     choices.forEach(choice =>{
@@ -135,13 +144,7 @@ export default function Test({data}){
     
   },[isCurrentUserExist]);
 
-  if(!currentUser){
-    return (
-      <Layout>
-        <h3>ログインしてください。</h3>
-      </Layout>
-    )
-  }
+
 
   const handleDelete = async(e) =>{
     console.log("點擊了刪除按鈕")
