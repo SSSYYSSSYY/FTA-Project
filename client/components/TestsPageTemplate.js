@@ -41,11 +41,14 @@ export default function TestsPageTemplate({children}){
   },[currentUser])
 
   return (
-  <div>
-    <Link href="/rules">予言テストのルールはこちらへ</Link>
+    <div>
+      <div className="testsTemplate">
+        <Link className="toRules" href="/rules">予言テストのルールはこちらへ</Link>
 
-  {isPenalized? (<div className="penaltyAlert">ペナルティ期間中は出題できません。</div>):(<div className="publishBtn"><Link style={{padding:"1rem"}} href="/PredictionTests/newTest">出題する</Link></div>)}
-    <main>{children}</main>
+        {isPenalized? (<div className="penaltyAlert">ペナルティ期間中は出題できません。</div>):(<div className="publishBtn"><Link style={{padding:"1rem"}} href="/PredictionTests/newTest">出題する</Link></div>)}
+      </div>
+      <main>{children}</main>
+    </div>
 
-  </div>)
+  )
 }

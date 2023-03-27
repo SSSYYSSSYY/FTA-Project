@@ -121,10 +121,10 @@ export default function TestHome({data}){
           currentData.map(data =>{
             return (
               <div key={data._id} className="PredictionTests">
-              <Link href={`/PredictionTests/${data._id}`}><h2>{`問${data.test_ID}：${data.title}`}</h2></Link>
-              <p>ジャンル：{data.genre}</p>
-              <p>{`基礎ポイント：${data.bonus}`}</p>
-              <small>出題者：<Link href={`/profile/${data.publisher._id}`}>{data.publisher.nickname}</Link></small>
+              <Link target="_blank" href={`/PredictionTests/${data._id}`}><h4>{`問${data.test_ID}：${data.title}`}</h4></Link>
+              <p className="genre">{`ジャンル：${data.genre}`}</p>
+              <p className="basicPoint">{`基礎ポイント：${data.bonus}`}</p>
+              <small className="publisher">出題者：<Link target="_blank" href={`/profile/${data.publisher._id}`}>{data.publisher.nickname}</Link></small>
             </div>
 
             )

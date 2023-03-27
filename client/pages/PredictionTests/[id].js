@@ -62,12 +62,16 @@ export default function Test({data}){
         console.log("出題者："+data.publisher._id.toString())
         if(currentUser.user._id.toString() == data.publisher._id.toString()){
           console.log("是自己出的題目")
+          //當前使用者為出題者本人，且當前使用者未受懲罰，且當前題目未結束
+          if(!currentUser.user.isPenalized && !data.isAnswered){
+            setCanDelete(true);
+          }
           if(data.isWaitingForAnswering){
             console.log("可以對答案了")
             setCanCheck(true);
             console.log(canCheck)
-          }
-      }
+          }}
+      
 
         for(let choice in data.choices){
           if(!data.choices[choice].answerer.length){
@@ -79,14 +83,12 @@ export default function Test({data}){
           }
         }
         // console.log(currentUser.user.isPenalized)
-        if(!currentUser.user.isPenalized && !data.isAnswered){
-          setCanDelete(true);
-        }
+
       }
       // console.log(data.choices)
       for(const choice in data.choices){
         data.choices[choice].answerer.map(user=>{
-          if(user._id.toString() == currentUser.user._id.toString()){
+          if(currentUser && user._id.toString() == currentUser.user._id.toString()){
             console.log("使用者有選過"+choice,user.usePoint)
             document.querySelector(`div#${choice}`).classList.add("selected");
             document.querySelector(`div#${choice}`).insertAdjacentHTML("beforeend",`<p><small>ポイント：${user.usePoint}</small></p>`)
@@ -171,21 +173,24 @@ export default function Test({data}){
   
   return (
     <Layout>
-    <Link href={`/PredictionTests`}>戻る</Link>
     {msg && <p className="alertMsg">{msg}</p>}
-    <div>
-      <h2>{`問${data.test_ID}：${data.title}`}</h2>
-      {canEdit&&<div className="editTests"><Link href={`/PredictionTests/edit/${data._id}`}>テストを編集する</Link></div>}
-      {canDelete&&<div onClick={handleDelete} className="deleteTest"><p style={{cursor:"pointer"}}>テストを取り下げる</p></div>}
-      <p>{`ジャンル：${data.genre}`}</p>
-      <small>出題者：<Link href={`/profile/${data.publisher._id}`}>{data.publisher.nickname}</Link></small>
-      <p>{`説明：${data.description}`}</p>
-      <p>{`基礎ポイント：${data.bonus}`}</p>
+    <div className="testBody">
+      <div className="navInTest">
+        <Link className="goBack" href={`/PredictionTests`}>戻る</Link>
+        {canEdit&&<div className="editTests"><Link href={`/PredictionTests/edit/${data._id}`}>編集する</Link></div>}
+        {canDelete&&<div onClick={handleDelete} className="deleteTest"><p style={{cursor:"pointer"}}>取り下げる</p></div>}
+      </div>
+      <h4>{`問${data.test_ID}：${data.title}`}</h4>
+      <p className="genre">{`ジャンル：${data.genre}`}</p>
+      
+      <p className="description">説明：<br/>
+      {data.description}</p>
+      <p className="basicPoint">{`基礎ポイント：${data.bonus}`}</p>
       <p>{data.isAccepting && `テスト状態：回答受付中`}</p>
       <p>{data.isWaitingForAnswering && `テスト状態：答え合わせ待ち`}</p>
       <p>{data.isAnswered && `テスト状態：答え合わせ済み`}</p>
-      <div>
-        <p>選択肢：</p>
+      {/* <p>選択肢：</p> */}
+      <section className="choicesSection">
         <div id="one" className="choices">
           <p>{`①：${data.choices.one.des}`}</p>
           <p><small>{`回答者数：${data.choices.one.answerer.length}`}</small></p>
@@ -218,14 +223,15 @@ export default function Test({data}){
           <p>{`⑧：${data.choices.eight.des}`}</p>
           <p><small>{`回答者数：${data.choices.eight.answerer.length}`}</small></p>
         </div>}
-      </div>
+      </section>
       <p>{`出題日時：${new Date(data.postDate).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}`}</p>
       <p>{`締め切り：${new Date(data.deadline).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}`}</p>
       {canPredict && data.isAccepting && <Link href={`/toPredict/${data._id}`}>予知を行う</Link>}
       {data.isWaitingForAnswering && <p>このテストはすでに締め切りが過ぎています。</p>}
       {data.isAnswered && <p>このテストはすでに答え合わせ済みです。</p>}
       {canCheck && <Link href={`/CheckOutTheAnswer/${data._id}`}>答え合わせを行う</Link>}
-      
+      <br/>
+      <small>出題者：<Link href={`/profile/${data.publisher._id}`}>{data.publisher.nickname}</Link></small>
     </div>
     </Layout>
   )

@@ -1023,6 +1023,7 @@ app.patch("*/CheckOutTheAnswer/:_id",requiredAuth,async(req,res)=>{
                 }
             }
         }
+        // console.log(correctAnswerer)
         correctAnswerer.map(async user =>{
             //這裡新增讓使用者的答題記錄可以儲存該題是否有答對的功能
             //模仿user模型中setFlag的寫法?
@@ -1035,7 +1036,7 @@ app.patch("*/CheckOutTheAnswer/:_id",requiredAuth,async(req,res)=>{
                 console.log(`玩家${user._id}可獲得${awardPoints}的點數和${awardExp}經驗值。`)
             }
             willBeSetAccuracyUser = await User.findOne({_id:user._id}).exec();
-            // console.log(willBeSetAccuracyUser)
+            // console.log("答對的人的email："+willBeSetAccuracyUser.email)
             willBeSetAccuracyUser.setAccuracy(foundTest._id);
             User.findOneAndUpdate({_id:user._id},{$inc:{predictionPoints:awardPoints,exp:awardExp,accuracySum:1}},{new:true}).exec(function(err,result){
                 if(err){
@@ -1056,6 +1057,50 @@ app.patch("*/CheckOutTheAnswer/:_id",requiredAuth,async(req,res)=>{
             }
             //在使用者的答題記錄儲存該題是否有答對
         });
+
+        //通知所有答題者
+
+        let allAnswerer = [];
+        for(let choice in foundTest.choices){
+            if(foundTest.choices.hasOwnProperty(choice)){
+                foundTest.choices[choice].answerer.map(user =>{
+                    allAnswerer.push(user);
+                })
+                
+            }
+        }
+        const filteredAnswerer = allAnswerer.filter((item, index, arr) => {
+            // 找出第一個相同_id的物件並保留，過濾掉其他相同_id的物件
+            return arr.findIndex(t => t._id.toString() == item._id.toString()) === index;
+          });
+        console.log(filteredAnswerer)
+        const transporter = nodemailer.createTransport({
+            service:"Gmail",
+            auth:{
+                user:GMAIL,
+                pass:GMAIL_PASSWORD,
+            }
+        });
+
+        filteredAnswerer.map(async user=>{
+            let answerer = await User.findOne({_id:user._id}).exec();
+            console.log("答題者的email："+answerer.email);
+            const mailOptions = {
+                from:GMAIL,
+                to:answerer.email,
+                subject:`予言テスト：${foundTest.title}の答え合わせが来ています。`,
+                html:`先日予知していたテストの答え合わせが行われました。<br /><a href="http://localhost:3000/PredictionTests/${foundTest._id}">結果はこちらへ</a>`,
+            }
+            transporter.sendMail(mailOptions,function(err,info){
+                if(err){
+                    console.log("通知郵件傳送失敗")
+                    console.log(err);
+                }else{
+                    console.log("通知郵件傳送成功")
+                    console.log(info);
+                }
+            })
+        })
 
         return res.send({
             msg:"答え合わせに成功しました。",

@@ -5,6 +5,7 @@
 @font-face {
   font-family: "GenEiLateMinN_v2";
   src: url("../fonts/GenEiLatin-Separate_v2.1/GenEiLateMinN_v2.ttf") format("truetype");
+  font-display: swap;
 }
 body{
   margin: auto;
@@ -15,7 +16,7 @@ body{
 div#__next{
   max-width: 400px;
   margin: auto;
-  border: 1.5rem #311b15 solid;
+  border: 1rem #311b15 solid;
   box-sizing: content-box;
   background-color: rgb(253, 250, 220);
 }
@@ -196,10 +197,10 @@ a.allTests{
 .testsByGenre{
   text-align: center;
   li{
-    color: #4b281f;
+    color: #2e2c0d;
     padding-bottom: .3rem;
     &:hover{
-      background-color: #754F44;
+      background-color: #5E654A;
       color: white;
       transition: .4s;
     }
@@ -208,7 +209,7 @@ a.allTests{
 }
 label.selectTestsNav{
   cursor: pointer;
-  background-color: #754F44;
+  background-color: #5E654A;
   color: white;
 
   width: 60%;
@@ -222,7 +223,7 @@ label.selectTestsNav{
 
 label.selectTestsNav + .testsByGenre{
   height: 0;
-  transition: .5s ease-in-out;
+  transition: .5s;
   overflow: hidden;
   
 }
@@ -239,6 +240,7 @@ label.selectTestsNav{
     width: 1rem;height: 1rem;
     font-size: 20px;
   }
+  
 }
 input#selectTestsNav:checked + label.selectTestsNav{
   position: relative;
@@ -255,7 +257,7 @@ input#selectTestsNav:checked + label.selectTestsNav{
 div.seeAllTests{
   text-align: center;
   cursor: pointer;
-  background-color: #754F44;
+  background-color: #5E654A;
   color: white;
   width: 60%;
   margin: 1rem auto;
@@ -278,7 +280,7 @@ ul.testsByStatus{
     padding: .5rem .2rem;
     width: 35%;
     text-align: center;
-    font-size: 15px;
+    font-size: 13px;
     transition: .3s;
     border-radius: 10px 10px 0 0;
   }
@@ -292,7 +294,224 @@ ul.testsByStatus{
   padding: .5rem;
 }
 
+.pagingBtn{
+  
+  display: flex;
+  justify-content: center;align-items: center;
+  transition: .3s;
+  button{
+    cursor: pointer;
+    &:hover{
+      background-color: #744f45;
+    }
+    i{
+      color: white;
+      font-size: 18px;
+    }
+    width: 100%;
+    border: none;
+    padding: .6rem;
+    background-color: #a56e5f;
+    transition: .3s;
+    &:disabled{
+      cursor: not-allowed;
+      background-color:#f5e4de ;
+      
+    }
+  }
+  button:nth-child(1){
+    border-right: #311b15 2px solid;
+  }
+  button:nth-child(2){
+    border-left: #311b15 2px solid;
+  }
+}
+.currentTests{
+  div.PredictionTests:nth-child(n+2){
+    border-top: #aa706b 2px dotted;
+  }
+}
+
+//以下是每個個別的題目區塊
+div.PredictionTests{
+  color: #5e664b;
+  h4{
+    color: #2e2c0d;
+    font-weight: 400;
+    position: relative;
+    display: flex;
+    &::before{
+      position: absolute;
+      transform: translateX(-15px);
+      content: "";
+      display: block;
+      width: 10px;height: 20px;
+      background-color: #2e2c0d;
+    }
+  }
+  // background-color: #ccc;
+  padding: 1rem;
+  // border: ;
+  small.publisher{
+    margin-top: .3rem;
+    display: block;
+    position: relative;
+    left: 12rem;
+    a{
+      color: #5e664b;
+    }
+  }
+  .basicPoint{
+    padding-bottom: .5rem;
+    border-bottom: 2px #5E654A dashed;
+    color: #2e2c0d;
+  }
+  .genre{
+    padding: .5rem 0;
+  }
+}
+
+
 //TESTsページ============================
+
+//個別テストのページ============================
+
+.testBody{
+  padding: 1rem;
+  color: #311b15;
+
+  h4{
+    font-size: 20px;
+    margin-bottom: .5rem;
+  }
+  p{
+    color: #754F44;
+  }
+  p:nth-child(-n+5){
+    margin-bottom: .5rem;
+  }
+}
+.navInTest{
+  position: relative;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // background-color: yellow;
+  margin-bottom: 1rem;
+  .goBack{
+    display: block;height: 40px;
+    background-color: rgb(78, 137, 192);
+    border-radius: 0 2px 2px 0;
+    color: white;
+    padding: .5rem;
+    position: relative;
+    transform: translateX(20px);
+    &::before{
+      content: "";
+      display: block;
+      top: 50%; /* 将伪元素的顶部对齐到父元素的中心位置 */
+      left: 0;
+      margin-top: -20px; /* 将伪元素向上移动其高度的一半，使其与父元素垂直居中 */
+      width: 0;
+      height: 0;
+      border-top: 20px solid transparent; /* 三角形的上边 */
+      border-bottom: 20px solid transparent; /* 三角形的下边 */
+      border-right: 20px solid rgb(78, 137, 192); /* 三角形的右边，同时也是箭头的颜色 */
+      position: absolute;
+      transform: translateX(-20px);
+    }
+  }
+  .editTests{
+    position: relative;
+    transform: translateX(15px);
+  }
+  .editTests,.deleteTest{
+    background-color: #976c45;
+    border-radius: 10px;
+    padding: .5rem;
+    height: 40px;
+    a,p{
+      color: white;
+    }
+  }
+}
+
+section.choicesSection{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-template-rows: repeat(4,1fr);
+  gap: .5rem;
+  .choices{
+    background-color: #ddd;
+    padding: .2rem;
+  }
+}
+
+
+//個別テストのページ============================
+
+//TestsPageTemplate============================
+
+.testsTemplate{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;align-items: center;
+  padding: 1rem 1rem 0;
+  position: relative;
+  &::after{
+    content: "";
+    display: block;
+    height: 1rem;
+    background: url("/separatingLine/b_ornament_146_0S.png") no-repeat center center;
+    width: 100%;
+    margin: 0rem 1rem 1rem;
+  }
+}
+.toRules{
+  display: flex;
+  &:hover::before,&:hover::after{
+    background-color: #d9e0c4;
+    transition: .3s;
+  }
+  &::before,&::after{
+    content: "";
+    display: block;
+    background-color: #2e2c0d;
+    width: 10px;height: 20px;
+    transition: .3s;
+  }
+  &::before{
+    transform: translateX(-12px);
+
+  }
+  &::after{
+    transform: translateX(12px);
+  }
+}
+
+.publishBtn{
+  margin: 1rem;
+  background-color: #aa706b;
+  padding: .5rem;
+  border-radius: 10px;
+  transition:background-color .3s;
+  a{
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+  }
+  &:hover{
+    background-color: white;
+    outline: 2px #aa706b solid;
+  }
+  &:hover a{
+    color: #aa706b;
+  }
+  
+}
+
+//TestsPageTemplate============================
 
 footer{
   background-color: #754F44;

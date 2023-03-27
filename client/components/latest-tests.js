@@ -23,7 +23,7 @@ export default function LatestTests() {
           latestFive.map(test =>{
             return (
             <li className="latestTest" key={test._id}>
-              <Link href={`/PredictionTests/${test._id}`}>{`問${test.test_ID}：${test.title}`}</Link>
+              <Link target="_blank" href={`/PredictionTests/${test._id}`}>{`問${test.test_ID}：${test.title}`}</Link>
               <br/>
               <Link className="publisher" href={`/profile/${test.publisher._id}`}><small>{`出題者：${test.publisher.nickname}`}</small></Link>
             </li>
