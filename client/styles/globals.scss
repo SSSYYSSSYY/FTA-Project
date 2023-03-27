@@ -2,13 +2,13 @@
   margin: 0;padding: 0;
   box-sizing: border-box;
 }
-// @font-face {
-//   font-family: "GenEiLateMinP_v2";
-//   src: url("/fonts/GenEiLatin-Separate_v2.1/GenEiLateMinP_v2.ttf");
-// }
+@font-face {
+  font-family: "GenEiLateMinN_v2";
+  src: url("../fonts/GenEiLatin-Separate_v2.1/GenEiLateMinN_v2.ttf") format("truetype");
+}
 body{
   margin: auto;
-  font-family: 'Kiwi Maru', serif;
+  font-family: 'GenEiLateMinN_v2', serif;
   background-color: #f5e4de;
   background: url("/background.svg") fixed 100px;
 }
@@ -39,9 +39,7 @@ header{
   font-family: 'Kaisei Opti', serif;
 
 }
-.banner-title{
-  text-align: right;
-}
+
 
 nav{
   padding: 1.2rem;
@@ -137,7 +135,7 @@ nav ul{
 
   background-color: #d9e0c4;
 }
-//#9FA4A9 #C9AFAF
+
 
 .latestTests{
   // margin-bottom: 1rem;
@@ -152,7 +150,8 @@ nav ul{
     background: url("/separatingLine/b_ornament_146_0S.png") no-repeat center center;
     margin-top: 2rem;
   }
-  p{
+  .publisher{
+    display: block;
     position: relative;
     left: 12rem;
   }
@@ -186,6 +185,114 @@ a.allTests{
     text-align: center;
   }
 }
+
+//TESTsページ============================
+
+.testsByGenre,.testsByStatus{
+  margin: .4rem 1rem 0;
+  cursor: pointer;
+  
+}
+.testsByGenre{
+  text-align: center;
+  li{
+    color: #4b281f;
+    padding-bottom: .3rem;
+    &:hover{
+      background-color: #754F44;
+      color: white;
+      transition: .4s;
+    }
+  }
+
+}
+label.selectTestsNav{
+  cursor: pointer;
+  background-color: #754F44;
+  color: white;
+
+  width: 60%;
+  margin: auto;
+  padding: .5rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+label.selectTestsNav + .testsByGenre{
+  height: 0;
+  transition: .5s ease-in-out;
+  overflow: hidden;
+  
+}
+input#selectTestsNav{
+  display: none;
+}
+label.selectTestsNav{
+  position: relative;
+  &::after{
+    content: "＋";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;height: 1rem;
+    font-size: 20px;
+  }
+}
+input#selectTestsNav:checked + label.selectTestsNav{
+  position: relative;
+  &::after{
+    content: "－";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;height: 1rem;
+    font-size: 20px;
+  }
+}
+
+div.seeAllTests{
+  text-align: center;
+  cursor: pointer;
+  background-color: #754F44;
+  color: white;
+  width: 60%;
+  margin: 1rem auto;
+  padding: .5rem;
+  border-radius: 10px;
+}
+
+#selectTestsNav:checked + label.selectTestsNav + .testsByGenre{
+  height: 13rem;
+  transition: .5s ease-in-out;
+}
+ul.testsByStatus{
+  display: flex;
+  justify-content: center;align-items: center;
+  li:nth-child(n+2){
+    margin-left: .3rem;
+  }
+  li{
+    background-color: #d9e0c4;
+    padding: .5rem .2rem;
+    width: 35%;
+    text-align: center;
+    font-size: 15px;
+    transition: .3s;
+    border-radius: 10px 10px 0 0;
+  }
+  li.selected{
+    background-color: #5E654A;
+    color: white;
+  }
+}
+.currentTests{
+  background-color: #d9e0c4;
+  padding: .5rem;
+}
+
+//TESTsページ============================
 
 footer{
   background-color: #754F44;

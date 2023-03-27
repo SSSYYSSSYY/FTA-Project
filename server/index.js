@@ -93,9 +93,9 @@ app.get("/news",async(req,res)=>{
 });
 
 app.get("/news/:_id", async(req,res)=>{
-    let {id} = req.params;
+    let {_id} = req.params;
     try{
-        let foundNews = await News.findOne({}).exec();
+        let foundNews = await News.findOne({_id}).exec();
         return res.send(foundNews);
     }catch(e){
         return res.status(500).send("予期せぬエラーが発生しました。");

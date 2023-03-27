@@ -27,6 +27,7 @@ export async function getStaticProps({params}){
   const response = await fetch(`http://127.0.0.1:8080/news/${params.id}`);
   
   const data = await response.json();
+
   return {
     props:{
       data,
@@ -36,11 +37,10 @@ export async function getStaticProps({params}){
 }
 
 export default function News({data}){
-  console.log(data)
   return (
     <Layout>
       <h3>{data.title}</h3>
-      <p><small>{data.postDate}</small></p>
+      <p><small>{new Date(data.postDate).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}</small></p>
       <p>{data.description}</p>
 
       <Link href={`/news`}>戻る</Link>

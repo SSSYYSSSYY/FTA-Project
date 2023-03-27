@@ -35,15 +35,15 @@ export default function Login(){
     <Layout>
       {msg && <div className="alertMsg">{msg}</div>}
       <form onSubmit={handleLogin}>
-        <label htmlFor="username">帳號：</label>
+        <label htmlFor="username">アカウント：</label>
         <input id="username" name="username" type="text"
         onChange={handleUsername}/>
         <br/>
-        <label htmlFor="password">密碼：</label>
+        <label htmlFor="password">パスワード：</label>
         <input id="password" name="password" type="password"
         onChange={handlePassword}/>
         <br/>
-        <button type="submit">登入</button>
+        <button type="submit">ログイン</button>
       </form>
     </Layout>
 

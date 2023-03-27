@@ -24,7 +24,8 @@ export default function LatestTests() {
             return (
             <li className="latestTest" key={test._id}>
               <Link href={`/PredictionTests/${test._id}`}>{`問${test.test_ID}：${test.title}`}</Link>
-              <p><small>{`出題者：${test.publisher.nickname}`}</small></p>
+              <br/>
+              <Link className="publisher" href={`/profile/${test.publisher._id}`}><small>{`出題者：${test.publisher.nickname}`}</small></Link>
             </li>
             )
           })

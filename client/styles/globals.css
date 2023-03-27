@@ -1,12 +1,17 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "GenEiLateMinN_v2";
+  src: url("../fonts/GenEiLatin-Separate_v2.1/GenEiLateMinN_v2.ttf") format("truetype");
+}
 body {
   margin: auto;
-  font-family: "Kiwi Maru", serif;
+  font-family: "GenEiLateMinN_v2", serif;
   background-color: #f5e4de;
   background: url("/background.svg") fixed 100px;
 }
@@ -35,10 +40,6 @@ header {
   background: url("/header.svg") center center no-repeat #754F44;
   background-size: cover;
   font-family: "Kaisei Opti", serif;
-}
-
-.banner-title {
-  text-align: right;
 }
 
 nav {
@@ -137,7 +138,8 @@ nav ul li:nth-child(n+3) {
   background: url("/separatingLine/b_ornament_146_0S.png") no-repeat center center;
   margin-top: 2rem;
 }
-.latestTests p {
+.latestTests .publisher {
+  display: block;
   position: relative;
   left: 12rem;
 }
@@ -168,6 +170,116 @@ a.allTests {
   margin-right: 1rem;
   width: 9rem;
   text-align: center;
+}
+
+.testsByGenre, .testsByStatus {
+  margin: 0.4rem 1rem 0;
+  cursor: pointer;
+}
+
+.testsByGenre {
+  text-align: center;
+}
+.testsByGenre li {
+  color: #4b281f;
+  padding-bottom: 0.3rem;
+}
+.testsByGenre li:hover {
+  background-color: #754F44;
+  color: white;
+  transition: 0.4s;
+}
+
+label.selectTestsNav {
+  cursor: pointer;
+  background-color: #754F44;
+  color: white;
+  width: 60%;
+  margin: auto;
+  padding: 0.5rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+label.selectTestsNav + .testsByGenre {
+  height: 0;
+  transition: 0.5s ease-in-out;
+  overflow: hidden;
+}
+
+input#selectTestsNav {
+  display: none;
+}
+
+label.selectTestsNav {
+  position: relative;
+}
+label.selectTestsNav::after {
+  content: "＋";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 1rem;
+  font-size: 20px;
+}
+
+input#selectTestsNav:checked + label.selectTestsNav {
+  position: relative;
+}
+input#selectTestsNav:checked + label.selectTestsNav::after {
+  content: "－";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 1rem;
+  font-size: 20px;
+}
+
+div.seeAllTests {
+  text-align: center;
+  cursor: pointer;
+  background-color: #754F44;
+  color: white;
+  width: 60%;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+#selectTestsNav:checked + label.selectTestsNav + .testsByGenre {
+  height: 13rem;
+  transition: 0.5s ease-in-out;
+}
+
+ul.testsByStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ul.testsByStatus li:nth-child(n+2) {
+  margin-left: 0.3rem;
+}
+ul.testsByStatus li {
+  background-color: #d9e0c4;
+  padding: 0.5rem 0.2rem;
+  width: 35%;
+  text-align: center;
+  font-size: 15px;
+  transition: 0.3s;
+  border-radius: 10px 10px 0 0;
+}
+ul.testsByStatus li.selected {
+  background-color: #5E654A;
+  color: white;
+}
+
+.currentTests {
+  background-color: #d9e0c4;
+  padding: 0.5rem;
 }
 
 footer {

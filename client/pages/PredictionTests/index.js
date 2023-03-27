@@ -20,11 +20,56 @@ export async function getServerSideProps(){
 export default function TestHome({data}){
   const router = useRouter();
 
+  const [currentSelect,setCurrentSelect] = useState("")
+  const [selectedData,setSelectedData] = useState(data);
+  const handleByGenre = (e) =>{
+    fetch(`http://127.0.0.1:8080/PredictionTests/genre/${e.target.textContent}`)
+    .then(data=>data.json())
+    .then(data=>setSelectedData(data))
+    .catch(e=>console.log(e));
+    setCurrentSelect(e.target.textContent);
+  }
+
+  const handleAllTests = (e) =>{
+    fetch(`http://127.0.0.1:8080/PredictionTests`)
+    .then(data=>data.json())
+    .then(data=>setSelectedData(data))
+    .catch(e=>console.log(e));
+    setCurrentSelect("");
+  }
+
+  const handleAccepting = (e) =>{
+    fetch(`http://127.0.0.1:8080/PredictionTests/status/isAccepting`)
+    .then(data=>data.json())
+    .then(data=>setSelectedData(data))
+    .catch(e=>console.log(e));
+    setCurrentSelect("回答受付中");
+  }
+  const handleWaiting = (e) =>{
+    fetch(`http://127.0.0.1:8080/PredictionTests/status/isWaitingForAnswering`)
+    .then(data=>data.json())
+    .then(data=>setSelectedData(data))
+    .catch(e=>console.log(e));
+    setCurrentSelect("答え合わせ待ち");
+  }
+  const handleAnswered = (e) =>{
+    fetch(`http://127.0.0.1:8080/PredictionTests/status/isAnswered`)
+    .then(data=>data.json())
+    .then(data=>setSelectedData(data))
+    .catch(e=>console.log(e));
+    setCurrentSelect("答え合わせ済み");
+  }
+
+  console.log(currentSelect)
+
+
   const [currentPage,setCurrentPage] = useState(0);
-  const currentData = data.slice(currentPage*pageSize,currentPage*pageSize+pageSize);
+  // const currentData = data.slice(currentPage*pageSize,currentPage*pageSize+pageSize);
+
+  const currentData = selectedData.slice(currentPage*pageSize,currentPage*pageSize+pageSize);
 
   let isLastPage = false;
-  if(currentData.length < 5||data.slice((currentPage+1)*pageSize,(currentPage+1)*pageSize+pageSize).length == 0){
+  if(currentData.length < 5||selectedData.slice((currentPage+1)*pageSize,(currentPage+1)*pageSize+pageSize).length == 0){
     isLastPage = true;
   }
 
@@ -50,7 +95,28 @@ export default function TestHome({data}){
     <div>
       
       <TestsPageTemplate>
-      <div>
+
+        
+        <input id="selectTestsNav" type="checkbox"/>
+        <label htmlFor="selectTestsNav" className="selectTestsNav">ジャンルで絞る&nbsp;&nbsp;&nbsp;</label>
+        <ul className="testsByGenre">
+          <li onClick={handleByGenre}>グルメ</li>
+          <li onClick={handleByGenre}>芸能</li>
+          <li onClick={handleByGenre}>時事・トレンド</li>
+          <li onClick={handleByGenre}>スポーツ</li>
+          <li onClick={handleByGenre}>アニメ・ゲーム</li>
+          <li onClick={handleByGenre}>政治経済</li>
+          <li onClick={handleByGenre}>趣味・雑学</li>
+          <li onClick={handleByGenre}>ノンジャンル</li>
+        </ul>
+
+        <ul className="testsByStatus">
+          {currentSelect == "回答受付中"?(<li className="selected" onClick={handleAccepting}>&nbsp;回答受付中&nbsp;</li>):(<li onClick={handleAccepting}>回答受付中</li>)}
+          {currentSelect == "答え合わせ待ち"?(<li className="selected" onClick={handleWaiting}>答え合わせ待ち</li>):(<li onClick={handleWaiting}>答え合わせ待ち</li>)}
+          {currentSelect == "答え合わせ済み"?(<li className="selected" onClick={handleAnswered}>答え合わせ済み</li>):(<li onClick={handleAnswered}>答え合わせ済み</li>)}
+        </ul>
+        
+      <div className="currentTests">
         {data && 
           currentData.map(data =>{
             return (
@@ -69,6 +135,7 @@ export default function TestHome({data}){
           {currentPage != 0? (<button onClick={handlePrePage}><i className="fa-solid fa-angles-left"></i></button>):(<button onClick={handlePrePage} disabled><i className="fa-solid fa-angles-left"></i></button>)}
           {isLastPage ? (<button onClick={handleNextPage} disabled><i className="fa-solid fa-angles-right"></i></button>):(<button onClick={handleNextPage}><i className="fa-solid fa-angles-right"></i></button>)}
       </div>
+      <div className="seeAllTests" onClick={handleAllTests}>すべてのテストを見る</div>
       </TestsPageTemplate>
     </div>
   </Layout>
