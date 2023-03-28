@@ -104,11 +104,12 @@ export default function NewTest(){
 
   return (
     <Layout>
+      {/* textarea中可用「\n來換行」 */}
       <form onSubmit={handlePublish}>
         <label htmlFor="test-title">タイトル：</label>
-        <input id="test-title" name="title" type="text" required
+        <textarea rows={2} id="test-title" name="title" required
         minLength="8" placeholder="八文字以上必要です。"
-        onChange={handleFormData}/>
+        onChange={handleFormData}></textarea>
         <label htmlFor="test-genre">ジャンル：</label>
         <select id="test-genre" name="genre" required defaultValue=""
         onChange={handleFormData}>
@@ -125,39 +126,39 @@ export default function NewTest(){
         </select>
         <br/>
         <label htmlFor="test-description">説明：</label>
-        <textarea id="test-description" name="description"
-        onChange={handleFormData} required placeholder="説明をここにご記入ください。" cols={36} rows={8}></textarea>
+        <textarea wrap="physical" rows={8} id="test-description" name="description"
+        onChange={handleFormData} required placeholder="説明をここにご記入ください。" cols={36}></textarea>
         <br/>
         <div className="choices">
           <p>選択肢：</p>
-          <p><small>※①～⑤は必須です。</small></p>
+          <p className="newTestNotice"><small>※①～⑤は必須です。</small></p>
           <label htmlFor="choice-one">①：</label>
-          <input id="choice-one" name="one" type="text" required
-          onChange={handleFormData}/>
+          <textarea rows={2} id="choice-one" name="one" required
+          onChange={handleFormData}></textarea>
           <label htmlFor="choice-two">②：</label>
-          <input id="choice-two" name="two" type="text" required
-          onChange={handleFormData}/>
+          <textarea rows={2} id="choice-two" name="two" required
+          onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-three">③：</label>
-          <input id="choice-three" name="three" type="text" required
+          <textarea rows={2} id="choice-three" name="three" required
           onChange={handleFormData}/>
           <label htmlFor="choice-four">④：</label>
-          <input id="choice-four" name="four" type="text" required
-          onChange={handleFormData}/>
+          <textarea rows={2} id="choice-four" name="four" required
+          onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-five">⑤：</label>
-          <input id="choice-five" name="five" type="text" required
-          onChange={handleFormData}/>
+          <textarea rows={2} id="choice-five" name="five" required
+          onChange={handleFormData}></textarea>
           <label htmlFor="choice-six">⑥：</label>
-          <input id="choice-six" name="six" type="text"
-          onChange={handleFormData}/>
+          <textarea rows={2} id="choice-six" name="six"
+          onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-seven">⑦：</label>
-          <input id="choice-seven" name="seven" type="text"
-          onChange={handleFormData}/>
+          <textarea rows={2} id="choice-seven" name="seven" 
+          onChange={handleFormData}></textarea>
           <label htmlFor="choice-eight">⑧：</label>
-          <input id="choice-eight" name="eight" type="text"
-          onChange={handleFormData}/>
+          <textarea rows={2} id="choice-eight" name="eight"
+          onChange={handleFormData}></textarea>
           <br/>
         </div>
         <br/>

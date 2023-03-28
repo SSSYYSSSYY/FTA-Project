@@ -20,7 +20,7 @@ body {
 div#__next {
   max-width: 400px;
   margin: auto;
-  border: 1rem #311b15 solid;
+  border: 0.8rem #311b15 solid;
   box-sizing: content-box;
   background-color: rgb(253, 250, 220);
 }
@@ -357,20 +357,166 @@ div.PredictionTests .genre {
 }
 
 .testBody {
-  padding: 1rem;
+  position: relative;
+  padding: 0.6rem;
   color: #311b15;
+}
+.testBody .statusMsg {
+  font-size: 14px;
+}
+.testBody .datesOfTest {
+  font-size: 13px;
+  margin: 1rem 0;
+}
+.testBody .goToCheck {
+  margin: 1rem auto;
+  text-align: center;
+  width: 50%;
+  display: block;
+  background-color: #f06d62;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-weight: 700;
+}
+.testBody .correctMsg {
+  color: rgb(180, 57, 41);
+  position: absolute;
+  z-index: 9;
+  right: 1rem;
+  top: 8rem;
+  transform: rotate(20deg);
+  background-color: rgba(255, 255, 255, 0.3);
+  border: rgb(180, 57, 41) 3px solid;
+  width: 7rem;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 30px;
+}
+.testBody .basicPoint {
+  font-size: 14px;
+}
+.testBody .basicPoint span {
+  text-decoration: underline;
+}
+.testBody .testStatus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+  text-align: center;
+}
+.testBody .testStatus span {
+  text-decoration: underline;
+}
+.testBody .testStatus::before, .testBody .testStatus::after {
+  content: "";
+  display: block;
+  background-color: #976c45;
+  width: 10px;
+  height: 20px;
+  transition: 0.3s;
+}
+.testBody .testStatus::before {
+  transform: translateX(-12px);
+}
+.testBody .testStatus::after {
+  transform: translateX(12px);
 }
 .testBody h4 {
   font-size: 20px;
   margin-bottom: 0.5rem;
+  color: #4b281f;
 }
-.testBody p {
+.testBody p, .testBody label {
   color: #754F44;
 }
-.testBody p:nth-child(-n+5) {
+.testBody .genre {
+  font-size: 14px;
   margin-bottom: 0.5rem;
 }
+.testBody small.publisher {
+  display: block;
+  width: 100%;
+  text-align: right;
+}
+.testBody small.publisher a {
+  color: #311b15;
+}
+.testBody .description {
+  cursor: pointer;
+  margin: 1rem;
+  background-color: #976c45;
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+}
+.testBody #description {
+  cursor: pointer;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #4b281f;
+  color: white;
+  padding: 1rem;
+  border: 2px white solid;
+  display: inline-block;
+  height: auto;
+  width: auto;
+  animation: showDes 0.8s forwards;
+  overflow: auto;
+  z-index: 999;
+  border-radius: 10px;
+  white-space: pre-wrap;
+}
+.testBody .mask {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
 
+main .alertMsg {
+  background-color: rgb(255, 255, 219);
+  color: #976c45;
+  border: 1px #976c45 solid;
+  margin: 1rem auto;
+  width: 90%;
+  text-align: center;
+  border-radius: 5px;
+  padding: 0.3rem;
+  font-size: 14px;
+}
+
+@keyframes showDes {
+  0% {
+    padding: 0;
+    overflow: hidden;
+    width: 0%;
+    height: 0%;
+  }
+  30% {
+    padding: 0;
+    overflow: hidden;
+    width: 90%;
+    height: 0%;
+  }
+  100% {
+    padding: 1rem;
+    overflow: auto;
+    width: 90%;
+    height: 50%;
+    cursor: auto;
+  }
+}
 .navInTest {
   position: relative;
   height: 40px;
@@ -392,14 +538,14 @@ div.PredictionTests .genre {
 .navInTest .goBack::before {
   content: "";
   display: block;
-  top: 50%; /* 将伪元素的顶部对齐到父元素的中心位置 */
+  top: 50%;
   left: 0;
-  margin-top: -20px; /* 将伪元素向上移动其高度的一半，使其与父元素垂直居中 */
+  margin-top: -20px;
   width: 0;
   height: 0;
-  border-top: 20px solid transparent; /* 三角形的上边 */
-  border-bottom: 20px solid transparent; /* 三角形的下边 */
-  border-right: 20px solid rgb(78, 137, 192); /* 三角形的右边，同时也是箭头的颜色 */
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-right: 20px solid rgb(78, 137, 192);
   position: absolute;
   transform: translateX(-20px);
 }
@@ -419,13 +565,130 @@ div.PredictionTests .genre {
 
 section.choicesSection {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  gap: 0.5rem;
+  font-size: 14px;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 25% 25% 25% 25%;
+  gap: 0.2rem;
+  margin: 2rem 0;
+  color: #754F44;
 }
 section.choicesSection .choices {
-  background-color: #ddd;
-  padding: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 252, 226);
+  border: 2px #976c45 solid;
+  border-radius: 3px;
+  box-shadow: 0 0 1px 1px rgba(97, 82, 42, 0.5);
+}
+section.choicesSection .choices .choiceInfo {
+  border-bottom: 2px #976c45 solid;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.2rem;
+}
+section.choicesSection .choices .choiceContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0.3rem;
+  text-align: center;
+  overflow-wrap: break-word;
+  min-height: 3.5rem;
+  vertical-align: middle;
+}
+section.choicesSection .choices.selected {
+  background-color: #fde5dd;
+  color: #773b35;
+  border: 2px #773b35 solid;
+}
+section.choicesSection .choices.selected .choiceInfo {
+  border-bottom: 2px #773b35 solid;
+}
+section.choicesSection .choices.selected .choiceContent {
+  color: #773b35;
+}
+section.choicesSection .choices.selected.flag {
+  background-color: rgb(255, 236, 126);
+  color: #754F44;
+  border: 2px #754F44 solid;
+}
+section.choicesSection .choices.selected.flag .choiceInfo {
+  border-bottom: 2px #754F44 solid;
+}
+section.choicesSection .choices.selected.flag .choiceInfo span:first-child::after {
+  content: "\f024";
+  font-size: 18px;
+  display: inline-block;
+  font-family: "Font Awesome 6 Free"; /* Font Awesome 圖示字體名稱 */
+  font-weight: 900; /* 字體粗細 */
+  position: absolute;
+  color: red;
+  transform: rotate(7deg) translateX(8px);
+}
+section.choicesSection .choices.selected.flag .choiceContent {
+  color: #754F44;
+}
+section.choicesSection .choices.answer {
+  animation: answerGlow 2s infinite;
+  position: relative;
+}
+section.choicesSection .choices.answer::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 100%;
+  height: 100%;
+  background: white;
+  border: 4px white solid;
+  animation: answerShine 2s infinite;
+}
+
+@keyframes answerGlow {
+  0% {
+    box-shadow: 0;
+  }
+  70% {
+    box-shadow: 0 0 50px white;
+  }
+  100% {
+    box-shadow: 0 0 20px white;
+  }
+}
+@keyframes answerShine {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+form {
+  padding: 1rem;
+  color: #4b281f;
+}
+form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+form .newTestNotice {
+  font-size: 14px;
+  margin: 0.5rem 0 1rem;
+}
+form input[type=text] {
+  width: 100%;
+  height: 3em;
+  line-height: 2;
+  margin-bottom: 1rem;
+}
+form select, form textarea {
+  width: 100%;
+  margin-bottom: 1rem;
+  white-space: pre-wrap;
 }
 
 .testsTemplate {

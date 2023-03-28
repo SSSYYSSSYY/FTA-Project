@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import TestsPageTemplate from "@/components/TestsPageTemplate";
 import { useEffect, useRef ,useState} from "react";
 
-
 const pageSize = 5;
 
 export async function getServerSideProps(){
@@ -16,6 +15,9 @@ export async function getServerSideProps(){
     }
   }
 }
+
+//因為這裡是進來題目頁面之後一口氣加載完所有題目，才能實現翻頁時不換頁
+//未來等題目變多之後應該就會卡頓，之後可能需要修改邏輯
 
 export default function TestHome({data}){
   const router = useRouter();

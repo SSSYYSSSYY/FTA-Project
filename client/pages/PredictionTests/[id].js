@@ -44,8 +44,9 @@ export default function Test({data}){
   const [canEdit,setCanEdit] = useState(false);
   const [canDelete,setCanDelete] = useState(false);
   const [canCheck,setCanCheck] = useState(false);
+  const [isCorrect,setIsCorrect] = useState(false);
 
-  console.log(data.answer)
+  const [isShowDes,setIsShowDes] = useState(false);
 
   // document.querySelector("div.answer").style.color = "blue";
   
@@ -60,6 +61,7 @@ export default function Test({data}){
       if(currentUser){
         console.log("當前使用者："+currentUser.user._id.toString())
         console.log("出題者："+data.publisher._id.toString())
+        
         if(currentUser.user._id.toString() == data.publisher._id.toString()){
           console.log("是自己出的題目")
           //當前使用者為出題者本人，且當前使用者未受懲罰，且當前題目未結束
@@ -83,7 +85,6 @@ export default function Test({data}){
           }
         }
         // console.log(currentUser.user.isPenalized)
-
       }
       // console.log(data.choices)
       for(const choice in data.choices){
@@ -91,12 +92,13 @@ export default function Test({data}){
           if(currentUser && user._id.toString() == currentUser.user._id.toString()){
             console.log("使用者有選過"+choice,user.usePoint)
             document.querySelector(`div#${choice}`).classList.add("selected");
-            document.querySelector(`div#${choice}`).insertAdjacentHTML("beforeend",`<p><small>ポイント：${user.usePoint}</small></p>`)
-            document.querySelector(`div#${choice}`).style.color = "#888";
+            document.querySelector(`div#${choice} .choiceInfo span`).insertAdjacentHTML("afterend",`<span><small>P：${user.usePoint}</small></span>`)
+            // document.querySelector(`div#${choice}`).style.color = "#888";
             //樣式等之後用CSS改
             if(user.isFlag){
               document.querySelector(`div#${choice}`).classList.add("flag");
-              document.querySelector(`div#${choice}`).style.color = "gold";
+              
+              // document.querySelector(`div#${choice}`).style.color = "gold";
               //樣式等之後用CSS改
             }
             predictedArr.push({
@@ -125,18 +127,21 @@ export default function Test({data}){
     choices.forEach(choice =>{
       let choiceContent = choice.querySelectorAll("p");
       choiceContent.forEach(p =>{
-        if(p.textContent == data.answer){
+        if(p.textContent == data.answer.slice(2)){
           choice.classList.add("answer");
+          console.log(data.answer)
+          //這邊要改
+          if(document.querySelector(".selected.answer")){
+            console.log("使用者有答對")
+            document.querySelector(".testBody").insertAdjacentHTML("afterbegin",`<div class="correctMsg">的中</div>`)
+          }else{
+            console.log("使用者沒答對")
+            document.querySelector(".testBody").insertAdjacentHTML("afterbegin",`<div class="incorrectMsg">ハズレ</div>`)
+          }
         }
       })
     })
-    if(data.isAnswered){
-      if(document.querySelector("div.answer")){
-        document.querySelector("div.answer").style.backgroundColor = "#CCC";
-      }
-      
-      //之後用CSS修改答案的樣式
-    }
+
     
   },[isCurrentUserExist]);
 
@@ -170,6 +175,13 @@ export default function Test({data}){
     }
     
   }
+  const showDes = (e) =>{
+    console.log("開啟說明文")
+    setIsShowDes(true)
+  }
+  const closeDes = (e) =>{
+    setIsShowDes(false)
+  }
   
   return (
     <Layout>
@@ -180,58 +192,92 @@ export default function Test({data}){
         {canEdit&&<div className="editTests"><Link href={`/PredictionTests/edit/${data._id}`}>編集する</Link></div>}
         {canDelete&&<div onClick={handleDelete} className="deleteTest"><p style={{cursor:"pointer"}}>取り下げる</p></div>}
       </div>
+      {/* <p className="testStatus">{data.isAccepting && `テスト状態：回答受付中`}</p>
+      <p className="testStatus">{data.isWaitingForAnswering && `テスト状態：答え合わせ待ち`}</p>
+      <p className="testStatus">{data.isAnswered && `テスト状態：答え合わせ済み`}</p> */}
+      {data.isAccepting?(<p className="testStatus"><span>回答受付中</span></p>):(null)}
+      {data.isWaitingForAnswering?(<p className="testStatus"><span>答え合わせ待ち</span></p>):(null)}
+      {data.isAnswered?(<p className="testStatus"><span>答え合わせ済み</span></p>):(null)}
       <h4>{`問${data.test_ID}：${data.title}`}</h4>
       <p className="genre">{`ジャンル：${data.genre}`}</p>
+      <p className="basicPoint">基礎ポイント：<span>{data.bonus}</span></p>
+      <p onClick={showDes}  className="description">説明はこちらへ</p>
+      {isShowDes && <p id="description">{data.description}</p>}
       
-      <p className="description">説明：<br/>
-      {data.description}</p>
-      <p className="basicPoint">{`基礎ポイント：${data.bonus}`}</p>
-      <p>{data.isAccepting && `テスト状態：回答受付中`}</p>
-      <p>{data.isWaitingForAnswering && `テスト状態：答え合わせ待ち`}</p>
-      <p>{data.isAnswered && `テスト状態：答え合わせ済み`}</p>
+      {isShowDes && <div onClick={closeDes} className="mask"></div>}
       {/* <p>選択肢：</p> */}
       <section className="choicesSection">
         <div id="one" className="choices">
-          <p>{`①：${data.choices.one.des}`}</p>
-          <p><small>{`回答者数：${data.choices.one.answerer.length}`}</small></p>
+          <div className="choiceInfo">
+            <span>①</span>
+            <span><small>{`${data.choices.one.answerer.length}人`}</small></span>
+          </div>
+          <p className="choiceContent">{data.choices.one.des}</p>
         </div>
         <div id="two" className="choices">
-          <p>{`②：${data.choices.two.des}`}</p>
-          <p><small>{`回答者数：${data.choices.two.answerer.length}`}</small></p>
+          <div className="choiceInfo">
+            <span>②</span>
+            <span><small>{`${data.choices.two.answerer.length}人`}</small></span>
+          </div>
+          <p className="choiceContent">{data.choices.two.des}</p>
         </div>
         <div id="three" className="choices">
-          <p>{`③：${data.choices.three.des}`}</p>
-          <p><small>{`回答者数：${data.choices.three.answerer.length}`}</small></p>
+          <div className="choiceInfo">
+            <span>③</span>
+            <span><small>{`${data.choices.three.answerer.length}人`}</small></span>
+          </div>
+          <p className="choiceContent">{data.choices.three.des}</p>
         </div>
         <div id="four" className="choices">
-          <p>{`④：${data.choices.four.des}`}</p>
-          <p><small>{`回答者数：${data.choices.four.answerer.length}`}</small></p>
+          <div className="choiceInfo">
+            <span>④</span>
+            <span><small>{`${data.choices.four.answerer.length}人`}</small></span>
+          </div>
+          <p className="choiceContent">{data.choices.four.des}</p>
         </div>
         <div id="five" className="choices">
-          <p>{`⑤：${data.choices.five.des}`}</p>
-          <p><small>{`回答者数：${data.choices.five.answerer.length}`}</small></p>
+          <div className="choiceInfo">
+            <span>⑤</span>
+            <span><small>{`${data.choices.five.answerer.length}人`}</small></span>
+          </div>
+          <p className="choiceContent">{data.choices.five.des}</p>
         </div>
         {data.choices.six.des && <div id="six" className="choices">
-          <p>{`⑥：${data.choices.six.des}`}</p>
-          <p><small>{`回答者数：${data.choices.six.answerer.length}`}</small></p>
+          <div className="choiceInfo">
+            <span>⑥</span>
+            <span><small>{`${data.choices.six.answerer.length}人`}</small></span>
+          </div>
+          <p className="choiceContent">{data.choices.six.des}</p>
           </div>}
         {data.choices.seven.des && <div id="seven" className="choices">
-          <p>{`⑦：${data.choices.seven.des}`}</p>
-          <p><small>{`回答者数：${data.choices.seven.answerer.length}`}</small></p>
+          <div className="choiceInfo">
+            <span>⑦</span>
+            <span><small>{`${data.choices.seven.answerer.length}人`}</small></span>
+          </div>
+          <p className="choiceContent">{data.choices.seven.des}</p>
         </div>}
         {data.choices.eight.des && <div id="eight" className="choices">
-          <p>{`⑧：${data.choices.eight.des}`}</p>
-          <p><small>{`回答者数：${data.choices.eight.answerer.length}`}</small></p>
+          <div className="choiceInfo">
+            <span>⑧</span>
+            <span><small>{`${data.choices.eight.answerer.length}人`}</small></span>
+          </div>
+          <p className="choiceContent">{data.choices.eight.des}</p>
         </div>}
       </section>
-      <p>{`出題日時：${new Date(data.postDate).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}`}</p>
-      <p>{`締め切り：${new Date(data.deadline).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}`}</p>
+      <div className="datesOfTest">
+        <p>{`出題日時：${new Date(data.postDate).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}`}</p>
+        <p>{`締め切り：${new Date(data.deadline).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}`}</p>
+      </div>
+      
       {canPredict && data.isAccepting && <Link href={`/toPredict/${data._id}`}>予知を行う</Link>}
-      {data.isWaitingForAnswering && <p>このテストはすでに締め切りが過ぎています。</p>}
-      {data.isAnswered && <p>このテストはすでに答え合わせ済みです。</p>}
-      {canCheck && <Link href={`/CheckOutTheAnswer/${data._id}`}>答え合わせを行う</Link>}
+      <div className="statusMsg">
+        {data.isWaitingForAnswering && <p>このテストはすでに締め切りが過ぎています。</p>}
+        {data.isAnswered && <p>このテストはすでに答え合わせ済みです。</p>}
+      </div>
+      
+      {canCheck && <Link className="goToCheck" href={`/CheckOutTheAnswer/${data._id}`}>答え合わせを行う</Link>}
       <br/>
-      <small>出題者：<Link href={`/profile/${data.publisher._id}`}>{data.publisher.nickname}</Link></small>
+      <small className="publisher">出題者：<Link href={`/profile/${data.publisher._id}`}>{data.publisher.nickname}</Link></small>
     </div>
     </Layout>
   )

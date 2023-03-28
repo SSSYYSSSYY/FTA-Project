@@ -125,9 +125,9 @@ export default function EditTest({data}){
       <p>編集ページ</p>
       <form onSubmit={handleEdit}>
         <label htmlFor="test-title">タイトル：</label>
-        <input value={formData.title} id="test-title" name="title" type="text" required
+        <textarea rows={2}value={formData.title} id="test-title" name="title"  required
         minLength="8" placeholder="八文字以上必要です。"
-        readOnly/>
+        readOnly></textarea>
         <p><small>※タイトルは編集できません。</small></p>
         <label htmlFor="test-genre">ジャンル：</label>
         <select value={formData.genre} id="test-genre" name="genre" required
@@ -145,39 +145,39 @@ export default function EditTest({data}){
         </select>
         <br/>
         <label htmlFor="test-description">説明文：</label>
-        <textarea value={formData.description} id="test-description" name="description"
+        <textarea wrap="physical" rows={8} value={formData.description} id="test-description" name="description"
         onChange={handleFormData}></textarea>
         <br/>
         <div className="choices">
           <p>選択肢：</p>
           <p><small>※①～⑤は必須です。</small></p>
           <label htmlFor="choice-one">①：</label>
-          <input value={formData.one} id="choice-one" name="one" type="text" required
-          onChange={handleFormData}/>
+          <textarea rows={2}value={formData.one} id="choice-one" name="one" required
+          onChange={handleFormData}></textarea>
           <label htmlFor="choice-two">②：</label>
-          <input value={formData.two} id="choice-two" name="two" type="text" required
-          onChange={handleFormData}/>
+          <textarea rows={2}value={formData.two} id="choice-two" name="two" required
+          onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-three">③：</label>
-          <input value={formData.three} id="choice-three" name="three" type="text" required
-          onChange={handleFormData}/>
+          <textarea rows={2}value={formData.three} id="choice-three" name="three"  required
+          onChange={handleFormData}></textarea>
           <label htmlFor="choice-four">④：</label>
-          <input value={formData.four} id="choice-four" name="four" type="text" required
-          onChange={handleFormData}/>
+          <textarea rows={2}value={formData.four} id="choice-four" name="four"  required
+          onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-five">⑤：</label>
-          <input value={formData.five} id="choice-five" name="five" type="text" required
-          onChange={handleFormData}/>
+          <textarea rows={2}value={formData.five} id="choice-five" name="five"  required
+          onChange={handleFormData}></textarea>
           <label htmlFor="choice-six">⑥：</label>
-          <input value={formData.six} id="choice-six" name="six" type="text"
-          onChange={handleFormData}/>
+          <textarea rows={2}value={formData.six} id="choice-six" name="six" 
+          onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-seven">⑦：</label>
-          <input value={formData.seven} id="choice-seven" name="seven" type="text"
-          onChange={handleFormData}/>
+          <textarea rows={2}value={formData.seven} id="choice-seven" name="seven" 
+          onChange={handleFormData}></textarea>
           <label htmlFor="choice-eight">⑧：</label>
-          <input value={formData.eight} id="choice-eight" name="eight" type="text"
-          onChange={handleFormData}/>
+          <textarea rows={2}value={formData.eight} id="choice-eight" name="eight" 
+          onChange={handleFormData}></textarea>
           <br/>
         </div>
         <br/>
