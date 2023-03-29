@@ -40,27 +40,34 @@ export default function SignUp(){
 
   return (
     <Layout>
-      <form onSubmit={handleSignUp}>
+      <form className="signUp" onSubmit={handleSignUp}>
         {msg && <div className="alertMsg">{msg}</div>}
-        <label htmlFor="username">アカウント：</label>
-        <input id="username" name="username" type="text"
-        onChange={handleUsername} required minLength="5"
-        placeholder="五文字以上必要です。"/>
-        <br/>
-        <label htmlFor="password">パスワード：</label>
-        <input id="password" name="password" type="password"
-        onChange={handlePassword} required minLength="5"
-        placeholder="五文字以上必要です。"/>
-        <br/>
-        <label htmlFor="email">メールアドレス：</label>
-        <input id="email" name="email" type="email"
-        onChange={handleEmail} required/>
-        <br/>
-        <label htmlFor="nickname">ニックネーム：</label>
-        <input id="nickname" name="nickname" type="text"
-        onChange={handleNickname} required minLength="2"
-        placeholder="二文字以上必要です。"/>
-        <br/>
+        <div className="username">
+          <label htmlFor="username">アカウント：</label>
+          <input id="username" name="username" type="text"
+          onChange={handleUsername} required minLength="5"
+          placeholder="五文字以上必要です。"/>
+        </div>
+        <div className="password">
+          <label htmlFor="password">パスワード：</label>
+          <input id="password" name="password" type="password"
+          onChange={handlePassword} required minLength="5"
+          placeholder="五文字以上必要です。"/>
+        </div>
+        <div className="email">
+          <label htmlFor="email">メールアドレス：</label>
+          <input id="email" name="email" type="email"
+          onChange={handleEmail} required/>
+        </div>
+        <small className="signUpNotice">※このメールアドレスは今後通知・連絡などに使わせていただきますので、<br/>有効かつ実在したメールアドレスを入力してください。</small>
+
+        <div className="nickname">
+          <label htmlFor="nickname">ニックネーム：</label>
+          <input id="nickname" name="nickname" type="text"
+          onChange={handleNickname} required minLength="2"
+          placeholder="二文字以上必要です。"/>
+        </div>
+
         <button type="submit">登録する</button>
       </form>
     </Layout>

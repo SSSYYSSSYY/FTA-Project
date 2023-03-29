@@ -34,15 +34,20 @@ export default function Login(){
   return (
     <Layout>
       {msg && <div className="alertMsg">{msg}</div>}
-      <form onSubmit={handleLogin}>
-        <label htmlFor="username">アカウント：</label>
-        <input id="username" name="username" type="text"
-        onChange={handleUsername}/>
-        <br/>
-        <label htmlFor="password">パスワード：</label>
-        <input id="password" name="password" type="password"
-        onChange={handlePassword}/>
-        <br/>
+      <form className="login" onSubmit={handleLogin}>
+        <div className="username">
+          <label htmlFor="username">アカウント：</label>
+          <input id="username" name="username" type="text"
+          onChange={handleUsername} required/>
+        </div>
+
+        <div className="password">
+          <label htmlFor="password">パスワード：</label>
+          <input id="password" name="password" type="password"
+          onChange={handlePassword} required/>
+        </div>
+
+
         <button type="submit">ログイン</button>
       </form>
     </Layout>

@@ -63,7 +63,16 @@ export default function Test({data}){
         console.log("出題者："+data.publisher._id.toString())
         
         if(currentUser.user._id.toString() == data.publisher._id.toString()){
-          console.log("是自己出的題目")
+          // console.log("是自己出的題目")
+          for(let choice in data.choices){
+            if(data.isAccepting &&!data.choices[choice].answerer.length){
+              //statusが「回答受付中」であるかつまだ誰も回答していなければ編集できる
+              setCanEdit(true);
+            }else{
+              setCanEdit(false);
+              break;
+            }
+          }
           //當前使用者為出題者本人，且當前使用者未受懲罰，且當前題目未結束
           if(!currentUser.user.isPenalized && !data.isAnswered){
             setCanDelete(true);
@@ -72,18 +81,12 @@ export default function Test({data}){
             console.log("可以對答案了")
             setCanCheck(true);
             console.log(canCheck)
-          }}
+          }}else{
+            // console.log("不是自己出的題目")
+          }
       
 
-        for(let choice in data.choices){
-          if(!data.choices[choice].answerer.length){
-            //まだ誰も回答していなければ編集できる
-            setCanEdit(true);
-          }else{
-            setCanEdit(false);
-            break;
-          }
-        }
+
         // console.log(currentUser.user.isPenalized)
       }
       // console.log(data.choices)
@@ -131,13 +134,19 @@ export default function Test({data}){
           choice.classList.add("answer");
           console.log(data.answer)
           //這邊要改
-          if(document.querySelector(".selected.answer")){
-            console.log("使用者有答對")
-            document.querySelector(".testBody").insertAdjacentHTML("afterbegin",`<div class="correctMsg">的中</div>`)
+          if(currentUser.user._id.toString() == data.publisher._id.toString()){
+            console.log("是自己出的題目")
           }else{
-            console.log("使用者沒答對")
-            document.querySelector(".testBody").insertAdjacentHTML("afterbegin",`<div class="incorrectMsg">ハズレ</div>`)
+            console.log("不是自己出的題目")
+            if(document.querySelector(".selected.answer")){
+              console.log("使用者有答對")
+              document.querySelector(".testBody").insertAdjacentHTML("afterbegin",`<div class="correctMsg">的中</div>`)
+            }else{
+              console.log("使用者沒答對")
+              document.querySelector(".testBody").insertAdjacentHTML("afterbegin",`<div class="incorrectMsg">ハズレ…</div>`)
+            }
           }
+
         }
       })
     })
@@ -148,7 +157,7 @@ export default function Test({data}){
   if(!currentUser){
     return (
       <Layout>
-        <h3>ログインしてください。</h3>
+        <h2 className="pleaseLogin">ログインしてください。</h2>
       </Layout>
     )
   }
@@ -269,7 +278,7 @@ export default function Test({data}){
         <p>{`締め切り：${new Date(data.deadline).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}`}</p>
       </div>
       
-      {canPredict && data.isAccepting && <Link href={`/toPredict/${data._id}`}>予知を行う</Link>}
+      {canPredict && data.isAccepting && <Link className="goToPredict" href={`/toPredict/${data._id}`}>予知を行う</Link>}
       <div className="statusMsg">
         {data.isWaitingForAnswering && <p>このテストはすでに締め切りが過ぎています。</p>}
         {data.isAnswered && <p>このテストはすでに答え合わせ済みです。</p>}

@@ -68,12 +68,12 @@ export default function Predict({data}){
         data.choices[choice].answerer.map(user=>{
           if(user._id.toString() == currentUser.user._id.toString()){
             console.log("使用者有選過"+choice,user);
-            document.querySelector(`div#${choice}`).classList.add("isSelected");
-            document.querySelector(`div#${choice}`).style.color = "#888";
+            document.querySelector(`div.${choice}`).classList.add("isSelected");
+            document.querySelector(`div.${choice}`).style.color = "#888";
             document.querySelector(`input#${choice}`).disabled = true;
             if(user.isFlag){
-              document.querySelector(`div#${choice}`).classList.add("FLAG");
-              document.querySelector(`div#${choice}`).style.color = "gold";
+              document.querySelector(`div.${choice}`).classList.add("FLAG");
+              document.querySelector(`div.${choice}`).style.color = "gold";
               document.querySelector(`div.isFlag`).style.display = "none";
             }
             predictedArr.push(choice)
@@ -146,61 +146,111 @@ export default function Predict({data}){
   }
   return(
     <Layout>
-      <h2>{`問${data.test_ID}：${data.title}`}</h2>
-      <p>{`ジャンル：${data.genre}`}</p>
-      <small>出題者：<Link href={`/profile/${data.publisher._id}`}>{data.publisher.nickname}</Link></small>
-      <p>{`基礎ポイント：${data.bonus}`}</p>
-      <form onSubmit={handleSubmit}>
-        <p>選択肢：</p>
-        <div id="one" className="choice toPredict">
-          <input onChange={handleChoice} value={data.choices.one.des} id="one" name="choices" type="radio"/>
-          <label htmlFor="one">{`①：${data.choices.one.des}`}</label>
-        </div>
-        <div id="two" className="choice toPredict">
-          <input onChange={handleChoice} value={data.choices.two.des} id="two" name="choices" type="radio"/>
-          <label htmlFor="two">{`②：${data.choices.two.des}`}</label>
-        </div>
-        <div id="three" className="choice toPredict">
-          <input onChange={handleChoice} value={data.choices.three.des} id="three" name="choices" type="radio"/>
-          <label htmlFor="three">{`③：${data.choices.three.des}`}</label>
-        </div>
-        <div id="four" className="choice toPredict">
-          <input onChange={handleChoice} value={data.choices.four.des} id="four" name="choices" type="radio"/>
-          <label htmlFor="four">{`④：${data.choices.four.des}`}</label>
-        </div>
-        <div id="five" className="choice toPredict">
-          <input onChange={handleChoice} value={data.choices.five.des} id="five" name="choices" type="radio"/>
-          <label htmlFor="five">{`⑤：${data.choices.five.des}`}</label>
-        </div>
+      <div className="testBody">
+      <h4>{`問${data.test_ID}：${data.title}`}</h4>
+      <p className="genre">{`ジャンル：${data.genre}`}</p>
 
-        {data.choices.six.des && 
-        <div id="six" className="choice toPredict">
-          <input onChange={handleChoice} value={data.choices.six.des} id="six" name="choices" type="radio"/>
-          <label htmlFor="six">{`⑥：${data.choices.six.des}`}</label>
-        </div>}
-        {data.choices.seven.des && 
-        <div id="seven" className="choice toPredict">
-          <input onChange={handleChoice} value={data.choices.seven.des} id="seven" name="choices" type="radio"/>
-          <label htmlFor="seven">{`⑦：${data.choices.seven.des}`}</label>
-        </div>}
-        {data.choices.eight.des && 
-        <div id="eight" className="choice toPredict">
-          <input onChange={handleChoice} value={data.choices.eight.des} id="eight" name="choices" type="radio"/>
-          <label htmlFor="eight">{`⑧：${data.choices.eight.des}`}</label>
-        </div>}
+      <p className="basicPoint">{`基礎ポイント：${data.bonus}`}</p>
+      <form onSubmit={handleSubmit}>
+        {/* <p>選択肢：</p> */}
+        <section className="choicesSection toPredict">
+          <div className="choices one toPredict">
+            <input onChange={handleChoice} value={data.choices.one.des} id="one" name="choices" type="radio"/>
+            <label htmlFor="one">
+              <div className="choiceInfo">
+                  <span>①</span>
+              </div>
+              <p className="choiceContent">{data.choices.one.des}</p>
+            </label>
+          </div>
+          <div className="choices two toPredict">
+            <input onChange={handleChoice} value={data.choices.two.des} id="two" name="choices" type="radio"/>
+            <label htmlFor="two">
+              <div className="choiceInfo">
+                <span>②</span>
+              </div>
+              <p className="choiceContent">{data.choices.two.des}</p>
+            </label>
+          </div>
+          <div className="choices three toPredict">
+            <input onChange={handleChoice} value={data.choices.three.des} id="three" name="choices" type="radio"/>
+            <label htmlFor="three">
+              <div className="choiceInfo">
+                <span>③</span>
+              </div>
+              <p className="choiceContent">{data.choices.three.des}</p>
+            </label>
+          </div>
+          <div className="choices four toPredict">
+            <input onChange={handleChoice} value={data.choices.four.des} id="four" name="choices" type="radio"/>
+            <label htmlFor="four">
+              <div className="choiceInfo">
+                <span>④</span>
+              </div>
+              <p className="choiceContent">{data.choices.four.des}</p>
+            </label>
+          </div>
+          <div className="choices five toPredict">
+            <input onChange={handleChoice} value={data.choices.five.des} id="five" name="choices" type="radio"/>
+            <label htmlFor="five">
+              <div className="choiceInfo">
+                <span>⑤</span>
+              </div>
+              <p className="choiceContent">{data.choices.five.des}</p>
+            </label>
+          </div>
+
+          {data.choices.six.des && 
+          <div className="choices six toPredict">
+            <input onChange={handleChoice} value={data.choices.six.des} id="six" name="choices" type="radio"/>
+            <label htmlFor="six">
+              <div className="choiceInfo">
+                <span>⑥</span>
+              </div>
+              <p className="choiceContent">{data.choices.six.des}</p>
+            </label>
+          </div>}
+          {data.choices.seven.des && 
+          <div className="choices seven toPredict">
+            <input onChange={handleChoice} value={data.choices.seven.des} id="seven" name="choices" type="radio"/>
+            <label htmlFor="seven">
+              <div className="choiceInfo">
+                <span>⑦</span>
+              </div>
+              <p className="choiceContent">{data.choices.seven.des}</p>
+            </label>
+          </div>}
+          {data.choices.eight.des && 
+          <div className="choices eight toPredict">
+            <input onChange={handleChoice} value={data.choices.eight.des} id="eight" name="choices" type="radio"/>
+            <label htmlFor="eight">
+              <div className="choiceInfo">
+                <span>⑧</span>
+              </div>
+              <p className="choiceContent">{data.choices.eight.des}</p>
+            </label>
+          </div>}
+        </section>
+        
         {<div className="isFlag">
           <input id="isFlag" name="isFlag" onChange={handlePredictData} type="checkbox" value={true}/>
           <label htmlFor="isFlag">自信あり</label>
         </div>}
         <div className="usePoint">
           <label htmlFor="usePoint">投入するポイント：</label>
-          <input onChange={handlePredictData} name="usePoint" type="number" min="20" id="usePoint" required/>
+          <input placeholder="最低20ポイントが必要です。" onChange={handlePredictData} name="usePoint" type="number" min="20" id="usePoint" required/>
         </div>
         {msg && <div style={{whiteSpace:"pre-wrap"}} className="pointAlert">{msg}</div>}
         <button type="submit">予知を行う</button>
       </form>
-      <p>{`出題日時：${new Date(data.postDate).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}`}</p>
-      <p>{`締め切り：${new Date(data.deadline).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}`}</p>
+      <div className="datesOfTest">
+        <p>{`出題日時：${new Date(data.postDate).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}`}</p>
+        <p>{`締め切り：${new Date(data.deadline).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}`}</p>
+      </div>
+      <small className="publisher">出題者：<Link href={`/profile/${data.publisher._id}`}>{data.publisher.nickname}</Link></small>
+      </div>
+      
+
     </Layout>
   )
 }

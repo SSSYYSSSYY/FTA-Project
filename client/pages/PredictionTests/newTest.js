@@ -105,7 +105,7 @@ export default function NewTest(){
   return (
     <Layout>
       {/* textarea中可用「\n來換行」 */}
-      <form onSubmit={handlePublish}>
+      <form className="newTest" onSubmit={handlePublish}>
         <label htmlFor="test-title">タイトル：</label>
         <textarea rows={2} id="test-title" name="title" required
         minLength="8" placeholder="八文字以上必要です。"
@@ -162,15 +162,15 @@ export default function NewTest(){
           <br/>
         </div>
         <br/>
-        <label htmlFor="test-deadline">締め切り：</label>
+        <label className="test-deadline" htmlFor="test-deadline">締め切り：</label>
         <input id="test-deadline" name="deadline" type="date" min={minDate} max={maxDate} required onChange={handleFormData}/>
-        <p><small>※締め切りは出題の48時間後から90日後まで選択できます。</small></p>
+        <p style={{marginBottom:"0rem"}} className="newTestNotice"><small>※締め切りは出題の48時間後から90日後まで選択できます。</small></p>
         <br/>
-        <label htmlFor="test-bonus">基礎ポイント：</label>
+        <label className="test-bonus" htmlFor="test-bonus">基礎ポイント：</label>
         <input id="test-bonus" name="bonus" type="number" min="20" required placeholder="最低20ポイントが必要です。"
         onChange={handleFormData}/>
         <br/>
-        {msg && <div style={{whiteSpace:"pre-wrap"}} className="pointAlert">{msg}</div>}
+        {msg && <div style={{whiteSpace:"pre-wrap",marginBottom:"0rem",marginTop:"1.5rem"}} className="pointAlert">{msg}</div>}
         <br/>
         <button type="submit">出題する</button>
       </form>

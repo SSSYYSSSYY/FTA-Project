@@ -16,10 +16,11 @@ body{
 div#__next{
   max-width: 400px;
   margin: auto;
-  border: .8rem #311b15 solid;
+  border: .6rem #311b15 solid;
   box-sizing: content-box;
   background-color: rgb(253, 250, 220);
 }
+
 
 a{
   text-decoration: none;
@@ -37,8 +38,11 @@ header{
   padding: 2rem;
   background: url("/header.svg") center center no-repeat #754F44;
   background-size: cover;
-  font-family: 'Kaisei Opti', serif;
-
+  font-family: 'GenEiLateMinN_v2', serif;
+  h1{
+    margin-top: 1.5rem;
+    line-height: 1.5em;
+  }
 }
 
 
@@ -89,19 +93,28 @@ nav ul{
   justify-content: center;align-items: center;
   text-align: center;
   margin:1rem auto;
-  height: 8rem;
+  height: 3rem;
   padding: 2rem;
   font-size: 22px;
-  background: url("/goToAbout.svg") no-repeat center;
-  background-color:rgb(255, 248, 239) ;
+  // background: url("/goToAbout.svg") no-repeat center;
+  // // background-color:rgb(255, 248, 239) ;
 
 
 
   a{
+    display: block;
+    position: relative;
     font-size: 20px;
-    line-height: 10rem;
     color: #4b281f;
     font-weight: 900;
+    &::before{
+      content: "\f05a";
+      display: block;
+      position: absolute;
+      font-size: 20px;
+      transform: translate(-30px,2px);
+      font-family: "Font Awesome 6 Free";
+    }
   }
 }
 .latestTests,.latestNewses{
@@ -376,7 +389,10 @@ div.PredictionTests{
 
 //個別テストのページ============================
 
+
+
 .testBody{
+  
   .statusMsg{
     font-size: 14px;
   }
@@ -384,7 +400,7 @@ div.PredictionTests{
     font-size: 13px;
     margin: 1rem 0;
   }
-  .goToCheck{
+  .goToCheck,.goToPredict{
     margin:1rem auto;
     text-align: center;
     width: 50%;
@@ -394,6 +410,26 @@ div.PredictionTests{
     padding: .5rem;
     border-radius: 10px;
     font-weight: 700;
+    transition:background-color .3s;
+    &:hover{
+      background-color: white;
+      color: #f06d62;
+      outline: 2px #f06d62 solid;
+    }
+  }
+  .incorrectMsg{
+    color: #666;
+    border: 2px #666 solid;
+    background-color: rgba(255,255,255,.3);
+    border-radius: 5px;
+    padding: .6rem 1rem;
+    font-weight: 700;
+    font-size: 20px;
+    position: absolute;
+    z-index: 9;
+    right: 2rem;
+    top: 9rem;
+    transform: rotate(20deg);
   }
   .correctMsg{
     color: rgb(180, 57, 41);
@@ -497,8 +533,8 @@ div.PredictionTests{
   }
 }
 
-main .alertMsg{
-  background-color:rgb(255, 255, 219) ;
+main .alertMsg,.pointAlert{
+  background-color:rgb(252, 252, 198) ;
   color: #976c45;
   border: 1px #976c45 solid;
   margin:1rem auto;
@@ -507,6 +543,7 @@ main .alertMsg{
   border-radius: 5px;
   padding: .3rem;
   font-size: 14px;
+  justify-content: center;align-items: center;
 }
 
 @keyframes showDes{
@@ -581,7 +618,7 @@ section.choicesSection{
   display: grid;
   font-size: 14px;
   grid-template-columns: 50% 50%;
-  grid-template-rows: 25% 25% 25% 25%;
+  // grid-template-rows: 25% 25% 25% 25%;
   gap: .2rem;
   margin: 2rem 0;
   color: #754F44;
@@ -592,7 +629,7 @@ section.choicesSection{
     border: 2px #976c45 solid;
     border-radius: 3px;
     box-shadow: 0 0 1px 1px rgba(97, 82, 42, 0.5);
-
+    min-height: 5rem;
     .choiceInfo{
       border-bottom: 2px #976c45 solid;
       display: flex;
@@ -606,7 +643,7 @@ section.choicesSection{
       flex-wrap: wrap;//沒用
       padding: .3rem;
       text-align: center;
-      overflow-wrap: break-word;
+      overflow-wrap: anywhere;//讓元素內容太長時，文字的任何地方都可斷行
       min-height: 3.5rem;
       vertical-align: middle;
       
@@ -648,6 +685,7 @@ section.choicesSection{
   }
   .choices.answer{
     animation: answerGlow 2s infinite;
+    animation-delay: 2s;
     position: relative;
     &::before{
       content: "";
@@ -657,9 +695,10 @@ section.choicesSection{
       width: 100%;
       height: 100%;
       background: white;
+      opacity: 0;
       border: 4px white solid;
       animation: answerShine 2s infinite;
-
+      animation-delay: 2s;
     }
   }
 }
@@ -668,11 +707,14 @@ section.choicesSection{
   0%{
     box-shadow: 0 ;
   }
-  70%{
+  50%{
     box-shadow:0 0 50px white;
   }
-  100%{
+  75%{
     box-shadow: 0 0 20px white;
+  }
+  100%{
+    box-shadow: 0 ;
   }
 }
 @keyframes answerShine{
@@ -680,7 +722,7 @@ section.choicesSection{
     opacity: 0;
   }
   50%{
-    opacity: .5;
+    opacity: .4;
   }
 
   100%{
@@ -692,9 +734,11 @@ section.choicesSection{
 //個別テストのページ============================
 
 //newTestページ============================
-
-form{
+form.newTest{
   padding: 1rem;
+}
+
+form{ 
   color: #4b281f;
   label{
     display: block;
@@ -718,9 +762,114 @@ form{
   // .choices label{
     
   // }
+  label.test-deadline,label.test-bonus{
+    display: inline;
+  }
+  button{
+    cursor: pointer;
+    display: block;
+    margin:1rem auto;
+    padding: .5rem 1rem;
+    font-size: 16px;
+    background-color: #aa706b;
+    color: white;
+    border: transparent 2px solid;border-radius: 10px;
+    font-weight: 700;
+    transition: .3s;
+    &:hover{
+      background-color: white;
+      color: #aa706b;
+      border: 2px #aa706b solid;
+    }
+  }
 }
 
 //newTestページ============================
+
+//CheckOut/toPredictページ============================
+
+h4.test-title{
+  font-size: 20px;
+  margin-bottom: 0.5rem;
+  color: #4b281f;
+  margin-top: 1rem;
+}
+p.test-genre{
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+  color: #754F44;
+}
+h4.test-title,p.test-genre{
+  margin-left: 1rem;
+  
+}
+
+.CheckOut,.toPredict{
+  input[type="radio"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+  input[type="radio"] + label{
+    margin: 0;
+    border-bottom: 2px transparent solid;
+    cursor: pointer;
+  }
+  input[type="radio"]:checked + label{
+    background-color: #fff0ae;
+    border-bottom: 2px #fff0ae solid;
+  }
+
+}
+div.isFlag{
+  label{
+    margin: 0;
+  }
+  input{
+    margin-right: .5rem;
+  }
+  display: flex;
+  justify-content: center;align-items: center;
+  min-height: 2em;
+  margin-bottom: 1rem;
+  font-size: 16px;
+  background-color:rgb(255, 255, 219) ;
+  color: #493622;
+  border: 1px #493622 solid;
+  border-radius: 8px;
+  max-width: 40%;
+  margin:0 auto 2rem;
+}
+
+div.usePoint{
+  label{
+    margin: 0;
+    color: #4b281f;
+  }
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+section.choicesSection .choices.toPredict.isSelected{
+  border: 2px solid #ccc;
+  box-shadow: none;
+  label{
+    .choiceInfo{
+      border-bottom: 2px solid #ccc;
+    }
+    background-color: #dfdfdf;
+    p,.choiceInfo span{
+      color: white;
+    }
+  }
+
+}
+
+form.edit{
+  padding: 1rem;
+}
+
+//CheckOut/toPredictページ============================
 
 //TestsPageTemplate============================
 
@@ -783,6 +932,147 @@ form{
 }
 
 //TestsPageTemplate============================
+
+//profile============================
+
+.profileBody,.recordBody{
+  padding: 1rem;
+  color: #4b281f;
+  a{
+    color: #4b281f;
+  }
+}
+.profileBody{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 2em;
+  h4{
+    align-self: flex-start;
+    font-size: 25px;
+    margin-bottom: 1rem;
+  }
+  .expBar{
+    height: .5rem;
+    width: 300px;
+    background-color: #ccc;
+    margin:1rem auto;
+    position: relative;
+    border-radius: 2px;
+    small{
+      margin: .2rem;
+      display: block;
+      text-align: right;
+      width: 100%;
+    }
+    .expBarIn{
+      background-color:rgb(78, 137, 192) ;
+      height: .5rem;
+      position: absolute;
+      border-radius: 2px 0 0 2px;
+      transition: width .3s;
+    }
+  }
+  .penaCounter{
+    margin: 1rem 0;
+  }
+}
+
+.recordBody{
+  background-color: #e9d5b1;
+  margin: .5rem;
+  
+  .recordTitle{
+    font-size: 18px;
+    margin: 1rem 0;
+  }
+  ul{
+    // background-color: #ffcc95;
+    padding: 1rem;
+
+    li{
+      margin-bottom: .8rem;
+      padding: 1rem;
+      // border-bottom: 2px #d8907c dashed;
+      position: relative;
+      background-color: #fff5eb;
+      border-radius: 10px;
+    }
+  }
+  .publishRecordsList{
+    margin-bottom: 3rem;
+  }
+  .predictRecordsList{
+    margin-bottom: 3rem;
+    li p.counter{
+      text-align: right;
+      font-size: 14px;
+    }
+    li .accurateMsg{
+      position: absolute;
+      top: -3px;left: -25px;
+      background-color: rgb(180, 57, 41);
+      color: white;
+      padding: 3px 6px;
+      font-size: 10px;
+      transform: rotate(-30deg);
+      border: white 3px double;
+    }
+  }
+}
+
+//profile============================
+
+//signUp============================
+
+form.signUp,form.login{
+  .alertMsg{
+    padding: .5rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+  .signUpNotice{
+    display: block;
+    margin-bottom: 1rem;
+  }
+  padding: 1rem;
+  div{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 0;
+    label{
+      margin-bottom: 0;
+    }
+    input{
+      margin-bottom: 0;
+      height: 2em;
+      width: 15em;
+    }
+  }
+  div.nickname{
+    margin-bottom: 2rem;
+  }
+}
+
+//signUp============================
+
+//login============================
+
+form.login{
+  padding: 2rem 1rem 1rem;
+  div.password{
+    margin-bottom: 2rem;
+  }
+}
+
+//login============================
+
+.pleaseLogin{
+  text-align: center;
+  margin: 2rem;
+  color: #311b15;
+}
 
 footer{
   background-color: #754F44;

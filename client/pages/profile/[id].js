@@ -52,6 +52,7 @@ export default function UserProfile({data}){
   data.foundUser.predictRecord = data.foundUser.predictRecord.reverse();
   data.foundUser.publishRecord = data.foundUser.publishRecord.reverse();
   let isTheUserSame;
+  const [expPro,setExpPro] = useState(0);
   
   const [publishCurrentPage,setPublishCurrentPage] = useState(0);
   const [predictCurrentPage,setPredictCurrentPage] = useState(0);
@@ -100,22 +101,27 @@ export default function UserProfile({data}){
   // console.table(PublishCurrentData)
 
   //========================================================
-  
-  const [currentUser,setCurrentUser] = useState(null);
-  useEffect(()=>{
-    setCurrentUser(AuthService.getCurrentUser());
-  },[]);
-  //AuthService.getCurrentUser();
-  //這裡的data會是從後端API傳回的資料
   if(!data){
     return <div>Loading...</div>
   }
+  const handleExpBar = () =>{
+    setExpPro(data.expProgress.toFixed(2));
+  }
+  const [currentUser,setCurrentUser] = useState(null);
+  useEffect(()=>{
+    setCurrentUser(AuthService.getCurrentUser());
+    setTimeout(handleExpBar,1000);
+    
+  },[]);
+  //AuthService.getCurrentUser();
+  //這裡的data會是從後端API傳回的資料
+
   let timeZonedPenalty = new Date(data.foundUser.penaltyEnd).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'});
   let penaltySplitBySpace = timeZonedPenalty.split(" ");
   if(!currentUser){
     return (
       <Layout>
-        <h2>ログインしてください。</h2>
+        <h2 className="pleaseLogin">ログインしてください。</h2>
       </Layout>
     )
   }else{
@@ -124,22 +130,21 @@ export default function UserProfile({data}){
   }
   return (
     <Layout>
-    <div>
+    <div className="profileBody">
       <h4>{`ニックネーム：${data.foundUser.nickname}`}</h4>
       <p>{isTheUserSame &&`所持ポイント：${data.foundUser.predictionPoints}`}</p>
       <p>{`予言ランク：${data.foundUser.level}`}</p>
-      <p>{isTheUserSame && `ランクアップまであと${data.foundUser.expForNextLevel}経験値`}</p>
-      <p>{isTheUserSame &&`経験値進捗：${Math.round(data.expProgress.toFixed(2)*100)}%`}</p>
-      {isTheUserSame && <p>{`ペナルティ回数：${data.foundUser.penaltyCount}`}</p>}
+      {isTheUserSame &&<div className="expBar"><div style={{ width: `calc(300 * ${expPro}px)`,transition: "width .5s ease-out" }} className="expBarIn"></div><small>ランクアップまであと{data.foundUser.expForNextLevel}exp</small></div>}
+      {isTheUserSame && <p className="penaCounter">{`ペナルティ回数：${data.foundUser.penaltyCount}`}</p>}
       {isTheUserSame && data.foundUser.isPenalized && <div className="isPenalty">
         <p className="penaltyAlert">ペナルティ期間中のため、出題およびテストの取り下げは行えません。</p>
         <p className="penaltyEnd">{`ペナルティ期間：${penaltySplitBySpace[0]} 23:59:59まで`}</p>
         {/* new Date(data.foundUser.penaltyEnd).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'}) */}
         </div>}
     </div>
-    <div>
-      <p>出題記録：</p>
-      <ul>
+    <div className="recordBody">
+      <p className="recordTitle">出題記録：</p>
+      <ul className="publishRecordsList">
         {data.foundUser.publishRecord.length > 0 ? PublishCurrentData.map((test,index) =>{
           if(!test.isExist|| !test._id){
             return <li key={index}>存在しないテストです。</li>
@@ -161,16 +166,16 @@ export default function UserProfile({data}){
         </div>}
         
       </ul>
-      {isTheUserSame &&<p>回答記錄：</p>}
-      <ul>
-        {isTheUserSame &&(data.foundUser.predictRecord.length > 0 ? predictCurrentData.map((test,index) =>{
+      {isTheUserSame &&<p className="recordTitle">回答記錄：</p>}
+      {isTheUserSame &&<ul className="predictRecordsList">
+        {(data.foundUser.predictRecord.length > 0 ? predictCurrentData.map((test,index) =>{
           if(!test.isExist || !test._id){
             return <li key={index}>存在しないテストです。</li>
           }
           return (
             <li>
-               <Link key={test._id} href={`/PredictionTests/${test._id}`}>{`${test.title}`}</Link>
-               <p>予知回数：{`${test.predictedSum}/4`}</p>
+               <Link key={test._id} href={`/PredictionTests/${test._id}`}>{`${test.title}`}</Link><br/>
+               <p className="counter">予知回数：{`${test.predictedSum}/4`}</p>
                {test.isAccurate && <p className="accurateMsg">的中！</p>}
             </li>
             )
@@ -178,13 +183,13 @@ export default function UserProfile({data}){
           <p>まだ回答したことがないよ！</p>
         ))}
 
-        {data.foundUser.predictRecord.length > 5 && 
+        {isTheUserSame &&data.foundUser.predictRecord.length > 5 && 
         <div className="pagingBtn">
           {predictCurrentPage == 0?(<button disabled onClick={handlePredictPrePage}><i className="fa-solid fa-angles-left"></i></button>):(<button onClick={handlePredictPrePage}><i className="fa-solid fa-angles-left"></i></button>)}
           {isPredictLastPage?(<button disabled onClick={handlePredictNextPage}><i className="fa-solid fa-angles-right"></i></button>):(<button onClick={handlePredictNextPage}><i className="fa-solid fa-angles-right"></i></button>)}
         </div>}
 
-      </ul>
+      </ul>}
     </div>
     </Layout>
   )

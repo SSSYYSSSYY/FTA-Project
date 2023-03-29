@@ -122,13 +122,12 @@ export default function EditTest({data}){
 
   return (
     <Layout>
-      <p>編集ページ</p>
-      <form onSubmit={handleEdit}>
+      <form className="edit" onSubmit={handleEdit}>
         <label htmlFor="test-title">タイトル：</label>
         <textarea rows={2}value={formData.title} id="test-title" name="title"  required
         minLength="8" placeholder="八文字以上必要です。"
         readOnly></textarea>
-        <p><small>※タイトルは編集できません。</small></p>
+        <p style={{margin :"-1rem 0 1rem"}}><small>※タイトルは編集できません。</small></p>
         <label htmlFor="test-genre">ジャンル：</label>
         <select value={formData.genre} id="test-genre" name="genre" required
         onChange={handleFormData}>
@@ -150,7 +149,7 @@ export default function EditTest({data}){
         <br/>
         <div className="choices">
           <p>選択肢：</p>
-          <p><small>※①～⑤は必須です。</small></p>
+          <p className="newTestNotice"><small>※①～⑤は必須です。</small></p>
           <label htmlFor="choice-one">①：</label>
           <textarea rows={2}value={formData.one} id="choice-one" name="one" required
           onChange={handleFormData}></textarea>
@@ -181,11 +180,11 @@ export default function EditTest({data}){
           <br/>
         </div>
         <br/>
-        <label htmlFor="test-deadline">締め切り：</label>
+        <label className="test-deadline" htmlFor="test-deadline">締め切り：</label>
         <input value={data.deadline.slice(0,10)} id="test-deadline" name="deadline" type="date" min={minDate} max={maxDate} required readOnly/>
         <p><small>※締め切りは編集できません。</small></p>
         <br/>
-        <label htmlFor="test-bonus">基礎ポイント：</label>
+        <label className="test-bonus" htmlFor="test-bonus">基礎ポイント：</label>
         <input value={data.bonus} id="test-bonus" name="bonus" type="number" min="20" required readOnly/>
         <p><small>※基礎ポイントは編集できません。</small></p>
         <br/>

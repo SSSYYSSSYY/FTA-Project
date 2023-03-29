@@ -9,7 +9,7 @@ export default function Home() {
   <Layout>
     <div>
       <div  id="goToAbout">
-        <Link href={`/about`}>初めてご覧になる方はこちらへ</Link>
+        <Link href={`/about`}>当サイトについて</Link>
       </div>
       
       <LatestTests></LatestTests>

@@ -17,7 +17,7 @@ export default function Contact(){
   if(!currentUser){
     return (
       <Layout>
-        <h1>ログインしてください。</h1>
+        <h2 className="pleaseLogin">ログインしてください。</h2>
       </Layout>
     )
   }
