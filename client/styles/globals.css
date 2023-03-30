@@ -529,6 +529,31 @@ main .alertMsg, .pointAlert {
   align-items: center;
 }
 
+.goBack {
+  display: block;
+  height: 40px;
+  background-color: rgb(78, 137, 192);
+  border-radius: 0 2px 2px 0;
+  color: white;
+  padding: 0.5rem;
+  position: relative;
+  transform: translateX(20px);
+}
+.goBack::before {
+  content: "";
+  display: block;
+  top: 50%;
+  left: 0;
+  margin-top: -20px;
+  width: 0;
+  height: 0;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-right: 20px solid rgb(78, 137, 192);
+  position: absolute;
+  transform: translateX(-20px);
+}
+
 @keyframes showDes {
   0% {
     padding: 0;
@@ -558,33 +583,9 @@ main .alertMsg, .pointAlert {
   align-items: center;
   margin-bottom: 1rem;
 }
-.navInTest .goBack {
-  display: block;
-  height: 40px;
-  background-color: rgb(78, 137, 192);
-  border-radius: 0 2px 2px 0;
-  color: white;
-  padding: 0.5rem;
-  position: relative;
-  transform: translateX(20px);
-}
-.navInTest .goBack::before {
-  content: "";
-  display: block;
-  top: 50%;
-  left: 0;
-  margin-top: -20px;
-  width: 0;
-  height: 0;
-  border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent;
-  border-right: 20px solid rgb(78, 137, 192);
-  position: absolute;
-  transform: translateX(-20px);
-}
 .navInTest .editTests {
-  position: relative;
-  transform: translateX(15px);
+  position: absolute;
+  right: 40%;
 }
 .navInTest .editTests, .navInTest .deleteTest {
   background-color: #976c45;
@@ -835,6 +836,10 @@ form.edit {
   padding: 1rem;
 }
 
+form.CheckOutForm {
+  padding: 1rem;
+}
+
 .testsTemplate {
   display: flex;
   flex-direction: column;
@@ -852,14 +857,14 @@ form.edit {
   margin: 0rem 1rem 1rem;
 }
 
-.toRules {
+.toRules, .toContact {
   display: flex;
 }
-.toRules:hover::before, .toRules:hover::after {
+.toRules:hover::before, .toRules:hover::after, .toContact:hover::before, .toContact:hover::after {
   background-color: #d9e0c4;
   transition: 0.3s;
 }
-.toRules::before, .toRules::after {
+.toRules::before, .toRules::after, .toContact::before, .toContact::after {
   content: "";
   display: block;
   background-color: #2e2c0d;
@@ -867,10 +872,10 @@ form.edit {
   height: 20px;
   transition: 0.3s;
 }
-.toRules::before {
+.toRules::before, .toContact::before {
   transform: translateX(-12px);
 }
-.toRules::after {
+.toRules::after, .toContact::after {
   transform: translateX(12px);
 }
 
@@ -1019,6 +1024,277 @@ form.login div.password {
   text-align: center;
   margin: 2rem;
   color: #311b15;
+}
+
+form.contact {
+  padding: 1rem;
+}
+form.contact h2 {
+  display: flex;
+  position: relative;
+  margin: 1rem auto 2rem;
+  justify-content: center;
+  align-items: center;
+}
+form.contact h2::before, form.contact h2::after {
+  content: "";
+  display: block;
+  background-color: #311b15;
+  height: 1.5em;
+  width: 10px;
+  position: relative;
+}
+form.contact h2::before {
+  transform: translateX(-10px);
+}
+form.contact h2::after {
+  transform: translateX(10px);
+}
+form.contact .nickname, form.contact .email {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+form.contact .nickname input, form.contact .email input {
+  width: 60%;
+}
+form.contact .nickname label, form.contact .email label {
+  margin-bottom: 0;
+}
+form.contact textarea {
+  margin-top: -1rem;
+}
+
+.newsTitle {
+  color: #311b15;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.newsTitle::before, .newsTitle::after {
+  content: "";
+  display: block;
+  background-color: #311b15;
+  height: 1.5em;
+  width: 10px;
+  position: relative;
+}
+.newsTitle::before {
+  transform: translateX(-10px);
+}
+.newsTitle::after {
+  transform: translateX(10px);
+}
+
+.newsIndex {
+  color: #311b15;
+  padding: 1rem;
+}
+.newsIndex li:nth-child(n+2) {
+  border-top: 2px dashed #4b281f;
+}
+.newsIndex .news {
+  padding: 0.5rem;
+}
+.newsIndex .news small {
+  font-size: 12px;
+}
+.newsIndex .news h4 {
+  font-size: 18px;
+  padding: 0.3rem 0;
+}
+.newsIndex .news h4 a {
+  color: #311b15;
+}
+
+.newsBody {
+  color: #311b15;
+  padding: 1rem;
+}
+.newsBody .goBack {
+  max-width: 15%;
+}
+.newsBody h3 {
+  margin: 1rem 0;
+  text-align: center;
+  font-size: 25px;
+}
+.newsBody .postDate {
+  margin-bottom: 2rem;
+  text-align: right;
+}
+
+.penaltyAlert {
+  background-color: rgb(255, 199, 199);
+  padding: 0.5rem 2rem;
+  margin: 2rem 0.7rem;
+  border: 1px solid rgb(163, 0, 0);
+  color: rgb(163, 0, 0);
+  border-radius: 10px;
+}
+
+li.isNotExist {
+  display: flex;
+  position: relative;
+}
+li.isNotExist::before {
+  position: relative;
+  transform: translate(-3px, 2px);
+  content: "\f057";
+  display: block;
+  font-family: "Font Awesome 6 Free";
+}
+
+section.about {
+  color: #311b15;
+  padding: 1rem;
+  overflow-wrap: anywhere;
+}
+section.about .toRules, section.about .toContact {
+  background-color: #e2f5d1;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+section.about span {
+  display: inline-block;
+  overflow-wrap: anywhere;
+  word-break: break-all;
+}
+section.about .author {
+  text-align: right;
+  font-size: 14px;
+}
+section.about .linkToFTA {
+  background-color: #f5d9d1;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #773b35;
+}
+section.about .linkToFTA p {
+  text-indent: 0;
+}
+section.about .linkToFTA a {
+  text-decoration: underline;
+  line-height: 1.5em;
+  color: #773b35;
+}
+section.about h3 {
+  margin: 1rem auto 2rem;
+  font-size: 18px;
+  text-align: center;
+}
+section.about p {
+  line-height: 1.5em;
+  text-indent: 1em;
+}
+section.about a {
+  justify-content: center;
+  align-items: center;
+}
+
+.highlighter.brown {
+  position: relative;
+  display: inline-block;
+  transform: translateX(-1em);
+  margin-right: -1em;
+  z-index: 1;
+}
+.highlighter.brown::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 0.8rem;
+  width: 90%;
+  background-color: rgba(204, 158, 145, 0.5);
+  transform: translateX(1em);
+  z-index: -1;
+}
+
+.highlighter.blue {
+  position: relative;
+  display: inline-block;
+  transform: translateX(-1em);
+  margin-right: -1em;
+  z-index: 1;
+}
+.highlighter.blue::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 0.8rem;
+  width: 90%;
+  background-color: rgba(145, 187, 204, 0.5);
+  transform: translateX(1em);
+  z-index: -1;
+}
+
+.highlighter.yellow {
+  position: relative;
+  display: inline-block;
+  transform: translateX(-1em);
+  margin-right: -1em;
+  z-index: 1;
+}
+.highlighter.yellow::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 0.8rem;
+  width: 90%;
+  background-color: rgba(233, 216, 104, 0.5);
+  transform: translateX(1em);
+  z-index: -1;
+}
+
+section.privacy-policy {
+  padding: 1rem;
+  line-height: 1.5em;
+  color: #311b15;
+}
+section.privacy-policy h4 {
+  margin-bottom: 0.5rem;
+}
+section.privacy-policy .miniTitle {
+  margin: 0.5rem 0 1rem;
+  font-size: 14px;
+}
+section.privacy-policy h3 {
+  text-align: center;
+  margin: 2rem;
+  font-size: 25px;
+}
+section.privacy-policy ul {
+  margin-bottom: 2rem;
+  background-color: #c7a585;
+  padding: 1rem;
+  border-radius: 10px;
+}
+section.privacy-policy ul li {
+  transform: translateX(5px);
+  position: relative;
+  font-size: 14px;
+}
+section.privacy-policy ul li::before {
+  position: absolute;
+  left: -10px;
+  top: 10px;
+  content: "";
+  display: block;
+  height: 5px;
+  width: 5px;
+  background-color: #311b15;
+}
+section.privacy-policy a {
+  color: #311b15;
+  text-decoration: underline;
 }
 
 footer {

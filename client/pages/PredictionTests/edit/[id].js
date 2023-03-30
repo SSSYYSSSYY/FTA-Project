@@ -149,33 +149,33 @@ export default function EditTest({data}){
         <br/>
         <div className="choices">
           <p>選択肢：</p>
-          <p className="newTestNotice"><small>※①～⑤は必須です。</small></p>
+          <p className="newTestNotice"><small>※①～⑤は必須、各選択肢は最大36文字までとなります。</small></p>
           <label htmlFor="choice-one">①：</label>
-          <textarea rows={2}value={formData.one} id="choice-one" name="one" required
+          <textarea maxLength={36} rows={2}value={formData.one} id="choice-one" name="one" required
           onChange={handleFormData}></textarea>
           <label htmlFor="choice-two">②：</label>
-          <textarea rows={2}value={formData.two} id="choice-two" name="two" required
+          <textarea maxLength={36} rows={2}value={formData.two} id="choice-two" name="two" required
           onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-three">③：</label>
-          <textarea rows={2}value={formData.three} id="choice-three" name="three"  required
+          <textarea maxLength={36} rows={2}value={formData.three} id="choice-three" name="three"  required
           onChange={handleFormData}></textarea>
           <label htmlFor="choice-four">④：</label>
-          <textarea rows={2}value={formData.four} id="choice-four" name="four"  required
+          <textarea maxLength={36} rows={2}value={formData.four} id="choice-four" name="four"  required
           onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-five">⑤：</label>
-          <textarea rows={2}value={formData.five} id="choice-five" name="five"  required
+          <textarea maxLength={36} rows={2}value={formData.five} id="choice-five" name="five"  required
           onChange={handleFormData}></textarea>
           <label htmlFor="choice-six">⑥：</label>
-          <textarea rows={2}value={formData.six} id="choice-six" name="six" 
+          <textarea maxLength={36} rows={2}value={formData.six} id="choice-six" name="six" 
           onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-seven">⑦：</label>
-          <textarea rows={2}value={formData.seven} id="choice-seven" name="seven" 
+          <textarea maxLength={36} rows={2}value={formData.seven} id="choice-seven" name="seven" 
           onChange={handleFormData}></textarea>
           <label htmlFor="choice-eight">⑧：</label>
-          <textarea rows={2}value={formData.eight} id="choice-eight" name="eight" 
+          <textarea maxLength={36} rows={2}value={formData.eight} id="choice-eight" name="eight" 
           onChange={handleFormData}></textarea>
           <br/>
         </div>

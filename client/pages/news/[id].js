@@ -2,6 +2,7 @@ import Link from "next/link"
 import Layout from "@/components/layout"
 import { useRouter } from "next/router";
 import { useEffect, useRef ,useState} from "react";
+import ReactMarkdown from "react-markdown";
 
 export async function getStaticPaths(){
   const response = await fetch(`http://127.0.0.1:8080/news/`);
@@ -37,13 +38,19 @@ export async function getStaticProps({params}){
 }
 
 export default function News({data}){
+  //有餘力的話把news部分做成可在網頁上發布新消息的markdown形式
+  //需要的套件：react-markdown已安裝 可能還有其他的 到時候再安裝
   return (
     <Layout>
-      <h3>{data.title}</h3>
-      <p><small>{new Date(data.postDate).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}</small></p>
-      <p>{data.description}</p>
+      <div className="newsBody">
+        <Link className="goBack" href={`/news`}>戻る</Link>
+        <h3>{data.title}</h3>
+        <p className="postDate"><small>{new Date(data.postDate).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}</small></p>
+        <p className="content">{data.description}</p>
+        <ReactMarkdown escapeHtml={false} className="content">{data.description}</ReactMarkdown>
+        {/* <ReactMarkdown>{markdownTest}</ReactMarkdown> */}
+      </div>
 
-      <Link href={`/news`}>戻る</Link>
     </Layout>
   )
 }

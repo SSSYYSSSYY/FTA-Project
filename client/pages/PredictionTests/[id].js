@@ -74,9 +74,25 @@ export default function Test({data}){
             }
           }
           //當前使用者為出題者本人，且當前使用者未受懲罰，且當前題目未結束
-          if(!currentUser.user.isPenalized && !data.isAnswered){
-            setCanDelete(true);
+          if(currentUser){
+            fetch(`http://127.0.0.1:8080/profile/${currentUser.user._id}`)
+            .then(data=>data.json())
+            .then(data=>{
+              if(!data.foundUser.isPenalized&& !data.isAnswered){
+                setCanDelete(true);
+              }else{
+                setCanDelete(false);
+              }
+            })
+            .catch(e=>console.log(e));
           }
+          // if(!currentUser.user.isPenalized && !data.isAnswered){
+          //   setCanDelete(true);
+          // }else{
+          //   setCanDelete(false);
+          // }
+          console.log("currentUser.user.isPenalized"+currentUser.user.isPenalized)
+          console.log("data.isAnswered"+data.isAnswered)
           if(data.isWaitingForAnswering){
             console.log("可以對答案了")
             setCanCheck(true);

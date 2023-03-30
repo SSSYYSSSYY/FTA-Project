@@ -895,7 +895,7 @@ const isOverdue = new cron.CronJob("3 0 * * * *",async function(){
 isOverdue.start();
 //上の関数を実行する
 
-const penaltyReset = new cron.CronJob("3 0 * * * *",async function(){
+const penaltyReset = new cron.CronJob("3 0 0 1 * *",async function(){
     //左から"秒　分　時　日　月　曜日"
     let nowTimeObj = new Date();
     let allUser = await User.find({}).exec();
@@ -908,12 +908,13 @@ const penaltyReset = new cron.CronJob("3 0 * * * *",async function(){
 
 penaltyReset.start();
 
-const isPenaltyEnd = new cron.CronJob("3 0 * * * *",async function(){
+const isPenaltyEnd = new cron.CronJob("3 0 0 * * *",async function(){
     //左から"秒　分　時　日　月　曜日"
     let nowTimeObj = new Date();
-    let allUser = await User.find({}).exec();
+    let allUser = await User.find({isPenalized:true}).exec();
 
     allUser.map(async user =>{
+        console.log(`玩家${user._id}的懲罰期間是${user.penaltyEnd}`)
         if((nowTimeObj > user.penaltyEnd || nowTimeObj == user.penaltyEnd ) && (user.isPenalized == true)){
             console.log(`玩家${user._id}的懲罰期間已過`);
             await User.findOneAndUpdate({_id:user._id},{isPenalized:false,penaltyCount:0},{new:true});
@@ -1168,7 +1169,7 @@ app.delete("/PredictionTests/:_id",requiredAuth, async(req,res)=>{
         //這邊的+的時間之後調整
         //60*10*1000是10分鐘
         if(savedUser.penaltyCount >= 3){
-            savedUser = await User.findOneAndUpdate({_id:req.user._id},{isPenalized:true,penaltyEnd:new Date(Date.now()+60*10*1000)},{new:true}).exec();
+            savedUser = await User.findOneAndUpdate({_id:req.user._id},{isPenalized:true,penaltyEnd:new Date(Date.now()+1000*60*60*24*10)},{new:true}).exec();
         }
         // console.log(allAnswerer)
         const filteredAnswerer = allAnswerer.filter((item, index, arr) => {

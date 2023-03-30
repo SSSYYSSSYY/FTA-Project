@@ -85,8 +85,7 @@ export default function NewTest(){
   
 
   useEffect(()=>{
-    //在測試階段最小日期先暫時改成24小時
-    const minDate = new Date(Date.now()+24*60*60*1000).toISOString().slice(0, 10);
+    const minDate = new Date(Date.now()+48*60*60*1000).toISOString().slice(0, 10);
     const maxDate = new Date(Date.now()+3*30*24*60*60*1000).toISOString().slice(0, 10);
 
     setMinDate(minDate);
@@ -97,7 +96,7 @@ export default function NewTest(){
   if(!currentUser){
     return (
       <Layout>
-        <h3>ログインしてください。</h3>
+        <h2 className="pleaseLogin">ログインしてください。</h2>
       </Layout>
     )
   }
@@ -131,33 +130,33 @@ export default function NewTest(){
         <br/>
         <div className="choices">
           <p>選択肢：</p>
-          <p className="newTestNotice"><small>※①～⑤は必須です。</small></p>
+          <p className="newTestNotice"><small>※①～⑤は必須、各選択肢は最大36文字までとなります。</small></p>
           <label htmlFor="choice-one">①：</label>
-          <textarea rows={2} id="choice-one" name="one" required
+          <textarea maxLength={36} rows={2} id="choice-one" name="one" required
           onChange={handleFormData}></textarea>
           <label htmlFor="choice-two">②：</label>
-          <textarea rows={2} id="choice-two" name="two" required
+          <textarea maxLength={36} rows={2} id="choice-two" name="two" required
           onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-three">③：</label>
-          <textarea rows={2} id="choice-three" name="three" required
+          <textarea maxLength={36} rows={2} id="choice-three" name="three" required
           onChange={handleFormData}/>
           <label htmlFor="choice-four">④：</label>
-          <textarea rows={2} id="choice-four" name="four" required
+          <textarea maxLength={36} rows={2} id="choice-four" name="four" required
           onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-five">⑤：</label>
-          <textarea rows={2} id="choice-five" name="five" required
+          <textarea maxLength={36} rows={2} id="choice-five" name="five" required
           onChange={handleFormData}></textarea>
           <label htmlFor="choice-six">⑥：</label>
-          <textarea rows={2} id="choice-six" name="six"
+          <textarea maxLength={36} rows={2} id="choice-six" name="six"
           onChange={handleFormData}></textarea>
           <br/>
           <label htmlFor="choice-seven">⑦：</label>
-          <textarea rows={2} id="choice-seven" name="seven" 
+          <textarea maxLength={36} rows={2} id="choice-seven" name="seven" 
           onChange={handleFormData}></textarea>
           <label htmlFor="choice-eight">⑧：</label>
-          <textarea rows={2} id="choice-eight" name="eight"
+          <textarea maxLength={36} rows={2} id="choice-eight" name="eight"
           onChange={handleFormData}></textarea>
           <br/>
         </div>

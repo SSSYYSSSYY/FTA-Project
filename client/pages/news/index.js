@@ -43,16 +43,20 @@ export default function News({data}){
   console.log(data)
   return (
     <Layout>
-      {data&&
-      currentData.map(data=>{
-        return (
-          <div key={`${data._id}`} className="news">
-            <Link href={`/news/${data._id}`}>{data.title}</Link>
-            <p><small>{new Date(data.postDate).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}</small></p>
-            
-          </div>
-        )
-      })}
+      <h2 className="newsTitle">お知らせ</h2>
+      <ul className="newsIndex">
+        {data&&
+        currentData.map(data=>{
+          return (
+            <li key={`${data._id}`} className="news">
+              <h4><Link href={`/news/${data._id}`}>{data.title}</Link></h4>
+              <p><small>{new Date(data.postDate).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}</small></p>
+              
+            </li>
+          )
+        })}
+
+      </ul>
       <div className="pagingBtn">
         {currentPage != 0? (<button onClick={handlePrePage}><i className="fa-solid fa-angles-left"></i></button>):(<button onClick={handlePrePage} disabled><i className="fa-solid fa-angles-left"></i></button>)}
         {isLastPage ? (<button onClick={handleNextPage} disabled><i className="fa-solid fa-angles-right"></i></button>):(<button onClick={handleNextPage}><i className="fa-solid fa-angles-right"></i></button>)}

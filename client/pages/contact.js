@@ -46,14 +46,18 @@ export default function Contact(){
   //server端使用nodemailer套件
   return (
     <Layout>
-      <h2>お問い合わせ</h2>
-      <form onSubmit={handleSubmit} action="/contact" method="POST">
-        <label htmlFor="nickname">ニックネーム：</label>
-        <input name="nickname" value={currentUser.user.nickname} id="nickname" readOnly/>
-        <br/>
-        <label htmlFor="email">メールアドレス：</label>
-        <input name="email" value={currentUser.user.email} id="email" readOnly/>
-        <br/>
+
+      <form className="contact" onSubmit={handleSubmit} action="/contact" method="POST">
+        <h2>お問い合わせ</h2>
+        <div className="nickname">
+          <label htmlFor="nickname">ニックネーム：</label>
+          <input name="nickname" value={currentUser.user.nickname} id="nickname" readOnly/>
+        </div>
+        <div className="email">
+          <label htmlFor="email">メールアドレス：</label>
+          <input name="email" value={currentUser.user.email} id="email" readOnly/>
+        </div>
+
         <label htmlFor="context">お問い合わせ内容：</label>
         <br/>
         <textarea onChange={handleFormData} cols="40" rows="10" id="context"

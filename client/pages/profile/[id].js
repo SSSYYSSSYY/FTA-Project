@@ -136,8 +136,9 @@ export default function UserProfile({data}){
       <p>{`予言ランク：${data.foundUser.level}`}</p>
       {isTheUserSame &&<div className="expBar"><div style={{ width: `calc(300 * ${expPro}px)`,transition: "width .5s ease-out" }} className="expBarIn"></div><small>ランクアップまであと{data.foundUser.expForNextLevel}exp</small></div>}
       {isTheUserSame && <p className="penaCounter">{`ペナルティ回数：${data.foundUser.penaltyCount}`}</p>}
+      {/*下面的 data.foundUser.isPenalized && 暫時先拿掉*/}
       {isTheUserSame && data.foundUser.isPenalized && <div className="isPenalty">
-        <p className="penaltyAlert">ペナルティ期間中のため、出題およびテストの取り下げは行えません。</p>
+        <p className="penaltyAlert" style={{marginTop:"1rem"}}>ペナルティ期間中のため、出題およびテストの取り下げは行えません。</p>
         <p className="penaltyEnd">{`ペナルティ期間：${penaltySplitBySpace[0]} 23:59:59まで`}</p>
         {/* new Date(data.foundUser.penaltyEnd).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'}) */}
         </div>}
@@ -147,7 +148,7 @@ export default function UserProfile({data}){
       <ul className="publishRecordsList">
         {data.foundUser.publishRecord.length > 0 ? PublishCurrentData.map((test,index) =>{
           if(!test.isExist|| !test._id){
-            return <li key={index}>存在しないテストです。</li>
+            return <li className="isNotExist" key={index}>存在しないテストです。</li>
           }
           return (
             <li>
@@ -170,7 +171,7 @@ export default function UserProfile({data}){
       {isTheUserSame &&<ul className="predictRecordsList">
         {(data.foundUser.predictRecord.length > 0 ? predictCurrentData.map((test,index) =>{
           if(!test.isExist || !test._id){
-            return <li key={index}>存在しないテストです。</li>
+            return <li className="isNotExist" key={index}>存在しないテストです。</li>
           }
           return (
             <li>

@@ -17,7 +17,7 @@ export default function Layout({children}){
   const handleLogout = () =>{
     AuthService.logout();//localStorageに入ってるユーザー情報を削除
     window.alert("ログアウトしました。");
-
+    location.reload();
   }
   //在使用者已經位於特定頁面時，navbar上前往該頁面的按鈕無效化
   // const isProfilePage = router.asPath.includes(`"/profile"`);

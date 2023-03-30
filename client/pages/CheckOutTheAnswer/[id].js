@@ -79,7 +79,7 @@ export default function CheckOutTheAnswer({data}){
     <Layout>
       <h4 className="test-title">{`問${data.test_ID}：${data.title}`}</h4>
       <p className="test-genre">{`ジャンル：${data.genre}`}</p>
-      <form onSubmit={handleSubmit}>
+      <form className="CheckOutForm" onSubmit={handleSubmit}>
         <label htmlFor="test-description">説明：</label>
         <textarea rows={8} wrap="hard" id="test-description" name="description"
         onChange={handleDes} required></textarea>
