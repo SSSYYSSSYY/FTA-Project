@@ -76,9 +76,9 @@ export default function Test({data}){
           //當前使用者為出題者本人，且當前使用者未受懲罰，且當前題目未結束
           if(currentUser){
             fetch(`http://127.0.0.1:8080/profile/${currentUser.user._id}`)
-            .then(data=>data.json())
-            .then(data=>{
-              if(!data.foundUser.isPenalized&& !data.isAnswered){
+            .then(Data=>Data.json())
+            .then(Data=>{
+              if(!Data.foundUser.isPenalized&& !data.isAnswered){
                 setCanDelete(true);
               }else{
                 setCanDelete(false);

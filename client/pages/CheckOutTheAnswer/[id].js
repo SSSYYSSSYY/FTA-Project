@@ -53,13 +53,14 @@ export default function CheckOutTheAnswer({data}){
   const handleDes = (e) =>{
     setDes({[e.target.name]:e.target.value});
   }
+  console.log(des)
+  console.log(answerData);
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
 
 
-    // console.log(des)
-    // console.log(answerData);
+
     const checkOutObj = {...des,...answerData}
     console.log(checkOutObj)
     try{
