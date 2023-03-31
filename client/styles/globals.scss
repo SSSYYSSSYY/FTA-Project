@@ -1581,6 +1581,45 @@ div.loading{
   }
 }
 
+.resourcePage{
+  color: #311b15;
+  line-height: 1.5em;
+  padding: 1rem;
+  a{
+    color: #311b15;
+    text-decoration: underline;
+    display: inline-block;
+    margin-left: 1rem;
+
+  }
+  .title{
+    font-size: 18px;
+    margin-bottom: .5rem;
+  }
+}
+
+.resourcePage h2{
+  display: flex;
+  position: relative;
+  margin: 1rem auto 2rem;
+  justify-content: center;
+  align-items: center;
+  
+  &::before,&::after{
+    content: "";
+    display: block;
+    background-color: #311b15;
+    height: 1.5em;width: 10px;
+    position: relative;
+  }
+  &::before{
+    transform: translateX(-10px);
+  }
+  &::after{
+    transform: translateX(10px);
+  }
+}
+
 
 footer{
   background-color: #754F44;

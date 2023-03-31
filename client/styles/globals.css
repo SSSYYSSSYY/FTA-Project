@@ -1502,6 +1502,44 @@ div.loading {
     stroke-dashoffset: -600;
   }
 }
+.resourcePage {
+  color: #311b15;
+  line-height: 1.5em;
+  padding: 1rem;
+}
+.resourcePage a {
+  color: #311b15;
+  text-decoration: underline;
+  display: inline-block;
+  margin-left: 1rem;
+}
+.resourcePage .title {
+  font-size: 18px;
+  margin-bottom: 0.5rem;
+}
+
+.resourcePage h2 {
+  display: flex;
+  position: relative;
+  margin: 1rem auto 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.resourcePage h2::before, .resourcePage h2::after {
+  content: "";
+  display: block;
+  background-color: #311b15;
+  height: 1.5em;
+  width: 10px;
+  position: relative;
+}
+.resourcePage h2::before {
+  transform: translateX(-10px);
+}
+.resourcePage h2::after {
+  transform: translateX(10px);
+}
+
 footer {
   background-color: #754F44;
   padding: 0.5rem;

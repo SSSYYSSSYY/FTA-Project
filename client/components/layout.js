@@ -91,7 +91,8 @@ export default function Layout({children}){
     <footer>
       <p>予言者育成学園非公式ファンサイト</p>
       {router.asPath.includes("privacy-policy")?(<span>プライバシーポリシー</span>):(<Link href="/privacy-policy">プライバシーポリシー</Link>)}
-      {router.asPath.includes("contact")?(<span>お問い合わせ</span>):(<Link href="/contact">お問い合わせ</Link>)}
+      {router.asPath.includes("contact")?(<span>お問い合わせ</span>):(<Link href="/contact">お問い合わせ</Link>)}<br/><br/>
+      {router.asPath.includes("resource")?(<span>当サイトで使用している素材</span>):(<Link href="/resource">当サイトで使用している素材</Link>)}
       <p>当サイトは、スマホゲーム『予言者育成学園Fortune Teller Academy』の非公式ファンサイトです。</p>
       <p>株式会社スクウェア・エニックス様および予言者育成学園公式様とは一切関係ございません。</p>
       <p>当サイトで使用している画像の著作権などは各権利者に帰属いたします。</p>
