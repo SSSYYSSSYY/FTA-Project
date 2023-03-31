@@ -59,7 +59,7 @@ export default function SignUp(){
           <input id="email" name="email" type="email"
           onChange={handleEmail} required/>
         </div>
-        <small className="signUpNotice">※このメールアドレスは今後通知・連絡などに使わせていただきますので、<br/>有効かつ実在したメールアドレスを入力してください。</small>
+        <small className="signUpNotice">※このメールアドレスは今後通知・連絡などに使わせていただきますので、<br/>実在したかつ有効なメールアドレスを入力してください。</small>
 
         <div className="nickname">
           <label htmlFor="nickname">ニックネーム：</label>

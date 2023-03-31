@@ -9,9 +9,17 @@ const websiteTitle = "予言テストサイト";
 export default function Layout({children}){
   const router = useRouter();
   const [currentUser,setCurrentUser] = useState(null);
+  const [loading,setLoading] = useState(true);
+  
+
 
   useEffect(()=>{
     setCurrentUser(AuthService.getCurrentUser());
+    if (process.browser) {
+      window.addEventListener('load', () => {
+        console.log('頁面已經加載完成');
+      });
+    }
   },[]);
 
   const handleLogout = () =>{
@@ -30,8 +38,7 @@ export default function Layout({children}){
       <meta name="viewport" content="width=device-width,initial-scale=1"/>
       <title>{websiteTitle}</title>
       <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Kaisei+Opti&display=swap');
+
       </style>
     </Head>
     <header>
@@ -65,6 +72,20 @@ export default function Layout({children}){
           </ul>
         )}
     </nav>
+    <div id="cover" class="cover">
+      <div id="loading" class="ui-circle-loading">
+        <ul class="animate">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+      </div>
+    </div>
+    
     <main>{children}</main>
     <footer>
       <p>予言者育成学園非公式ファンサイト</p>

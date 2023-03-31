@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @font-face {
   font-family: "GenEiLateMinN_v2";
   src: url("../fonts/GenEiLatin-Separate_v2.1/GenEiLateMinN_v2.ttf") format("truetype");
@@ -23,6 +27,7 @@ div#__next {
   border: 0.6rem #311b15 solid;
   box-sizing: content-box;
   background-color: rgb(253, 250, 220);
+  overflow: hidden;
 }
 
 a {
@@ -734,7 +739,11 @@ form select, form textarea {
   white-space: pre-wrap;
 }
 form label.test-deadline, form label.test-bonus {
-  display: inline;
+  display: inline-block;
+}
+form #test-bonus {
+  display: inline-block;
+  width: 14em;
 }
 form button {
   cursor: pointer;
@@ -812,6 +821,9 @@ div.usePoint {
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
+}
+div.usePoint #usePoint {
+  width: 14em;
 }
 div.usePoint label {
   margin: 0;
@@ -1194,7 +1206,14 @@ section.about a {
   align-items: center;
 }
 
+strong {
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
 .highlighter.brown {
+  word-wrap: break-word;
+  word-break: break-all;
   position: relative;
   display: inline-block;
   transform: translateX(-1em);
@@ -1215,6 +1234,8 @@ section.about a {
 }
 
 .highlighter.blue {
+  word-wrap: break-word;
+  word-break: break-all;
   position: relative;
   display: inline-block;
   transform: translateX(-1em);
@@ -1235,6 +1256,8 @@ section.about a {
 }
 
 .highlighter.yellow {
+  word-wrap: break-word;
+  word-break: break-all;
   position: relative;
   display: inline-block;
   transform: translateX(-1em);
@@ -1297,6 +1320,188 @@ section.privacy-policy a {
   text-decoration: underline;
 }
 
+.publishCorner, .predictCorner, .checkOutCorner {
+  color: #2e2c0d;
+  margin: 1rem 0;
+  background-color: #d9e0c4;
+  padding: 0.5rem;
+  border-radius: 5px;
+  line-height: 1.5em;
+}
+.publishCorner a, .predictCorner a, .checkOutCorner a {
+  text-decoration: underline;
+  color: #2e2c0d;
+}
+.publishCorner .title, .predictCorner .title, .checkOutCorner .title {
+  font-size: 18px;
+  padding: 1rem;
+  background-color: #eff5de;
+  margin: 0;
+}
+.publishCorner p, .predictCorner p, .checkOutCorner p {
+  margin: 1rem 0;
+}
+.publishCorner img, .predictCorner img, .checkOutCorner img {
+  display: block;
+  margin: auto;
+}
+.publishCorner .delete, .publishCorner .patch, .predictCorner .delete, .predictCorner .patch, .checkOutCorner .delete, .checkOutCorner .patch {
+  padding-top: 0.5rem;
+  border-top: #5E654A 2px dashed;
+}
+
+.rulesBody {
+  line-height: 1.5em;
+  color: #311b15;
+  padding: 1rem;
+}
+.rulesBody .blockTitle {
+  margin-bottom: 0.5rem;
+  font-size: 18px;
+}
+.rulesBody .blockTitle::before {
+  position: absolute;
+  content: "";
+  display: block;
+  height: 20px;
+  width: 10px;
+  background-color: #4b281f;
+  transform: translateX(-15px);
+}
+.rulesBody .hint {
+  display: inline-block;
+  margin: 0.5rem 0;
+}
+.rulesBody .profileCorner {
+  margin: 1rem 0;
+  background-color: rgb(218, 206, 188);
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.rulesBody .profileCorner .title {
+  font-size: 18px;
+  padding: 1rem;
+  background-color: rgb(255, 240, 211);
+}
+.rulesBody .profileCorner .aboutPoint, .rulesBody .profileCorner .aboutExp, .rulesBody .profileCorner .aboutPenalty {
+  border-bottom: #4b281f 2px dashed;
+  padding: 1rem;
+}
+.rulesBody h2 {
+  display: flex;
+  position: relative;
+  margin: 1rem auto 2rem;
+  justify-content: center;
+  align-items: center;
+}
+.rulesBody h2::before, .rulesBody h2::after {
+  content: "";
+  display: block;
+  background-color: #311b15;
+  height: 1.5em;
+  width: 10px;
+  position: relative;
+}
+.rulesBody h2::before {
+  transform: translateX(-10px);
+}
+.rulesBody h2::after {
+  transform: translateX(10px);
+}
+
+/* 滾動條的整體樣式 */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* 滾動條軌道 */
+::-webkit-scrollbar-track {
+  background-color: #cc9e91;
+}
+
+/* 滾動條滑塊 */
+::-webkit-scrollbar-thumb {
+  background-color: #882929;
+  border-radius: 5px;
+}
+
+/* Firefox 瀏覽器 */
+/* 滾動條的整體樣式 */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #882929 #cc9e91;
+}
+
+/* 滾動條滑塊 */
+html::-webkit-scrollbar-thumb {
+  background-color: #882929;
+}
+
+/* 滾動條軌道 */
+html::-webkit-scrollbar-track {
+  background-color: #cc9e91;
+}
+
+/* Microsoft Edge 瀏覽器 */
+/* 滾動條的整體樣式 */
+@media screen and (min-width: 768px) {
+  ::-ms-scrollbar {
+    width: 5px;
+  }
+}
+/* 滾動條軌道 */
+@media screen and (min-width: 768px) {
+  ::-ms-scrollbar-track {
+    background-color: #cc9e91;
+  }
+}
+/* 滾動條滑塊 */
+@media screen and (min-width: 768px) {
+  ::-ms-scrollbar-thumb {
+    background-color: #882929;
+    border-radius: 5px;
+  }
+}
+div.loading {
+  width: 350px;
+  margin: auto;
+}
+
+#load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  width: 100px;
+  animation: loading 3s linear infinite;
+}
+#load #loading-inner {
+  stroke-dashoffset: 0;
+  stroke-dasharray: 300;
+  stroke-width: 10;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  animation: loading-circle 2s linear infinite;
+  stroke: #311b15;
+  fill: transparent;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading-circle {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -600;
+  }
+}
 footer {
   background-color: #754F44;
   padding: 0.5rem;

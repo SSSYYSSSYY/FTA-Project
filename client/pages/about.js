@@ -7,7 +7,7 @@ export default function About(){
     <Layout>
       <section className="about">
         <h3>本サイトをご覧になっている皆さんへ</h3>
-        <p>本サイトは、予言者育成学園卒業生が立ち上げた、<span className="highlighter brown">ちょっとした二次創作</span>のようなものです。</p>
+        <p>本サイトは、予言者育成学園卒業生が立ち上げた、<strong className="highlighter brown">ちょっとした二次創作</strong>のようなものです。</p>
         <br/>
         <div className="linkToFTA">
           <p>予言者育成学園ってなんぞや？って方は以下をご覧ください。</p>
@@ -18,7 +18,7 @@ export default function About(){
         </div>
 
         <br/>
-        <p>本サイトは、ログインさえすれば、<span className="highlighter blue">誰でも</span><span className="highlighter blue">予言テストを出せる、回答できる</span>サービスです。</p>
+        <p>本サイトは、ログインさえすれば、<strong className="highlighter blue">誰でも</strong><strong className="highlighter blue">予言テストを出せる、回答できる</strong>サービスです。</p>
         
         <br/><p>これでみんなジャン先生です。</p><br/>
         <Link className="toRules" href="/rules">予言テストのルールなどはこちらへ</Link><br/>
@@ -30,7 +30,7 @@ export default function About(){
         <p>二次創作なので、広告を掲載するなど収益を得るようなことをする予定は一切ございません。
         <br/>
         が、広告は悪！という意味ではないです。念のため。</p><br/>
-        <p>また、わいせつ・差別・そのほか公序良俗に反するものなど<span className="highlighter yellow">他人に不快感を与える表現</span>は、お控えいただきますようお願い申し上げます。</p>
+        <p>また、わいせつ・差別・そのほか公序良俗に反するものなど<strong className="highlighter yellow">他人に不快感を与える表現</strong>は、お控えいただきますようお願い申し上げます。</p>
         <p>なお、不適切な内容などに対する通報機能はまだ開発中です。</p>
         <p>当面は上記にあるお問い合わせフォームにご記入いただき、こちらで対応いたします。</p><br/>
         <p>まあ通報機能なんかなくても不適切な内容は書いちゃダメなんですよね。

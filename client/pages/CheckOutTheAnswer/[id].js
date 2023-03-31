@@ -44,24 +44,53 @@ export default function CheckOutTheAnswer({data}){
   const [des,setDes] = useState({});
   //會進到這個頁面代表使用者必定是出題者本人
 
+  const [defaultText,setDefaultText] = useState("");
+
   const handleAnswerData = (e) =>{
     setAnswerData({
         [e.target.id]:e.target.value,
     });
+    switch (e.target.id){
+      case "one":
+        setDefaultText(`正解は、「①：${e.target.value}」でした。`);
+        // setDes(defaultText);
+        break;
+      case "two":
+        setDefaultText(`正解は、「②：${e.target.value}」でした。`);
+        break;
+      case "three":
+        setDefaultText(`正解は、「③：${e.target.value}」でした。`);
+        break;
+      case "four":
+        setDefaultText(`正解は、「④：${e.target.value}」でした。`);
+        break;
+      case "five":
+        setDefaultText(`正解は、「⑤：${e.target.value}」でした。`);
+        break;
+      case "six":
+        setDefaultText(`正解は、「⑥：${e.target.value}」でした。`);
+        break;
+      case "seven":
+        setDefaultText(`正解は、「⑦：${e.target.value}」でした。`);
+        break;
+      case "eight":
+        setDefaultText(`正解は、「⑧：${e.target.value}」でした。`);
+        break;
+    }
   }
 
   const handleDes = (e) =>{
-    setDes({[e.target.name]:e.target.value});
+    setDefaultText({[e.target.name]:e.target.value});
   }
-  console.log(des)
-  console.log(answerData);
+  // console.log(des)
+  // console.log(answerData);
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
 
 
 
-    const checkOutObj = {...des,...answerData}
+    const checkOutObj = {description:defaultText.description,...answerData}
     console.log(checkOutObj)
     try{
       await TestService.checkOutTheAnswer(checkOutObj,data._id.toString());
@@ -82,7 +111,7 @@ export default function CheckOutTheAnswer({data}){
       <p className="test-genre">{`ジャンル：${data.genre}`}</p>
       <form className="CheckOutForm" onSubmit={handleSubmit}>
         <label htmlFor="test-description">説明：</label>
-        <textarea rows={8} wrap="hard" id="test-description" name="description"
+        <textarea defaultValue={defaultText} rows={8} wrap="hard" id="test-description" name="description"
         onChange={handleDes} required></textarea>
         {/* <p>選択肢：</p> */}
         <section className="choicesSection CheckOut">
