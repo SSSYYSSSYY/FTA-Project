@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Kaisei Decol
+- Font Author: Copyright 2020 The Kaisei Project Authors (https://github.com/Font-Kai/Kaisei)
+- Font Source: http://fonts.gstatic.com/s/kaiseidecol/v8/bMrwmSqP45sidWf3QmfFW6iyW1EP22OjoA.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))
