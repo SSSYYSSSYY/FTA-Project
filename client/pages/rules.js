@@ -12,7 +12,7 @@ export default function Rules(){
           <p>1.まずは登録。</p>
           <p>2.登録完了したら自動にログイン画面に遷移します。<br/>ここで先ほど登録したアカウントとパスワードを入力します。</p>
           <p>3.ログイン成功したら、自動にプロフィール画面に遷移します。</p>
-          
+          <img width={`300px`} src="/pictures/profile.png"/>
           <div className="profileCorner">
             <p className="title">プロフィールについて：</p>
             <div className="aboutPoint">
@@ -51,9 +51,9 @@ export default function Rules(){
             </div>
             <div id="aboutPenalty" className="aboutPenalty">
               <p className="blockTitle">「ペナルティ」について：</p>
-              <p>1.テストの取り下げを行うたびに「ペナルティ回数」が増えます。<br/>この「ペナルティ回数」が三回になると、「ペナルティ」を課せられ、十日間の「ペナルティ期間」に入ります。</p>
+              <p>1.テストの取り下げを行うたびに「取り下げ回数」が増えます。<br/>この「取り下げ回数」が三回になると、「ペナルティ」を課せられ、十日間の「ペナルティ期間」に入ります。</p>
               <p>2.「ペナルティ期間」では<strong>出題＆取り下げができない</strong>ので、くれぐれもご注意ください。</p>
-              <p>3.「ペナルティ回数」は毎月一日でリセットされます。<br/>つまり、毎月は二回までペナルティなしに取り下げができます。</p>
+              <p>3.「取り下げ回数」は毎月一日０時にリセットされます。<br/>つまり、毎月は二回までペナルティなしに取り下げができます。</p>
             </div>
           </div>
           
@@ -72,7 +72,7 @@ export default function Rules(){
           {/* 題目的說明的「そんな島に」改成「そんな島で」
           「重度な方向音痴で、その上びびり屋だからである」
           重新截圖*/}
-          <p><small>※「説明はこちらへ」をクリックすれば、先ほど入力した説明文が出てきます。<br/>ジャン先生になりきって説明を考えてみましょう。</small></p>
+          <p><small>※「説明はこちらへ」をクリックすれば、先ほど入力した説明文が出てきます。こんな感じです。<br/>ジャン先生になりきって説明を考えてみましょう。</small></p>
           <img width={`350px`} src="/pictures/publishDes.png"/>
           <p className="patch">「編集」について：<br/><small>※テストの編集は「まだ誰も回答していない」＆テストが「回答受付中」の場合に限る。</small></p>
           <p>1.「編集する」をクリック。</p>
@@ -82,26 +82,38 @@ export default function Rules(){
           <img width={`300px`} src="/pictures/testNav.png"/>
           <p>1.「取り下げる」をクリックすると、確認メッセージが出てきます。</p>
           <img width={`300px`} src="/pictures/deleteConfirm.png"/>
-          <p>2.「ペナルティ」については<Link href="#aboutPenalty" passHref>こちら</Link>。</p>
+          {/* 換圖片 */}
+          <p>2.「取り下げ回数」については<Link href="#aboutPenalty" passHref>こちら</Link>。</p>
 
         </section>
         <section className="predictCorner">
           <p className="title"><strong>予知</strong>について：</p>
-          <p>1.他人の出題したかつ回答受付中のテスト画面では、「予知を行う」のボタンが出てきます。これをクリック。</p>
+          <p>1.他人の出題したかつ回答受付中のテストのページでは、「予知を行う」のボタンが出てきます。これをクリック。</p>
           <img width={`300px`} src="/pictures/predict.png"/>
           <p>2.入れたい選択肢をクリックし、旗を立てるかどうかと投入するポイントを決め、「予知を行う」をクリック。<br/></p>
           <img width={`300px`} src="/pictures/toPredict.png"/>
-          {/* 數字框要加大所以這張圖之後要改 先做到這裡*/}
+          <p>4.完成！<br/>また、一つのテストに対して、最大４回まで予知できます。</p>
+          <img width={`300px`} src="/pictures/predictSuccess.png"/>
+          <p><small>※ちなみに、旗立ててない選択肢はピンクになります。</small></p>
+          <img width={`300px`} src="/pictures/predictPink.png"/>
         </section>
         <section className="checkOutCorner">
           <p className="title"><strong>答え合わせ</strong>について：</p>
-          <p>1.「答え合わせ待ち」のテスト画面では、「答え合わせを行う」のボタンが出てきます。これをクリック。</p>
-          <p>2.正解となる選択肢をクリック。</p>
-          <p><small>※選択肢をクリックすると、このように該当選択肢の内容が定型文として出てきます。もちろん、自分で修正したり内容を加えたりすることも可能です。</small></p>
-          <p>3.「答え合わせを行う」をクリック。</p>
-          <p>4.完成！</p>
-          <p><small>※説明文は、先ほど入力した内容に変わります。</small></p>
+          <p>1.締め切りを過ぎたテストのページでは、「答え合わせを行う」のボタンが出てきます。これをクリック。</p>
+          <img width={`300px`} src="/pictures/checkOut.png"/>
+          <p>2.正解となる選択肢を決めて、「答え合わせを行う」をクリック。</p>
+          <img width={`300px`} src="/pictures/toCheckOut.png"/>
+          <p><small>※選択肢をクリックすると、このように該当選択肢の内容がテンプレとして「説明」のところに出てきます。もちろん、自分で修正したり内容を加えたりすることも可能です。</small></p>
+          <p>3.完成！
+            <br/>このように正解となった選択肢はふんわりと光るようになります。
+          </p>
+          <img width={`300px`} src="/pictures/checkOutSuccess.png"/>
+          <p><small>※光り具合については、色々調整してたらこんな感じに落ち着いたのですが、「こんなの分からないよー！」とか「眩しすぎるー！」って方がいらっしゃったら教えていただけると幸いです…</small></p>
+          <p><small>※ちなみに説明文は、先ほど入力した内容に変わります。</small></p>
+          <img width={`300px`} src="/pictures/checkOutedDes.png"/>
         </section>
+        <p>予言テストの流れは以上です。<br/>不明点がありましたら、<Link href={`/contact`}>こちら</Link>までご連絡ください。
+        </p>
       </div>
 
     </Layout>

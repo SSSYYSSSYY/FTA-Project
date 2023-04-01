@@ -163,7 +163,7 @@ export default function NewTest(){
         <br/>
         <label className="test-deadline" htmlFor="test-deadline">締め切り：</label>
         <input id="test-deadline" name="deadline" type="date" min={minDate} max={maxDate} required onChange={handleFormData}/>
-        <p style={{marginBottom:"0rem"}} className="newTestNotice"><small>※締め切りは出題の48時間後から90日後まで選択できます。</small></p>
+        <p style={{marginBottom:"0rem"}} className="newTestNotice"><small>※締め切りは出題の２日後から９０日後まで選択できます。</small></p>
         <br/>
         <label className="test-bonus" htmlFor="test-bonus">基礎ポイント：</label>
         <input id="test-bonus" name="bonus" type="number" min="20" required placeholder="最低20ポイントが必要です。"

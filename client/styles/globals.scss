@@ -1410,17 +1410,22 @@ section.privacy-policy{
   p{
     margin: 1rem 0 ;
   }
-  img{
-    display: block;
-    margin:  auto;
-  }
   .delete,.patch{
     padding-top: .5rem;
     border-top: #5E654A 2px dashed;
   }
 }
 
+
 .rulesBody{
+  a{
+    text-decoration: underline;
+    color: #2e2c0d;
+  }
+  img{
+    display: block;
+    margin:  auto;
+  }
   line-height: 1.5em;
   .blockTitle{
     &::before{
@@ -1478,6 +1483,14 @@ section.privacy-policy{
     &::after{
       transform: translateX(10px);
     }
+  }
+}
+
+
+.signUpAndLoginCorner{
+  img{
+    display: block;
+    margin: 1rem auto;
   }
 }
 
@@ -1539,47 +1552,7 @@ html::-webkit-scrollbar-track {
   }
 }
 
-div.loading{
-  width: 350px;
 
-  margin: auto;
-}
-#load {
-  display: flex;
-  justify-content: center;align-items: center;
-  margin:2rem auto;
-  width: 100px;
-  animation: loading 3s linear infinite;
-  #loading-inner {
-    stroke: {
-      dashoffset: 0;
-      dasharray: 300;
-      width: 10;
-      miterlimit: 10;
-      linecap: round;
-    }
-    animation: loading-circle 2s linear infinite;
-    stroke: #311b15;
-    fill: transparent;
-  }
-}
-
-@keyframes loading {
-  0% { 
-    transform: rotate(0); 
-  }
-  100% { 
-    transform: rotate(360deg);
-  }
-}
-@keyframes loading-circle {
-  0% { 
-    stroke-dashoffset: 0
-  }
-  100% { 
-    stroke-dashoffset: -600;
-  }
-}
 
 .resourcePage{
   color: #311b15;

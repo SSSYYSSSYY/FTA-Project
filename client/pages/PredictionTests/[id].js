@@ -187,7 +187,7 @@ export default function Test({data}){
     console.log(latestUserData)
 
     
-    let confirm = window.confirm(`テストが取り下げられます。\n本当によろしいでしょうか？\n現在のペナルティ回数：${latestUserData.foundUser.penaltyCount}`);
+    let confirm = window.confirm(`テストが取り下げられます。\n本当によろしいでしょうか？\n現在の取り下げ回数：${latestUserData.foundUser.penaltyCount}`);
     if(confirm){
       console.log("確定要刪除")
       try{

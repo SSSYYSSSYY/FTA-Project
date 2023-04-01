@@ -135,7 +135,7 @@ export default function UserProfile({data}){
       <p>{isTheUserSame &&`所持ポイント：${data.foundUser.predictionPoints}`}</p>
       <p>{`予言ランク：${data.foundUser.level}`}</p>
       {isTheUserSame &&<div className="expBar"><div style={{ width: `calc(300 * ${expPro}px)`,transition: "width .5s ease-out" }} className="expBarIn"></div><small>ランクアップまであと{data.foundUser.expForNextLevel}exp</small></div>}
-      {isTheUserSame && <p className="penaCounter">{`ペナルティ回数：${data.foundUser.penaltyCount}`}</p>}
+      {isTheUserSame && <p className="penaCounter">{`取り下げ回数：${data.foundUser.penaltyCount}`}</p>}
       {/*下面的 data.foundUser.isPenalized && 暫時先拿掉*/}
       {isTheUserSame && data.foundUser.isPenalized && <div className="isPenalty">
         <p className="penaltyAlert" style={{marginTop:"1rem"}}>ペナルティ期間中のため、出題およびテストの取り下げは行えません。</p>
