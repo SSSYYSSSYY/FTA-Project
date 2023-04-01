@@ -830,7 +830,7 @@ class CheckOutTheAnswer{
 //毎日0時にテストが締め切りになったかどうかを判断するための関数
 //この関数を毎日0時に執行するようにセットする
 //cronパッケージ
-const isOverdue = new cron.CronJob("3 0 * * * *",async function(){
+const isOverdue = new cron.CronJob("3 0 0 * * *",async function(){
     //要注意：*の間の半角スペースを忘れないように
     //左から"秒　分　時　日　月　曜日"
     //つまり毎日0時に関数を実行したい場合は、
