@@ -143,6 +143,7 @@ nav ul li:nth-child(n+3) {
 }
 
 .latestTests {
+  line-height: 1.5em;
   border-top: #754F44 3px dashed;
 }
 .latestTests li:nth-child(n+1) {
@@ -179,13 +180,18 @@ a.allTests {
 }
 .latestNews a {
   border-bottom: 2px #5E654A dashed;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+.latestNews small {
+  font-size: 12px;
 }
 .latestNews .postDate {
   background-color: #fefff9;
   border-radius: 5px;
   padding: 0.2rem 0.5rem;
   margin-right: 1rem;
-  width: 9rem;
+  width: 8rem;
   text-align: center;
 }
 
@@ -338,6 +344,7 @@ ul.testsByStatus li.selected {
 div.PredictionTests {
   color: #5e664b;
   padding: 1rem;
+  line-height: 1.5em;
 }
 div.PredictionTests h4 {
   color: #2e2c0d;
@@ -373,6 +380,7 @@ div.PredictionTests .genre {
 }
 
 .testBody {
+  line-height: 1.5em;
   position: relative;
   padding: 0.6rem;
   color: #311b15;
@@ -629,6 +637,7 @@ section.choicesSection .choices .choiceContent {
   display: flex;
   align-items: center;
   justify-content: center;
+  line-height: 1em;
   flex-wrap: wrap;
   padding: 0.3rem;
   text-align: center;
@@ -1136,6 +1145,7 @@ form.contact textarea {
 }
 
 .newsBody {
+  line-height: 1.5em;
   color: #311b15;
   padding: 1rem;
 }
@@ -1530,6 +1540,7 @@ html::-webkit-scrollbar-track {
 footer {
   background-color: #754F44;
   padding: 0.5rem;
+  line-height: 1.5em;
 }
 footer p, footer a, footer span {
   color: white;

@@ -156,6 +156,7 @@ nav ul{
 
 
 .latestTests{
+  line-height: 1.5em;
   // margin-bottom: 1rem;
   border-top: #754F44 3px dashed;
   li:nth-child(n+1){
@@ -193,15 +194,21 @@ a.allTests{
   justify-content: flex-start;
   a{
     border-bottom: 2px #5E654A dashed;
+    font-size: 14px;
+    line-height: 1.5em;
+  }
+  small{
+    font-size: 12px;
   }
   .postDate{
     background-color: #fefff9;
     border-radius: 5px;
     padding: .2rem .5rem;
     margin-right: 1rem;
-    width: 9rem;
+    width: 8rem;
     text-align: center;
   }
+
 }
 
 //TESTsページ============================
@@ -386,6 +393,7 @@ div.PredictionTests{
   .genre{
     padding: .5rem 0;
   }
+  line-height: 1.5em;
 }
 
 
@@ -396,7 +404,7 @@ div.PredictionTests{
 
 
 .testBody{
-  
+  line-height: 1.5em;
   .statusMsg{
     font-size: 14px;
   }
@@ -645,7 +653,7 @@ section.choicesSection{
     .choiceContent{
       display: flex;align-items: center;justify-content: center;
       //以上雖然可以置中但會導致無法換行?
-
+      line-height: 1em;
       flex-wrap: wrap;//沒用
       padding: .3rem;
       text-align: center;
@@ -1188,6 +1196,7 @@ form.contact{
 }
 
 .newsBody{
+  line-height: 1.5em;
   p.content{
     white-space: pre-wrap;
   }
@@ -1613,6 +1622,7 @@ html::-webkit-scrollbar-track {
 footer{
   background-color: #754F44;
   padding: .5rem;
+  line-height: 1.5em;
   p,a,span{
     color: white;
     margin: 1rem;
