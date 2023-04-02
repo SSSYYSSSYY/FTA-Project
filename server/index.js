@@ -1210,9 +1210,9 @@ app.delete("/PredictionTests/:_id",requiredAuth, async(req,res)=>{
 
 
 
-
+let port = process.env.PORT || 8080;
 
 //サーバーを立ち上げる
-app.listen(8080, () => {
+app.listen(port, () => {
     console.log("サーバーがポート8080で稼働しています。");
   });
