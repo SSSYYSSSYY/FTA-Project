@@ -31,7 +31,7 @@ const { findOneAndUpdate } = require("./models/prediction-test");
     //仿照原本遊戲的模式，倍率每天更新一次就好，也可以省流量
 
 //MongoDBに連携する
-mongoose.connect("mongodb://127.0.0.1:27017/PredictionTestDB2")
+mongoose.connect(process.env.MONGODB_CONNECTION)
 .then(()=>{
     console.log("MongoDBへの連携に成功しました。");
 })
