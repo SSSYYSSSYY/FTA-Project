@@ -5,27 +5,38 @@ import TestService from "@/services/test.service";
 import { useState,useEffect } from "react";
 import { useRouter } from "next/router"
 
-export async function getStaticPaths(){
-  const response = await fetch("https://fta-project.vercel.app/PredictionTests/");
-  const data = await response.json();
-  const paths = data.map(d =>{
-    return {
-      params:{
-        id:d._id,
-      }
-    }
-  });
-  return {
-    paths,
-    fallback:false,//這樣當使用者隨便輸入一串不存在的_id時才不會引起bug
-  }
-}
+// export async function getStaticPaths(){
+//   const response = await fetch("https://fta-project.vercel.app/PredictionTests/");
+//   const data = await response.json();
+//   const paths = data.map(d =>{
+//     return {
+//       params:{
+//         id:d._id,
+//       }
+//     }
+//   });
+//   return {
+//     paths,
+//     fallback:false,//這樣當使用者隨便輸入一串不存在的_id時才不會引起bug
+//   }
+// }
 
-//getStaticPaths()後必須接getStaticProps()才能正常運作
-//但getStaticProps()本身可以單獨使用
+// //getStaticPaths()後必須接getStaticProps()才能正常運作
+// //但getStaticProps()本身可以單獨使用
 
-export async function getStaticProps({params}){
-  const response = await fetch(`https://fta-project.vercel.app/PredictionTests/${params.id}`);
+// export async function getStaticProps({params}){
+//   const response = await fetch(`https://fta-project.vercel.app/PredictionTests/${params.id}`);
+//   const data = await response.json();
+//   return {
+//     props:{
+//       data,
+//     }
+//   }
+// }
+
+export async function getServerSideProps({params}){
+  const { id } = params;
+  const response = await fetch(`https://fta-project.vercel.app/PredictionTests/${id}`);
   const data = await response.json();
   return {
     props:{
@@ -33,7 +44,6 @@ export async function getStaticProps({params}){
     }
   }
 }
-
 
 export default function CheckOutTheAnswer({data}){
   const router = useRouter();

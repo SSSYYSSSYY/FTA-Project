@@ -14,34 +14,45 @@ import ReactPaginate from 'react-paginate';
   //需要的資料：1.現在登入的使用者、2.使用者所存取的網址中的_id
   //若當前登入的使用者和使用者想存取的個人檔案的_id不同，則隱藏部分資料
 
-export async function getStaticPaths(){
-  const response = await fetch(`https://fta-project.vercel.app/profile/`);
-  const data = await response.json();
-  const paths = data.map(d =>{
+// export async function getStaticPaths(){
+//   const response = await fetch(`https://fta-project.vercel.app/profile/`);
+//   const data = await response.json();
+//   const paths = data.map(d =>{
     
-    return {
-      params:{
-        id:d._id,
-      }
-    }
-  });
-  return {
-    paths,
-    fallback:false,//這樣當使用者隨便輸入一串不存在的_id時才不會引起bug
-  }
-}
+//     return {
+//       params:{
+//         id:d._id,
+//       }
+//     }
+//   });
+//   return {
+//     paths,
+//     fallback:false,//這樣當使用者隨便輸入一串不存在的_id時才不會引起bug
+//   }
+// }
 
-// getStaticPaths()後必須接getStaticProps()才能正常運作
-// 但getStaticProps()本身可以單獨使用
+// // getStaticPaths()後必須接getStaticProps()才能正常運作
+// // 但getStaticProps()本身可以單獨使用
 
-export async function getStaticProps({params}){
-  const response = await fetch(`https://fta-project.vercel.app/profile/${params.id}`);
+// export async function getStaticProps({params}){
+//   const response = await fetch(`https://fta-project.vercel.app/profile/${params.id}`);
+//   const data = await response.json();
+//   return {
+//     props:{
+//       data,
+//     },
+
+//   }
+// }
+
+export async function getServerSideProps({params}){
+  const { id } = params;
+  const response = await fetch(`https://fta-project.vercel.app/profile/${id}`);
   const data = await response.json();
   return {
     props:{
       data,
-    },
-
+    }
   }
 }
 

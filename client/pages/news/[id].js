@@ -4,36 +4,47 @@ import { useRouter } from "next/router";
 import { useEffect, useRef ,useState} from "react";
 import ReactMarkdown from "react-markdown";
 
-export async function getStaticPaths(){
-  const response = await fetch(`https://fta-project.vercel.app/news/`);
-  const data = await response.json();
-  const paths = data.map(d =>{
+// export async function getStaticPaths(){
+//   const response = await fetch(`https://fta-project.vercel.app/news/`);
+//   const data = await response.json();
+//   const paths = data.map(d =>{
     
-    return {
-      params:{
-        id:d._id,
-      }
-    }
-  });
-  return {
-    paths,
-    fallback:false,//這樣當使用者隨便輸入一串不存在的_id時才不會引起bug
-  }
-}
+//     return {
+//       params:{
+//         id:d._id,
+//       }
+//     }
+//   });
+//   return {
+//     paths,
+//     fallback:false,//這樣當使用者隨便輸入一串不存在的_id時才不會引起bug
+//   }
+// }
 
-// getStaticPaths()後必須接getStaticProps()才能正常運作
-// 但getStaticProps()本身可以單獨使用
+// // getStaticPaths()後必須接getStaticProps()才能正常運作
+// // 但getStaticProps()本身可以單獨使用
 
-export async function getStaticProps({params}){
-  const response = await fetch(`https://fta-project.vercel.app/news/${params.id}`);
+// export async function getStaticProps({params}){
+//   const response = await fetch(`https://fta-project.vercel.app/news/${params.id}`);
   
-  const data = await response.json();
+//   const data = await response.json();
 
+//   return {
+//     props:{
+//       data,
+//     },
+
+//   }
+// }
+
+export async function getServerSideProps({params}){
+  const { id } = params;
+  const response = await fetch(`https://fta-project.vercel.app/news/${id}`);
+  const data = await response.json();
   return {
     props:{
       data,
-    },
-
+    }
   }
 }
 
