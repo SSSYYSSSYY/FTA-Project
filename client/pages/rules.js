@@ -73,7 +73,7 @@ export default function Rules(){
           「重度な方向音痴で、その上びびり屋だからである」
           重新截圖*/}
           <p><small>※「説明はこちらへ」をクリックすれば、先ほど入力した説明文が出てきます。こんな感じです。<br/>ジャン先生になりきって説明を考えてみましょう。</small></p>
-          <img width={`350px`} src="/pictures/publishDes.png"/>
+          <img width={`300px`} src="/pictures/publishDes.png"/>
           <p className="patch">「編集」について：<br/><small>※テストの編集は「まだ誰も回答していない」＆テストが「回答受付中」の場合に限る。</small></p>
           <p>1.「編集する」をクリック。</p>
           <img width={`300px`} src="/pictures/testNav.png"/>
