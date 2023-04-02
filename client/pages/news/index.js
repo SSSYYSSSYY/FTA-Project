@@ -7,7 +7,7 @@ import AuthService from "@/services/auth.service"
 const pageSize = 5;
 
 export async function getServerSideProps(){
-  const response = await fetch("http://127.0.0.1:8080/news/");
+  const response = await fetch("https://fta-project.vercel.app/news/");
   const data = await response.json();
   return {
     props:{

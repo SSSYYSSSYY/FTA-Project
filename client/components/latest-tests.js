@@ -6,7 +6,7 @@ export default function LatestTests() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://127.0.0.1:8080/PredictionTests/");
+      const response = await fetch("https://fta-project.vercel.app/PredictionTests/");
       const data = await response.json();
       setData(data);
     }

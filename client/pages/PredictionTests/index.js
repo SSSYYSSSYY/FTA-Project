@@ -7,7 +7,7 @@ import { useEffect, useRef ,useState} from "react";
 const pageSize = 5;
 
 export async function getServerSideProps(){
-  const response = await fetch("http://127.0.0.1:8080/PredictionTests/");
+  const response = await fetch("https://fta-project.vercel.app/PredictionTests/");
   const data = await response.json();
   return {
     props:{
@@ -25,7 +25,7 @@ export default function TestHome({data}){
   const [currentSelect,setCurrentSelect] = useState("")
   const [selectedData,setSelectedData] = useState(data);
   const handleByGenre = (e) =>{
-    fetch(`http://127.0.0.1:8080/PredictionTests/genre/${e.target.textContent}`)
+    fetch(`https://fta-project.vercel.app/PredictionTests/genre/${e.target.textContent}`)
     .then(data=>data.json())
     .then(data=>setSelectedData(data))
     .catch(e=>console.log(e));
@@ -33,7 +33,7 @@ export default function TestHome({data}){
   }
 
   const handleAllTests = (e) =>{
-    fetch(`http://127.0.0.1:8080/PredictionTests`)
+    fetch(`https://fta-project.vercel.app/PredictionTests`)
     .then(data=>data.json())
     .then(data=>setSelectedData(data))
     .catch(e=>console.log(e));
@@ -41,21 +41,21 @@ export default function TestHome({data}){
   }
 
   const handleAccepting = (e) =>{
-    fetch(`http://127.0.0.1:8080/PredictionTests/status/isAccepting`)
+    fetch(`https://fta-project.vercel.app/PredictionTests/status/isAccepting`)
     .then(data=>data.json())
     .then(data=>setSelectedData(data))
     .catch(e=>console.log(e));
     setCurrentSelect("回答受付中");
   }
   const handleWaiting = (e) =>{
-    fetch(`http://127.0.0.1:8080/PredictionTests/status/isWaitingForAnswering`)
+    fetch(`https://fta-project.vercel.app/PredictionTests/status/isWaitingForAnswering`)
     .then(data=>data.json())
     .then(data=>setSelectedData(data))
     .catch(e=>console.log(e));
     setCurrentSelect("答え合わせ待ち");
   }
   const handleAnswered = (e) =>{
-    fetch(`http://127.0.0.1:8080/PredictionTests/status/isAnswered`)
+    fetch(`https://fta-project.vercel.app/PredictionTests/status/isAnswered`)
     .then(data=>data.json())
     .then(data=>setSelectedData(data))
     .catch(e=>console.log(e));

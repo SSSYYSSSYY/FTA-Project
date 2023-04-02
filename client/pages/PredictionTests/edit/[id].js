@@ -6,7 +6,7 @@ import { useState,useEffect } from "react";
 import { useRouter } from "next/router"
 
 export async function getStaticPaths(){
-  const response = await fetch("http://127.0.0.1:8080/PredictionTests/");
+  const response = await fetch("https://fta-project.vercel.app/PredictionTests/");
   const data = await response.json();
   const paths = data.map(d =>{
     return {
@@ -25,7 +25,7 @@ export async function getStaticPaths(){
 //但getStaticProps()本身可以單獨使用
 
 export async function getStaticProps({params}){
-  const response = await fetch(`http://127.0.0.1:8080/PredictionTests/${params.id}`);
+  const response = await fetch(`https://fta-project.vercel.app/PredictionTests/${params.id}`);
   const data = await response.json();
   return {
     props:{

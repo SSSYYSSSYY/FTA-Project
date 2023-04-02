@@ -6,7 +6,7 @@ export default function News() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://127.0.0.1:8080/news/");
+      const response = await fetch("https://fta-project.vercel.app/news/");
       const data = await response.json();
       setData(data);
     }

@@ -15,7 +15,7 @@ import ReactPaginate from 'react-paginate';
   //若當前登入的使用者和使用者想存取的個人檔案的_id不同，則隱藏部分資料
 
 export async function getStaticPaths(){
-  const response = await fetch(`http://127.0.0.1:8080/profile/`);
+  const response = await fetch(`https://fta-project.vercel.app/profile/`);
   const data = await response.json();
   const paths = data.map(d =>{
     
@@ -35,7 +35,7 @@ export async function getStaticPaths(){
 // 但getStaticProps()本身可以單獨使用
 
 export async function getStaticProps({params}){
-  const response = await fetch(`http://127.0.0.1:8080/profile/${params.id}`);
+  const response = await fetch(`https://fta-project.vercel.app/profile/${params.id}`);
   const data = await response.json();
   return {
     props:{

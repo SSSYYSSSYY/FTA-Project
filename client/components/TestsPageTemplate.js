@@ -26,7 +26,7 @@ export default function TestsPageTemplate({children}){
 
 
     if(currentUser){
-      fetch(`http://127.0.0.1:8080/profile/${currentUser.user._id}`)
+      fetch(`https://fta-project.vercel.app/profile/${currentUser.user._id}`)
       .then(data=>data.json())
       .then(data=>{
         latestUserData = data;

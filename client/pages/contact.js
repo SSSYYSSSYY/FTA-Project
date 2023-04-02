@@ -34,7 +34,7 @@ export default function Contact(){
     let contactObj = {
       nickname,email,formData
     }
-    const response = await axios.post("http://127.0.0.1:8080/contact",contactObj);
+    const response = await axios.post("https://fta-project.vercel.app/contact",contactObj);
     window.alert(response.data);
     router.push("/");
     

@@ -5,7 +5,7 @@ import { useEffect, useRef ,useState} from "react";
 import ReactMarkdown from "react-markdown";
 
 export async function getStaticPaths(){
-  const response = await fetch(`http://127.0.0.1:8080/news/`);
+  const response = await fetch(`https://fta-project.vercel.app/news/`);
   const data = await response.json();
   const paths = data.map(d =>{
     
@@ -25,7 +25,7 @@ export async function getStaticPaths(){
 // 但getStaticProps()本身可以單獨使用
 
 export async function getStaticProps({params}){
-  const response = await fetch(`http://127.0.0.1:8080/news/${params.id}`);
+  const response = await fetch(`https://fta-project.vercel.app/news/${params.id}`);
   
   const data = await response.json();
 
