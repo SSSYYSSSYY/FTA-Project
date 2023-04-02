@@ -49,6 +49,10 @@ const requiredAuth = passport.authenticate("jwt",{session:false});
 //passportでユーザーがログイン状態であるかどうかを検証する
 // /PredictionTests系Routeはログインしたユーザーのみがアクセスできる
 
+app.get("/test",(req,res)=>{
+    return res.send("success!")
+})
+
 //お問い合わせ用Routes＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
 app.post("/contact",(req,res)=>{
