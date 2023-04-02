@@ -6,7 +6,7 @@ export default function Resource(){
   return(
     <Layout>
       <div className="resourcePage">
-        <h2>当サイトで使用している素材</h2>
+        <h2>使用している素材について</h2>
 
         <p className="title">背景画像：</p>
         <a target="_blank" href="https://www.wowpatterns.com/free-vector/abstract-minimal-doodle-line-brush-strokes-seamless-vector-pattern">wowpatterns.com</a>
