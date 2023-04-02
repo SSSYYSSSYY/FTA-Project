@@ -202,6 +202,7 @@ a.allTests {
 
 .testsByGenre {
   text-align: center;
+  line-height: 1.5em;
 }
 .testsByGenre li {
   color: #2e2c0d;
