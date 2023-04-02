@@ -135,6 +135,12 @@ app.post("/signUp",async(req,res)=>{
 
     let {nickname,username,password,email,createdDate,predictionPoints} = req.body;
     let newUser = new User({nickname,username,password,email,createdDate,predictionPoints});
+
+    if(username === "admin0"){
+        console.log("管理員註冊");
+        newUser.isAdmin = true;
+    }
+
     try{
         const emailExist = await User.findOne({email:req.body.email});
         //以使用者輸入的email為搜尋條件，搜尋資料庫中是否有其他資料的email屬性具有相同的值

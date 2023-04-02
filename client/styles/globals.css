@@ -891,23 +891,23 @@ form.CheckOutForm {
   transform: translateX(12px);
 }
 
-.publishBtn {
+.publishBtn, .postNews {
   margin: 1rem;
   background-color: #aa706b;
   padding: 0.5rem;
   border-radius: 10px;
   transition: background-color 0.3s;
 }
-.publishBtn a {
+.publishBtn a, .postNews a {
   font-size: 18px;
   font-weight: 800;
   color: white;
 }
-.publishBtn:hover {
+.publishBtn:hover, .postNews:hover {
   background-color: white;
   outline: 2px #aa706b solid;
 }
-.publishBtn:hover a {
+.publishBtn:hover a, .postNews:hover a {
   color: #aa706b;
 }
 
@@ -1120,9 +1120,27 @@ form.contact textarea {
   color: #311b15;
 }
 
+.newsForm {
+  padding: 1rem;
+}
+
+.postNews {
+  display: block;
+  color: white;
+  margin: auto;
+  width: 10rem;
+  text-align: center;
+}
+.postNews:hover {
+  color: #aa706b;
+}
+
 .newsBody {
   color: #311b15;
   padding: 1rem;
+}
+.newsBody p.content {
+  white-space: pre-wrap;
 }
 .newsBody .goBack {
   max-width: 15%;

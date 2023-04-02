@@ -4,6 +4,10 @@ const bcrypt = require("bcrypt");
 const { User } = require(".");
 
 const userSchema = new Schema({
+    isAdmin:{
+        type:Boolean,
+        default:false,
+    },
     nickname:{
         type:String,
         required:true,

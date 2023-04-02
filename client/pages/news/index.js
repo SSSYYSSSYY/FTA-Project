@@ -2,6 +2,7 @@ import Link from "next/link"
 import Layout from "@/components/layout"
 import { useRouter } from "next/router";
 import { useEffect, useRef ,useState} from "react";
+import AuthService from "@/services/auth.service"
 
 const pageSize = 5;
 
@@ -18,6 +19,7 @@ export async function getServerSideProps(){
 export default function News({data}){
   const router = useRouter();
   const {query} = router;
+  const [currentUser,setCurrentUser] = useState(null);
 
   const [currentPage,setCurrentPage] = useState(0);
   const currentData = data.slice(currentPage*pageSize,currentPage*pageSize+pageSize);
@@ -27,6 +29,13 @@ export default function News({data}){
     isLastPage = true;
   }
 
+  useEffect(()=>{
+    setCurrentUser(AuthService.getCurrentUser());
+  },[]);
+
+  if(currentUser){
+    console.log(currentUser.user.isAdmin)
+  }
 
   const handlePrePage = (e) =>{
     e.preventDefault();
@@ -40,10 +49,11 @@ export default function News({data}){
     setCurrentPage(currentPage + 1);
   }
 
-  console.log(data)
+  // console.log(data)
   return (
     <Layout>
       <h2 className="newsTitle">お知らせ</h2>
+      {currentUser&&currentUser.user.isAdmin&&<Link className="postNews" href={`/news/post`}>お知らせを作成</Link>}
       <ul className="newsIndex">
         {data&&
         currentData.map(data=>{

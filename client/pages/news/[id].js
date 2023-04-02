@@ -47,7 +47,7 @@ export default function News({data}){
         <h3>{data.title}</h3>
         <p className="postDate"><small>{new Date(data.postDate).toLocaleString('ja-JP', {timeZone: 'Asia/Tokyo'})}</small></p>
         <p className="content">{data.description}</p>
-        <ReactMarkdown escapeHtml={false} className="content">{data.description}</ReactMarkdown>
+        {/* <ReactMarkdown escapeHtml={false} className="content">{data.description}</ReactMarkdown> */}
         {/* <ReactMarkdown>{markdownTest}</ReactMarkdown> */}
       </div>
 
