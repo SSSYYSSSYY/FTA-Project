@@ -275,7 +275,7 @@ div.seeAllTests {
 }
 
 #selectTestsNav:checked + label.selectTestsNav + .testsByGenre {
-  height: 13rem;
+  height: 15rem;
   transition: 0.5s ease-in-out;
 }
 
@@ -475,6 +475,7 @@ div.PredictionTests .genre {
   font-size: 20px;
   margin-bottom: 0.5rem;
   color: #4b281f;
+  line-height: 1.5em;
 }
 .testBody p, .testBody label {
   color: #754F44;
@@ -633,6 +634,7 @@ section.choicesSection .choices .choiceInfo {
   display: flex;
   justify-content: space-between;
   padding: 0 0.2rem;
+  line-height: 1.3em;
 }
 section.choicesSection .choices .choiceContent {
   display: flex;
@@ -985,6 +987,7 @@ form.CheckOutForm {
 }
 .recordBody .publishRecordsList {
   margin-bottom: 3rem;
+  line-height: 1.5em;
 }
 .recordBody .predictRecordsList {
   margin-bottom: 3rem;

@@ -291,7 +291,7 @@ div.seeAllTests{
 }
 
 #selectTestsNav:checked + label.selectTestsNav + .testsByGenre{
-  height: 13rem;
+  height: 15rem;
   transition: .5s ease-in-out;
 }
 ul.testsByStatus{
@@ -494,6 +494,7 @@ div.PredictionTests{
     font-size: 20px;
     margin-bottom: .5rem;
     color: #4b281f;
+    line-height: 1.5em;
   }
   p,label{
     color: #754F44;
@@ -650,6 +651,7 @@ section.choicesSection{
       display: flex;
       justify-content: space-between;
       padding: 0 .2rem;
+      line-height: 1.3em;
     }
     .choiceContent{
       display: flex;align-items: center;justify-content: center;
@@ -1028,6 +1030,7 @@ form.CheckOutForm{
   }
   .publishRecordsList{
     margin-bottom: 3rem;
+    line-height: 1.5em;
   }
   .predictRecordsList{
     margin-bottom: 3rem;
