@@ -4,6 +4,7 @@
   "description": "CRUD for P Test API",
   "main": "index.js",
   "scripts": {
+    "cron":"node cron/cron.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
