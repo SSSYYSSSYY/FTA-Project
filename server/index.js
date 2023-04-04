@@ -54,7 +54,7 @@ app.get("/test",(req,res)=>{
 })
 
 app.get("/api/cron-daily",async (req,res)=>{
-    console.log("執行cron")
+    console.log("執行daily排程")
     // res.status(200).end('Hello Cron!');
   
     //每天0點判斷題目是否過期
@@ -112,6 +112,20 @@ app.get("/api/cron-daily",async (req,res)=>{
             console.log(`已更新玩家${user._id}的懲罰狀態`);
         }
     })
+    res.send({msg:"daily排程完成"});
+})
+
+app.get("/api/cron-monthly",async(req,res)=>{
+    console.log("執行monthly排程")
+    //每月1號0點重置所有玩家的懲罰狀態和回數
+    let nowTimeObj = new Date();
+    let allUser = await User.find({}).exec();
+    allUser.map(async user =>{
+        console.log(`重置玩家${user._id}的懲罰回數`);
+        await User.findOneAndUpdate({_id:user._id},{penaltyCount:0},{new:true}).exec();
+        console.log(`已重置玩家${user._id}的懲罰回數`);
+    })
+    res.send({msg:"monthly排程完成"});
 })
 
 //お問い合わせ用Routes＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
@@ -898,103 +912,103 @@ class CheckOutTheAnswer{
         }
 }
 
-//毎日0時にテストが締め切りになったかどうかを判断するための関数
-//この関数を毎日0時に執行するようにセットする
-//cronパッケージ
-const isOverdue = new cron.CronJob("3 0 0 * * *",async function(){
-    //要注意：*の間の半角スペースを忘れないように
-    //左から"秒　分　時　日　月　曜日"
-    //つまり毎日0時に関数を実行したい場合は、
-    //"0 0 0 * * *"と入力
-    //今はテスト段階なので仮の時間を入れておく
+// //毎日0時にテストが締め切りになったかどうかを判断するための関数
+// //この関数を毎日0時に執行するようにセットする
+// //cronパッケージ
+// const isOverdue = new cron.CronJob("3 0 0 * * *",async function(){
+//     //要注意：*の間の半角スペースを忘れないように
+//     //左から"秒　分　時　日　月　曜日"
+//     //つまり毎日0時に関数を実行したい場合は、
+//     //"0 0 0 * * *"と入力
+//     //今はテスト段階なので仮の時間を入れておく
 
-    //現在時刻が設置された答え合わせ日時を過ぎていたら
-    //テストのステータスを「答え合わせ待ち」にする
+//     //現在時刻が設置された答え合わせ日時を過ぎていたら
+//     //テストのステータスを「答え合わせ待ち」にする
 
-    let nowTimeObj = new Date();
-    let allTest = await PredictionTest.find({}).exec();
-    allTest.map(async(test)=>{
-        //console.log(`すべてのテストの締め切りは${test.deadline}`);
-        if((nowTimeObj > test.deadline || nowTimeObj == test.deadline ) && (test.isAccepting == true)){
-            //締め切りを過ぎたかつ「受付中」のテストのstatusを更新する
-            console.log(`${test.title}は締め切りを過ぎたよ！`);
-            console.log(`締め切りを過ぎたテストのID${test._id}`)
-            console.log(`出題者は${test.publisher._id}`)
-            let publisher = await User.findOne({_id:test.publisher._id});
-            console.log(`出題者のメールアドレスは${publisher.email}`)
+//     let nowTimeObj = new Date();
+//     let allTest = await PredictionTest.find({}).exec();
+//     allTest.map(async(test)=>{
+//         //console.log(`すべてのテストの締め切りは${test.deadline}`);
+//         if((nowTimeObj > test.deadline || nowTimeObj == test.deadline ) && (test.isAccepting == true)){
+//             //締め切りを過ぎたかつ「受付中」のテストのstatusを更新する
+//             console.log(`${test.title}は締め切りを過ぎたよ！`);
+//             console.log(`締め切りを過ぎたテストのID${test._id}`)
+//             console.log(`出題者は${test.publisher._id}`)
+//             let publisher = await User.findOne({_id:test.publisher._id});
+//             console.log(`出題者のメールアドレスは${publisher.email}`)
 
-            const transporter = nodemailer.createTransport({
-                service:"Gmail",
-                auth:{
-                    user:GMAIL,
-                    pass:GMAIL_PASSWORD,
-                }
-            });
+//             const transporter = nodemailer.createTransport({
+//                 service:"Gmail",
+//                 auth:{
+//                     user:GMAIL,
+//                     pass:GMAIL_PASSWORD,
+//                 }
+//             });
 
-            const mailOptions = {
-                from:GMAIL,
-                to:publisher.email,
-                subject:`締め切りを過ぎた予言テストがあります。`,
-                html:`予言テスト：${test.title}が締め切りになりました。<br /><a href="http://localhost:3000/PredictionTests/${test._id}">答え合わせはこちらへ</a>`,
-            }
+//             const mailOptions = {
+//                 from:GMAIL,
+//                 to:publisher.email,
+//                 subject:`締め切りを過ぎた予言テストがあります。`,
+//                 html:`予言テスト：${test.title}が締め切りになりました。<br /><a href="http://localhost:3000/PredictionTests/${test._id}">答え合わせはこちらへ</a>`,
+//             }
 
-            transporter.sendMail(mailOptions, function(err,info){
-                if(err){
-                    console.log("傳送失敗：");
-                    console.log(err)
-                    // return res.status(500).send("予期せぬエラーが発生しました。");
-                }else{
-                    console.log("傳送成功：");
-                    console.log(info);
-                    // return res.send("お問い合わせありがとうございます。\nご報告いただいた内容については、後ほど改めてご連絡させていただきます。\nホームに戻ります。")
-                }
-            });
-
-
+//             transporter.sendMail(mailOptions, function(err,info){
+//                 if(err){
+//                     console.log("傳送失敗：");
+//                     console.log(err)
+//                     // return res.status(500).send("予期せぬエラーが発生しました。");
+//                 }else{
+//                     console.log("傳送成功：");
+//                     console.log(info);
+//                     // return res.send("お問い合わせありがとうございます。\nご報告いただいた内容については、後ほど改めてご連絡させていただきます。\nホームに戻ります。")
+//                 }
+//             });
 
 
-            await PredictionTest.findOneAndUpdate({test_ID:test.test_ID},{isAccepting:false,isWaitingForAnswering:true},{new:true});
-            console.log(test.title+"の状態を更新したよ！");
-        }
-    })
+
+
+//             await PredictionTest.findOneAndUpdate({test_ID:test.test_ID},{isAccepting:false,isWaitingForAnswering:true},{new:true});
+//             console.log(test.title+"の状態を更新したよ！");
+//         }
+//     })
     
-},"Asia/Tokyo");
-//タイムゾーンを日本に設定
-//各パラメーターの意味はnpmjsのドキュメント、あるいは
-//https://ithelp.ithome.com.tw/articles/10249462を参照
+// },"Asia/Tokyo");
+// //タイムゾーンを日本に設定
+// //各パラメーターの意味はnpmjsのドキュメント、あるいは
+// //https://ithelp.ithome.com.tw/articles/10249462を参照
 
-isOverdue.start();
-//上の関数を実行する
+// isOverdue.start();
+// //上の関数を実行する
 
-const penaltyReset = new cron.CronJob("3 0 0 1 * *",async function(){
-    //左から"秒　分　時　日　月　曜日"
-    let nowTimeObj = new Date();
-    let allUser = await User.find({}).exec();
-    allUser.map(async user =>{
-        console.log(`重置玩家${user._id}的懲罰回數`);
-        await User.findOneAndUpdate({_id:user._id},{penaltyCount:0},{new:true}).exec();
-        console.log(`已重置玩家${user._id}的懲罰回數`);
-    })
-},"Asia/Tokyo");
+// const penaltyReset = new cron.CronJob("3 0 0 1 * *",async function(){
+//     //左から"秒　分　時　日　月　曜日"
+//     let nowTimeObj = new Date();
+//     let allUser = await User.find({}).exec();
+//     allUser.map(async user =>{
+//         console.log(`重置玩家${user._id}的懲罰回數`);
+//         await User.findOneAndUpdate({_id:user._id},{penaltyCount:0},{new:true}).exec();
+//         console.log(`已重置玩家${user._id}的懲罰回數`);
+//     })
+// },"Asia/Tokyo");
 
-penaltyReset.start();
+// penaltyReset.start();
 
-const isPenaltyEnd = new cron.CronJob("3 0 0 * * *",async function(){
-    //左から"秒　分　時　日　月　曜日"
-    let nowTimeObj = new Date();
-    let allUser = await User.find({isPenalized:true}).exec();
+// const isPenaltyEnd = new cron.CronJob("3 0 0 * * *",async function(){
+//     //左から"秒　分　時　日　月　曜日"
+//     let nowTimeObj = new Date();
+//     let allUser = await User.find({isPenalized:true}).exec();
 
-    allUser.map(async user =>{
-        console.log(`玩家${user._id}的懲罰期間是${user.penaltyEnd}`)
-        if((nowTimeObj > user.penaltyEnd || nowTimeObj == user.penaltyEnd ) && (user.isPenalized == true)){
-            console.log(`玩家${user._id}的懲罰期間已過`);
-            await User.findOneAndUpdate({_id:user._id},{isPenalized:false,penaltyCount:0},{new:true});
-            console.log(`已更新玩家${user._id}的懲罰狀態`);
-        }
-    })
-},"Asia/Tokyo");
+//     allUser.map(async user =>{
+//         console.log(`玩家${user._id}的懲罰期間是${user.penaltyEnd}`)
+//         if((nowTimeObj > user.penaltyEnd || nowTimeObj == user.penaltyEnd ) && (user.isPenalized == true)){
+//             console.log(`玩家${user._id}的懲罰期間已過`);
+//             await User.findOneAndUpdate({_id:user._id},{isPenalized:false,penaltyCount:0},{new:true});
+//             console.log(`已更新玩家${user._id}的懲罰狀態`);
+//         }
+//     })
+// },"Asia/Tokyo");
 
-isPenaltyEnd.start();
+// isPenaltyEnd.start();
 
 //特定のテストを編集する
 app.patch("/PredictionTests/:_id",requiredAuth,async(req,res)=>{

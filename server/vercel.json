@@ -13,9 +13,14 @@
       "dest": "/"
     }
   ],
-  "crons": [{
-    "path": "/api/cron-daily",
-    "schedule": "44 5 * * *"
-    
-  }]
+  "crons": [
+    {
+      "path": "/api/cron-daily",
+      "schedule": "0 0 * * *"
+    },
+    {
+      "path": "/api/cron-monthly",
+      "schedule": "0 0 1 * *"
+    }
+  ]
 }
