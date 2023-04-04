@@ -23,12 +23,7 @@ const jwt = require("jsonwebtoken");
 const { use } = require("passport");
 const { findOneAndUpdate } = require("./models/prediction-test");
 
-//使用NEXT.js串接複數個API?
 
-    //未來新增倍率功能時要自動判斷倍率?
-    //是否要製作倍率功能，等整個服務上線後看大家反應?
-    //若有要做的話，要仔細評估每個使用者初始持有的點數
-    //仿照原本遊戲的模式，倍率每天更新一次就好，也可以省流量
 
 //MongoDBに連携する
 mongoose.connect(process.env.MONGODB_CONNECTION)
