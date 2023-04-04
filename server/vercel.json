@@ -13,12 +13,8 @@
       "dest": "/"
     }
   ],
-  "cron":[{
-    "name":"cron",
-    "schedule":"* * * * *",
-    "command":"npm run cron",
-    "output":{
-      "background":true
-    }
+  "crons": [{
+    "path": "/api/cron",
+    "schedule": "* * * * *"
   }]
 }
