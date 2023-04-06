@@ -25,40 +25,29 @@ export default function TestHome({data}){
   const [currentSelect,setCurrentSelect] = useState("")
   const [selectedData,setSelectedData] = useState(data);
   const handleByGenre = (e) =>{
-    fetch(`https://fta-project.vercel.app/PredictionTests/genre/${e.target.textContent}`)
-    .then(data=>data.json())
-    .then(data=>setSelectedData(data))
-    .catch(e=>console.log(e));
+    const filteredByGenre = data.filter(d =>d.genre == e.target.textContent);
+    setSelectedData(filteredByGenre);
     setCurrentSelect(e.target.textContent);
   }
 
   const handleAllTests = (e) =>{
-    fetch(`https://fta-project.vercel.app/PredictionTests`)
-    .then(data=>data.json())
-    .then(data=>setSelectedData(data))
-    .catch(e=>console.log(e));
+    setSelectedData(data);
     setCurrentSelect("");
   }
 
   const handleAccepting = (e) =>{
-    fetch(`https://fta-project.vercel.app/PredictionTests/status/isAccepting`)
-    .then(data=>data.json())
-    .then(data=>setSelectedData(data))
-    .catch(e=>console.log(e));
+    const filteredByStatus = data.filter(d => d.isAccepting == true);
+    setSelectedData(filteredByStatus);
     setCurrentSelect("回答受付中");
   }
   const handleWaiting = (e) =>{
-    fetch(`https://fta-project.vercel.app/PredictionTests/status/isWaitingForAnswering`)
-    .then(data=>data.json())
-    .then(data=>setSelectedData(data))
-    .catch(e=>console.log(e));
+    const filteredByStatus = data.filter(d => d.isWaitingForAnswering == true);
+    setSelectedData(filteredByStatus);
     setCurrentSelect("答え合わせ待ち");
   }
   const handleAnswered = (e) =>{
-    fetch(`https://fta-project.vercel.app/PredictionTests/status/isAnswered`)
-    .then(data=>data.json())
-    .then(data=>setSelectedData(data))
-    .catch(e=>console.log(e));
+    const filteredByStatus = data.filter(d => d.isAnswered == true);
+    setSelectedData(filteredByStatus);
     setCurrentSelect("答え合わせ済み");
   }
 
