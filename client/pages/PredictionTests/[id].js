@@ -60,7 +60,7 @@ export default function Test({data}){
   const [isShowDes,setIsShowDes] = useState(false);
 
   // document.querySelector("div.answer").style.color = "blue";
-  console.log(data)
+  // console.log(data)
   
   let predictedArr = [];
   let flag;

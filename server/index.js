@@ -332,6 +332,14 @@ app.get("/PredictionTests/:_id",async(req,res)=>{
     }
 });
 
+app.get("/PredictionTests/*",async(req,res)=>{
+    try{
+        return res.status(404).send("このテストは存在していません。");
+    }catch(e){
+        return res.status(404).send("このテストは存在していません。");
+    }
+});
+
 //ジャンルで絞る
 app.get("/PredictionTests/genre/:genre",async(req,res)=>{
     let {genre} = req.params;
