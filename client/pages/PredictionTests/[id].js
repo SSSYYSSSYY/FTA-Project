@@ -37,6 +37,7 @@ import { useRouter } from "next/router"
 export async function getServerSideProps({params}){
   const { id } = params;
   const response = await fetch(`https://fta-project.vercel.app/PredictionTests/${id}`);
+  console.log(response)
   const data = await response.json();
   return {
     props:{
