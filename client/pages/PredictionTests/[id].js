@@ -171,8 +171,11 @@ export default function Test({data}){
               console.log("使用者有答對")
               document.querySelector(".testBody").insertAdjacentHTML("afterbegin",`<div class="correctMsg">的中</div>`)
             }else{
-              console.log("使用者沒答對")
-              document.querySelector(".testBody").insertAdjacentHTML("afterbegin",`<div class="incorrectMsg">ハズレ…</div>`)
+              if(document.querySelector(".selected")){
+                console.log("使用者沒答對")
+                document.querySelector(".testBody").insertAdjacentHTML("afterbegin",`<div class="incorrectMsg">ハズレ…</div>`)
+              }
+
             }
           }
 
