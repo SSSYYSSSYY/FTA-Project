@@ -77,7 +77,7 @@ app.get("/api/cron-daily",async (req,res)=>{
                 from:GMAIL,
                 to:publisher.email,
                 subject:`締め切りを過ぎた予言テストがあります。`,
-                html:`予言テスト：${test.title}が締め切りになりました。<br /><a href="http://localhost:3000/PredictionTests/${test._id}">答え合わせはこちらへ</a>`,
+                html:`予言テスト：${test.title}が締め切りになりました。<br /><a href="https://fta-project-client.vercel.app/PredictionTests/${test._id}">答え合わせはこちらへ</a>`,
             }
   
             transporter.sendMail(mailOptions, function(err,info){
