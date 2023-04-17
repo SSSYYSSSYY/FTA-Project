@@ -656,12 +656,12 @@ section.choicesSection{
     .choiceContent{
       display: flex;align-items: center;justify-content: center;
       //以上雖然可以置中但會導致無法換行?
-      line-height: 1em;
+      line-height: 1.2em;
       flex-wrap: wrap;//沒用
       padding: .3rem;
       text-align: center;
       overflow-wrap: anywhere;//讓元素內容太長時，文字的任何地方都可斷行
-      min-height: 3.5rem;
+      min-height: 4rem;
       vertical-align: middle;
       
     }

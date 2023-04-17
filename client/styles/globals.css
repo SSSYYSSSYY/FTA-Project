@@ -640,12 +640,12 @@ section.choicesSection .choices .choiceContent {
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 1em;
+  line-height: 1.2em;
   flex-wrap: wrap;
   padding: 0.3rem;
   text-align: center;
   overflow-wrap: anywhere;
-  min-height: 3.5rem;
+  min-height: 4rem;
   vertical-align: middle;
 }
 section.choicesSection .choices.selected {
