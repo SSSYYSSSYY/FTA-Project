@@ -4,6 +4,7 @@ import AuthService from "@/services/auth.service"
 import TestService from "@/services/test.service";
 import { useState,useEffect } from "react";
 import { useRouter } from "next/router"
+const URL = "https://fta-project.vercel.app/";
 
 // export async function getStaticPaths(){
 //   const response = await fetch("https://fta-project.vercel.app/PredictionTests/");
@@ -36,7 +37,7 @@ import { useRouter } from "next/router"
 
 export async function getServerSideProps({params}){
   const { id } = params;
-  const response = await fetch(`https://fta-project.vercel.app/PredictionTests/${id}`);
+  const response = await fetch(`${URL}PredictionTests/${id}`);
   console.log(response)
   const data = await response.json();
   return {
@@ -88,7 +89,7 @@ export default function Test({data}){
           }
           //當前使用者為出題者本人，且當前使用者未受懲罰，且當前題目未結束
           if(currentUser){
-            fetch(`https://fta-project.vercel.app/profile/${currentUser.user._id}`)
+            fetch(`${URL}profile/${currentUser.user._id}`)
             .then(Data=>Data.json())
             .then(Data=>{
               if(!Data.foundUser.isPenalized&& !data.isAnswered){
@@ -197,7 +198,7 @@ export default function Test({data}){
   const handleDelete = async(e) =>{
     console.log("點擊了刪除按鈕")
     console.log(data._id)
-    const latestUserData = await fetch(`https://fta-project.vercel.app/profile/${currentUser.user._id}`)
+    const latestUserData = await fetch(`${URL}profile/${currentUser.user._id}`)
     .then(data=>data.json())
     .catch(e=>console.log(e));
     console.log(latestUserData)
