@@ -184,11 +184,14 @@ export default function Test({data}){
         }
       })
     })
-    if(currentUser.user.isAdmin){
-      setCanDelete(true);
-      setCanEdit(true);
-      setCanCheck(true);
+    if(currentUser){
+      if(currentUser.user.isAdmin){
+        setCanDelete(true);
+        setCanEdit(true);
+        setCanCheck(true);
+      }
     }
+
     
   },[isCurrentUserExist]);
 
