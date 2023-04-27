@@ -94,13 +94,14 @@ export default function CheckOutTheAnswer({data}){
 
   const handleDes = (e) =>{
     setDefaultText({[e.target.name]:e.target.value});
+    console.log(defaultText)
   }
   // console.log(des)
   // console.log(answerData);
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
-
+    console.log
     if(!isSetAnswer){
       window.alert("正解となる選択肢を選んでください。");
     }else{
