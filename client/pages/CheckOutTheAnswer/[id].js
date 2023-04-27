@@ -101,7 +101,7 @@ export default function CheckOutTheAnswer({data}){
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
-    console.log
+
     if(!isSetAnswer){
       window.alert("正解となる選択肢を選んでください。");
     }else{
@@ -128,9 +128,6 @@ export default function CheckOutTheAnswer({data}){
       <h4 className="test-title">{`問${data.test_ID}：${data.title}`}</h4>
       <p className="test-genre">{`ジャンル：${data.genre}`}</p>
       <form className="CheckOutForm" onSubmit={handleSubmit}>
-        <label htmlFor="test-description">説明：</label>
-        <textarea defaultValue={defaultText} rows={8} wrap="hard" id="test-description" name="description"
-        onChange={handleDes} required></textarea>
         {/* <p>選択肢：</p> */}
         <section className="choicesSection CheckOut">
           <div className="choices one CheckOut">
@@ -211,7 +208,9 @@ export default function CheckOutTheAnswer({data}){
 
           </div>}
         </section>
-        
+        <label htmlFor="test-description">説明：</label>
+        <textarea defaultValue={defaultText} rows={8} wrap="hard" id="test-description" name="description"
+        onChange={handleDes} required></textarea>
         <button type="submit">答え合わせを行う</button>
       </form>
     </Layout>
