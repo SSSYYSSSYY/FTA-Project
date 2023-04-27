@@ -55,11 +55,13 @@ export default function CheckOutTheAnswer({data}){
   //會進到這個頁面代表使用者必定是出題者本人
 
   const [defaultText,setDefaultText] = useState("");
+  const [isSetAnswer,setIsSetAnswer] = useState(false);
 
   const handleAnswerData = (e) =>{
     setAnswerData({
         [e.target.id]:e.target.value,
     });
+    setIsSetAnswer(true);
     console.log(answerData);
     switch (e.target.id){
       case "one":
@@ -99,7 +101,7 @@ export default function CheckOutTheAnswer({data}){
   const handleSubmit = async(e) =>{
     e.preventDefault();
 
-    if(!answerData){
+    if(!isSetAnswer){
       window.alert("正解となる選択肢を選んでください。");
     }else{
       const checkOutObj = {description:defaultText.description,...answerData}
