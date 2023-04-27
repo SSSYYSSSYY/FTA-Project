@@ -105,8 +105,9 @@ export default function CheckOutTheAnswer({data}){
     if(!isSetAnswer){
       window.alert("正解となる選択肢を選んでください。");
     }else{
-      const checkOutObj = {description:des,...answerData}
-      console.log(checkOutObj)
+      // const checkOutObj = {description:des,...answerData}
+      // console.log(checkOutObj)
+      console.log({des,answerData})
       try{
         await TestService.checkOutTheAnswer({des,answerData},data._id.toString());
         for(let data in answerData){
