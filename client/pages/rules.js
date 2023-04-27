@@ -103,7 +103,7 @@ export default function Rules(){
           <img width={`300px`} src="/pictures/checkOut.png"/>
           <p>2.正解となる選択肢を決めて、「答え合わせを行う」をクリック。</p>
           <img width={`300px`} src="/pictures/toCheckOut.png"/>
-          <p><small>※選択肢をクリックすると、このように該当選択肢の内容がテンプレとして「説明」のところに出てきます。もちろん、自分で修正したり内容を加えたりすることも可能です。</small></p>
+          <p><small>※選択肢をクリックすると、このように該当選択肢の内容が「説明」のところに出てきます。</small></p>
           <p>3.完成！
             <br/>このように正解となった選択肢はふんわりと光るようになります。
           </p>
