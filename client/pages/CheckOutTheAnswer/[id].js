@@ -60,6 +60,7 @@ export default function CheckOutTheAnswer({data}){
     setAnswerData({
         [e.target.id]:e.target.value,
     });
+    console.log(answerData);
     switch (e.target.id){
       case "one":
         setDefaultText(`正解は、「①：${e.target.value}」でした。`);
