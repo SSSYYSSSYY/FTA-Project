@@ -108,7 +108,7 @@ export default function CheckOutTheAnswer({data}){
       const checkOutObj = {description:des,...answerData}
       console.log(checkOutObj)
       try{
-        await TestService.checkOutTheAnswer(des,answerData,data._id.toString());
+        await TestService.checkOutTheAnswer({des,answerData},data._id.toString());
         for(let data in answerData){
           document.querySelector(`div.choices.${data}`).classList.add("answer");
           // document.querySelector(`div.choices.${data}`).style.color = "blue";
