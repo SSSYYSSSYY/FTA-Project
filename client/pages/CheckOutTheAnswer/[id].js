@@ -51,7 +51,7 @@ export default function CheckOutTheAnswer({data}){
   const [currentUser,setCurrentUser] = useState(null);
   const [msg,setMsg] = useState("");
   const [answerData,setAnswerData] = useState({});
-  const [des,setDes] = useState({});
+  const [des,setDes] = useState("");
   //會進到這個頁面代表使用者必定是出題者本人
 
   const [defaultText,setDefaultText] = useState("");
@@ -93,8 +93,8 @@ export default function CheckOutTheAnswer({data}){
   }
 
   const handleDes = (e) =>{
-    setDefaultText({[e.target.name]:e.target.value});
-    console.log(defaultText)
+    setDes({[e.target.name]:e.target.value});
+    console.log(des)
   }
   // console.log(des)
   // console.log(answerData);
@@ -105,7 +105,7 @@ export default function CheckOutTheAnswer({data}){
     if(!isSetAnswer){
       window.alert("正解となる選択肢を選んでください。");
     }else{
-      const checkOutObj = {description:defaultText,...answerData}
+      const checkOutObj = {description:des,...answerData}
       console.log(checkOutObj)
       try{
         await TestService.checkOutTheAnswer(checkOutObj,data._id.toString());
