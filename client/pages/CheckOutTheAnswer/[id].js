@@ -99,21 +99,25 @@ export default function CheckOutTheAnswer({data}){
   const handleSubmit = async(e) =>{
     e.preventDefault();
 
-
-
-    const checkOutObj = {description:defaultText.description,...answerData}
-    console.log(checkOutObj)
-    try{
-      await TestService.checkOutTheAnswer(checkOutObj,data._id.toString());
-      for(let data in answerData){
-        document.querySelector(`div.choices.${data}`).classList.add("answer");
-        // document.querySelector(`div.choices.${data}`).style.color = "blue";
+    if(!answerData){
+      window.alert("正解となる選択肢を選んでください。");
+    }else{
+      const checkOutObj = {description:defaultText.description,...answerData}
+      console.log(checkOutObj)
+      try{
+        await TestService.checkOutTheAnswer(checkOutObj,data._id.toString());
+        for(let data in answerData){
+          document.querySelector(`div.choices.${data}`).classList.add("answer");
+          // document.querySelector(`div.choices.${data}`).style.color = "blue";
+        }
+        window.alert("答え合わせに成功しました！\nテストに戻ります。");
+        router.push(`/PredictionTests/${data._id}`);
+      }catch(e){
+        console.log(e);
       }
-      window.alert("答え合わせに成功しました！\nテストに戻ります。");
-      router.push(`/PredictionTests/${data._id}`);
-    }catch(e){
-      console.log(e);
     }
+
+
   }
   
   return (

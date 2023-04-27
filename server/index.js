@@ -1178,7 +1178,7 @@ app.patch("*/CheckOutTheAnswer/:_id",requiredAuth,async(req,res)=>{
                 from:GMAIL,
                 to:answerer.email,
                 subject:`予言テスト：${foundTest.title}の答え合わせが来ています。`,
-                html:`先日予知していたテストの答え合わせが行われました。<br /><a href="http://localhost:3000/PredictionTests/${foundTest._id}">結果はこちらへ</a>`,
+                html:`先日予知していたテストの答え合わせが行われました。<br /><a href="https://fta-project.vercel.app/PredictionTests/${foundTest._id}">結果はこちらへ</a>`,
             }
             transporter.sendMail(mailOptions,function(err,info){
                 if(err){
