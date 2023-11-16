@@ -51,15 +51,18 @@ export default function CheckOutTheAnswer({data}){
   const [currentUser,setCurrentUser] = useState(null);
   const [msg,setMsg] = useState("");
   const [answerData,setAnswerData] = useState({});
-  const [des,setDes] = useState({});
+  const [des,setDes] = useState("");
   //會進到這個頁面代表使用者必定是出題者本人
 
   const [defaultText,setDefaultText] = useState("");
+  const [isSetAnswer,setIsSetAnswer] = useState(false);
 
   const handleAnswerData = (e) =>{
     setAnswerData({
         [e.target.id]:e.target.value,
     });
+    setIsSetAnswer(true);
+    console.log(answerData);
     switch (e.target.id){
       case "one":
         setDefaultText(`正解は、「①：${e.target.value}」でした。`);
@@ -90,7 +93,8 @@ export default function CheckOutTheAnswer({data}){
   }
 
   const handleDes = (e) =>{
-    setDefaultText({[e.target.name]:e.target.value});
+    setDes({[e.target.name]:e.target.value});
+    console.log(des)
   }
   // console.log(des)
   // console.log(answerData);
@@ -98,21 +102,26 @@ export default function CheckOutTheAnswer({data}){
   const handleSubmit = async(e) =>{
     e.preventDefault();
 
-
-
-    const checkOutObj = {description:defaultText.description,...answerData}
-    console.log(checkOutObj)
-    try{
-      await TestService.checkOutTheAnswer(checkOutObj,data._id.toString());
-      for(let data in answerData){
-        document.querySelector(`div.choices.${data}`).classList.add("answer");
-        // document.querySelector(`div.choices.${data}`).style.color = "blue";
+    if(!isSetAnswer){
+      window.alert("正解となる選択肢を選んでください。");
+    }else{
+      // const checkOutObj = {description:des,...answerData}
+      // console.log(checkOutObj)
+      console.log({des,answerData})
+      try{
+        await TestService.checkOutTheAnswer({des,answerData},data._id.toString());
+        for(let data in answerData){
+          document.querySelector(`div.choices.${data}`).classList.add("answer");
+          // document.querySelector(`div.choices.${data}`).style.color = "blue";
+        }
+        window.alert("答え合わせに成功しました！\nテストに戻ります。");
+        router.push(`/PredictionTests/${data._id}`);
+      }catch(e){
+        console.log(e);
       }
-      window.alert("答え合わせに成功しました！\nテストに戻ります。");
-      router.push(`/PredictionTests/${data._id}`);
-    }catch(e){
-      console.log(e);
     }
+
+
   }
   
   return (
@@ -120,9 +129,6 @@ export default function CheckOutTheAnswer({data}){
       <h4 className="test-title">{`問${data.test_ID}：${data.title}`}</h4>
       <p className="test-genre">{`ジャンル：${data.genre}`}</p>
       <form className="CheckOutForm" onSubmit={handleSubmit}>
-        <label htmlFor="test-description">説明：</label>
-        <textarea defaultValue={defaultText} rows={8} wrap="hard" id="test-description" name="description"
-        onChange={handleDes} required></textarea>
         {/* <p>選択肢：</p> */}
         <section className="choicesSection CheckOut">
           <div className="choices one CheckOut">
@@ -203,7 +209,9 @@ export default function CheckOutTheAnswer({data}){
 
           </div>}
         </section>
-        
+        <label htmlFor="test-description">説明：</label>
+        <textarea defaultValue={defaultText} rows={8} wrap="hard" id="test-description" name="description"
+        onChange={handleDes} required></textarea>
         <button type="submit">答え合わせを行う</button>
       </form>
     </Layout>

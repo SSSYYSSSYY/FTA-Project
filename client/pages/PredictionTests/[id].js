@@ -73,6 +73,7 @@ export default function Test({data}){
       setIsCurrentUserExist(true);
     }else{
       if(currentUser){
+
         console.log("當前使用者："+currentUser.user._id.toString())
         console.log("出題者："+data.publisher._id.toString())
         
@@ -183,6 +184,13 @@ export default function Test({data}){
         }
       })
     })
+    if(currentUser){
+      if(currentUser.user.isAdmin){
+        setCanDelete(true);
+        setCanEdit(true);
+        setCanCheck(true);
+      }
+    }
 
     
   },[isCurrentUserExist]);

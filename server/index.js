@@ -1071,11 +1071,11 @@ app.patch("*/CheckOutTheAnswer/:_id",requiredAuth,async(req,res)=>{
 
         //テストが答え合わせ待ち状態であるかどうかを確かめる
         //「答え合わせ待ち」のテストのみが答え合わせを行える
-        if (foundTest.isAccepting){
-            return res.send("このテストはまだ回答受付中です。");
-        }else if(foundTest.isAnswered){
-            return res.send("このテストはすでに答え合わせ済みです。");
-        }
+        // if (foundTest.isAccepting){
+        //     return res.send("このテストはまだ回答受付中です。");
+        // }else if(foundTest.isAnswered){
+        //     return res.send("このテストはすでに答え合わせ済みです。");
+        // }
         let ANSWER = "";
         let correctAnswerer = [];
         let willBeSetAccuracyUser;
